@@ -12,8 +12,8 @@
 #define SEQUENCELIST_H
 
 #include <stdio.h>
-#include <stdlib.h>                 //提供malloc、realloc、free、exit原型
-#include "../../▲01 绪论/Status.h"  //**▲01 绪论**//
+#include <stdlib.h>  //提供malloc、realloc、free、exit原型
+#include "../../01-Introduction/Status.h"  //**01-Introduction**//
 
 /* 宏定义 */
 #define LIST_INIT_SIZE 100  //顺序表存储空间的初始分配量

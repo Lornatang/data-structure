@@ -1,46 +1,40 @@
 /********************************
  *                              *
- * ÎÄ¼þ¼Ð: ¡ø02 ÏßÐÔ±í\02 Union *
+ * æ–‡ä»¶å¤¹: â–²02 çº¿æ€§è¡¨\02 Union *
  *                              *
- * ÄÚ  ÈÝ: Çó²¢¼¯Ïà¹Øº¯Êý²âÊÔ   *
+ * å†…  å®¹: æ±‚å¹¶é›†ç›¸å…³å‡½æ•°æµ‹è¯•   *
  *                              *
  ********************************/
 
 #include <stdio.h>
-#include "Union.c"					//**¡ø02 ÏßÐÔ±í**//
-	
-void PrintElem(LElemType_Sq e);		//²âÊÔº¯Êý£¬´òÓ¡ÕûÐÍ 
-	
-int main(int argc, char **argv)
-{
-	SqList La, Lb;
-	LElemType_Sq a[5] = {5, 2, 1, 3, 9};
-	LElemType_Sq b[7] = {7, 2, 6, 9, 11, 3, 10};
-	int i;
-	
-	InitList_Sq(&La);					//³õÊ¼»¯La 
-	for(i=1; i<=5; i++)
-		ListInsert_Sq(&La, i, a[i-1]);	
-	InitList_Sq(&Lb);					//³õÊ¼»¯Lb 
-	for(i=1; i<=7; i++)
-		ListInsert_Sq(&Lb, i, b[i-1]);
+#include "Union.c"  //**â–²02 çº¿æ€§è¡¨**//
 
-	printf("La = ");					//Êä³öLa 
-	ListTraverse_Sq(La, PrintElem); 
-	printf("\n");
-	printf("Lb = ");					//Êä³öLb 
-	ListTraverse_Sq(Lb, PrintElem); 
-	printf("\n\n");
-	
-	printf("La = La¡ÈLb = ");			//Êä³öÐÂ±íLaµÄÄÚÈÝ
-	Union(&La, Lb);
-	ListTraverse_Sq(La, PrintElem);
-	printf("\n\n");
-	
-	return 0;
+void PrintElem(LElemType_Sq e);  //æµ‹è¯•å‡½æ•°ï¼Œæ‰“å°æ•´åž‹
+
+int main(int argc, char **argv) {
+  SqList La, Lb;
+  LElemType_Sq a[5] = {5, 2, 1, 3, 9};
+  LElemType_Sq b[7] = {7, 2, 6, 9, 11, 3, 10};
+  int i;
+
+  InitList_Sq(&La);  //åˆå§‹åŒ–La
+  for (i = 1; i <= 5; i++) ListInsert_Sq(&La, i, a[i - 1]);
+  InitList_Sq(&Lb);  //åˆå§‹åŒ–Lb
+  for (i = 1; i <= 7; i++) ListInsert_Sq(&Lb, i, b[i - 1]);
+
+  printf("La = ");  //è¾“å‡ºLa
+  ListTraverse_Sq(La, PrintElem);
+  printf("\n");
+  printf("Lb = ");  //è¾“å‡ºLb
+  ListTraverse_Sq(Lb, PrintElem);
+  printf("\n\n");
+
+  printf("La = LaâˆªLb = ");  //è¾“å‡ºæ–°è¡¨Laçš„å†…å®¹
+  Union(&La, Lb);
+  ListTraverse_Sq(La, PrintElem);
+  printf("\n\n");
+
+  return 0;
 }
 
-void PrintElem(LElemType_Sq e)
-{
-	printf("%d ", e);
-}
+void PrintElem(LElemType_Sq e) { printf("%d ", e); }

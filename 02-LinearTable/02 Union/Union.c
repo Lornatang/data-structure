@@ -1,41 +1,38 @@
 /********************************
  *                              *
- * ÎÄ¼ş¼Ğ: ¡ø02 ÏßĞÔ±í\02 Union *
+ * æ–‡ä»¶å¤¹: â–²02 çº¿æ€§è¡¨\02 Union *
  *                              *
- * ÎÄ¼şÃû: Union.c              *
+ * æ–‡ä»¶å: Union.c              *
  *                              *
- * Ëã  ·¨: 2.1                  * 
+ * ç®—  æ³•: 2.1                  *
  *                              *
  ********************************/
 
 #ifndef UNION_C
 #define UNION_C
 
-#include "Union.h"							//**¡ø02 ÏßĞÔ±í**//
+#include "Union.h"  //**â–²02 çº¿æ€§è¡¨**//
 
-/*¨T¨T¨T¨T¨[
-¨U Ëã·¨2.1¨U 
-¨^¨T¨T¨T¨T*/
-void Union(SqList *La, SqList Lb)
-{
-	int La_len, Lb_len;
-	int i;
-	LElemType_Sq e;
-	
-	La_len = ListLength_Sq(*La);			//ÇóË³Ğò±í³¤¶È 
-	Lb_len = ListLength_Sq(Lb);
-	
-	for(i=1; i<=Lb_len; i++)
-	{
-		GetElem_Sq(Lb, i, &e);				//È¡LbÖĞµÚi¸öÔªËØ¸³¸øe 
-		if(!LocateElem_Sq(*La, e, equal)) 	//Èôe²»ÔÚLaÖĞÔò²åÈë
-			ListInsert_Sq(La, ++La_len, e);	
-	}
+/*â•â•â•â•â•—
+â•‘ ç®—æ³•2.1â•‘
+â•šâ•â•â•â•*/
+void Union(SqList *La, SqList Lb) {
+  int La_len, Lb_len;
+  int i;
+  LElemType_Sq e;
+
+  La_len = ListLength_Sq(*La);  //æ±‚é¡ºåºè¡¨é•¿åº¦
+  Lb_len = ListLength_Sq(Lb);
+
+  for (i = 1; i <= Lb_len; i++) {
+    GetElem_Sq(Lb, i, &e);              //å–Lbä¸­ç¬¬iä¸ªå…ƒç´ èµ‹ç»™e
+    if (!LocateElem_Sq(*La, e, equal))  //è‹¥eä¸åœ¨Laä¸­åˆ™æ’å…¥
+      ListInsert_Sq(La, ++La_len, e);
+  }
 }
 
-Status equal(LElemType_Sq e1, LElemType_Sq e2)
-{
-   return e1==e2 ? TRUE : FALSE;
+Status equal(LElemType_Sq e1, LElemType_Sq e2) {
+  return e1 == e2 ? TRUE : FALSE;
 }
 
 #endif

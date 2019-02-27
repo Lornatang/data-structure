@@ -1,27 +1,27 @@
 /********************************
  *                              *
- * ÎÄ¼þ¼Ð: ¡ø02 ÏßÐÔ±í\02 Union *
+ * æ–‡ä»¶å¤¹: â–²02 çº¿æ€§è¡¨\02 Union *
  *                              *
- * ÎÄ¼þÃû: Union.h              *
+ * æ–‡ä»¶å: Union.h              *
  *                              *
- * ÄÚ  ÈÝ: Çó²¢¼¯Ïà¹Ø²Ù×÷ÁÐ±í   *
+ * å†…  å®¹: æ±‚å¹¶é›†ç›¸å…³æ“ä½œåˆ—è¡¨   *
  *                              *
  ********************************/
 
 #ifndef UNION_H
 #define UNION_H
 
-#include "../01 SequenceList/SequenceList.c"	//**¡ø02 ÏßÐÔ±í**//
+#include "../01 SequenceList/SequenceList.c"  //**â–²02 çº¿æ€§è¡¨**//
 
-/* ²¢¼¯º¯ÊýÁÐ±í */ 
+/* å¹¶é›†å‡½æ•°åˆ—è¡¨ */
 void Union(SqList *La, SqList Lb);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(01)Ëã·¨2.1£ºA=A¡ÈB¡£ ©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(01)ç®—æ³•2.1ï¼šA=AâˆªBã€‚ â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”*/
 
 Status equal(LElemType_Sq e1, LElemType_Sq e2);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(02)ÅÐ¶ÏÁ½ÔªËØÊÇ·ñÏàµÈ¡£©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(02)åˆ¤æ–­ä¸¤å…ƒç´ æ˜¯å¦ç›¸ç­‰ã€‚â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”â”*/
 
 #endif
