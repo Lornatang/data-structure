@@ -1,10 +1,10 @@
 /***************************************
  *                                     *
- * ÎÄ¼þ¼Ð: ¡ø02 ÏßÐÔ±í\01 SequenceList *
+ * æ–‡ä»¶å¤¹: â–²02 çº¿æ€§è¡¨\01 SequenceList *
  *                                     *
- * ÎÄ¼þÃû: SequenceList.h              *
+ * æ–‡ä»¶å: SequenceList.h              *
  *                                     *
- * ÄÚ  ÈÝ: Ë³Ðò±íÏà¹Ø²Ù×÷ÁÐ±í          *
+ * å†…  å®¹: é¡ºåºè¡¨ç›¸å…³æ“ä½œåˆ—è¡¨          *
  *                                     *
  ***************************************/
 
@@ -12,85 +12,85 @@
 #define SEQUENCELIST_H
 
 #include <stdio.h>
-#include <stdlib.h>						//Ìá¹©malloc¡¢realloc¡¢free¡¢exitÔ­ÐÍ
-#include "../../¡ø01 Ð÷ÂÛ/Status.h"		//**¡ø01 Ð÷ÂÛ**//
+#include <stdlib.h>                 //æä¾›mallocã€reallocã€freeã€exitåŽŸåž‹
+#include "../../â–²01 ç»ªè®º/Status.h"  //**â–²01 ç»ªè®º**//
 
-/* ºê¶¨Òå */
-#define LIST_INIT_SIZE 100				//Ë³Ðò±í´æ´¢¿Õ¼äµÄ³õÊ¼·ÖÅäÁ¿ 
-#define LISTINCREMENT  10				//Ë³Ðò±í´æ´¢¿Õ¼äµÄ·ÖÅäÔöÁ¿
+/* å®å®šä¹‰ */
+#define LIST_INIT_SIZE 100  //é¡ºåºè¡¨å­˜å‚¨ç©ºé—´çš„åˆå§‹åˆ†é…é‡
+#define LISTINCREMENT 10    //é¡ºåºè¡¨å­˜å‚¨ç©ºé—´çš„åˆ†é…å¢žé‡
 
-/* Ë³Ðò±íÀàÐÍ¶¨Òå */
+/* é¡ºåºè¡¨ç±»åž‹å®šä¹‰ */
 #ifndef LELEMTYPE_SQ
 #define LELEMTYPE_SQ
 typedef int LElemType_Sq;
 #endif
 
-typedef struct
-{
-	LElemType_Sq *elem;					//´æ´¢¿Õ¼ä»ùÖ·£¨Ö¸ÏòµÚÒ»¸ö½áµãµÄÖ¸Õë£© 
-	int length;							//µ±Ç°Ë³Ðò±í³¤¶È 
-	int listsize;						//µ±Ç°·ÖÅäµÄ´æ´¢ÈÝÁ¿ 
-}SqList;								//Ë³Ðò±í0ºÅµ¥ÔªÕý³£Ê¹ÓÃ 
+typedef struct {
+  LElemType_Sq *elem;  //å­˜å‚¨ç©ºé—´åŸºå€ï¼ˆæŒ‡å‘ç¬¬ä¸€ä¸ªç»“ç‚¹çš„æŒ‡é’ˆï¼‰
+  int length;          //å½“å‰é¡ºåºè¡¨é•¿åº¦
+  int listsize;        //å½“å‰åˆ†é…çš„å­˜å‚¨å®¹é‡
+} SqList;              //é¡ºåºè¡¨0å·å•å…ƒæ­£å¸¸ä½¿ç”¨
 
-/* Ë³Ðò±íº¯ÊýÁÐ±í */
+/* é¡ºåºè¡¨å‡½æ•°åˆ—è¡¨ */
 Status InitList_Sq(SqList *L);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(01)Ëã·¨2.3£º³õÊ¼»¯¿ÕË³Ðò±íL¡£©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(01)ç®—æ³•2.3ï¼šåˆå§‹åŒ–ç©ºé¡ºåºè¡¨Lã€‚â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”*/
 
 void ClearList_Sq(SqList *L);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(02)Çå¿ÕË³Ðò±íL¡£ ©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(02)æ¸…ç©ºé¡ºåºè¡¨Lã€‚ â”ƒ
+â”—â”â”â”â”â”â”â”â”â”*/
 
 void DestroyList_Sq(SqList *L);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(03)Ïú»ÙË³Ðò±íL¡£ ©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
-	  
+/*â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(03)é”€æ¯é¡ºåºè¡¨Lã€‚ â”ƒ
+â”—â”â”â”â”â”â”â”â”â”*/
+
 Status ListEmpty_Sq(SqList L);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(04)ÅÐ¶ÏË³Ðò±íLÊÇ·ñÎª¿Õ¡£ ©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(04)åˆ¤æ–­é¡ºåºè¡¨Læ˜¯å¦ä¸ºç©ºã€‚ â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”â”â”*/
 
 int ListLength_Sq(SqList L);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(05)·µ»ØË³Ðò±íLÖÐÔªËØ¸öÊý¡£ ©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
-	
-Status GetElem_Sq(SqList L, int i, LElemType_Sq *e);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(06)ÓÃe½ÓÊÕË³Ðò±íLÖÐµÚi¸öÔªËØ¡£ ©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(05)è¿”å›žé¡ºåºè¡¨Lä¸­å…ƒç´ ä¸ªæ•°ã€‚ â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”*/
 
-int LocateElem_Sq(SqList L, LElemType_Sq e, Status(Compare)(LElemType_Sq, LElemType_Sq));
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(07)Ëã·¨2.6£º·µ»ØË³Ðò±íLÖÐÊ×¸öÓëeÂú×ãCompare¹ØÏµµÄÔªËØÎ»Ðò¡£©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+Status GetElem_Sq(SqList L, int i, LElemType_Sq *e);
+/*â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(06)ç”¨eæŽ¥æ”¶é¡ºåºè¡¨Lä¸­ç¬¬iä¸ªå…ƒç´ ã€‚ â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”*/
+
+int LocateElem_Sq(SqList L, LElemType_Sq e,
+                  Status(Compare)(LElemType_Sq, LElemType_Sq));
+/*â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(07)ç®—æ³•2.6ï¼šè¿”å›žé¡ºåºè¡¨Lä¸­é¦–ä¸ªä¸Žeæ»¡è¶³Compareå…³ç³»çš„å…ƒç´ ä½åºã€‚â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”*/
 
 Status PriorElem_Sq(SqList L, LElemType_Sq cur_e, LElemType_Sq *pre_e);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(08)ÓÃpre_e½ÓÊÕcur_eµÄÇ°Çý¡£      ©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(08)ç”¨pre_eæŽ¥æ”¶cur_eçš„å‰é©±ã€‚      â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”*/
 
 Status NextElem_Sq(SqList L, LElemType_Sq cur_e, LElemType_Sq *next_e);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(09)ÓÃnext_e½ÓÊÕcur_eµÄºó¼Ì¡£     ©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(09)ç”¨next_eæŽ¥æ”¶cur_eçš„åŽç»§ã€‚     â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”*/
 
 Status ListInsert_Sq(SqList *L, int i, LElemType_Sq e);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(10)Ëã·¨2.4£ºÔÚË³Ðò±íLµÄµÚi¸öÎ»ÖÃÉÏ²åÈëe¡£©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(10)ç®—æ³•2.4ï¼šåœ¨é¡ºåºè¡¨Lçš„ç¬¬iä¸ªä½ç½®ä¸Šæ’å…¥eã€‚â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”*/
 
 Status ListDelete_Sq(SqList *L, int i, LElemType_Sq *e);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(11)Ëã·¨2.5£ºÉ¾³ýË³Ðò±íLÉÏµÚi¸öÎ»ÖÃµÄÔªËØ£¬²¢ÓÃe·µ»Ø¡£©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(11)ç®—æ³•2.5ï¼šåˆ é™¤é¡ºåºè¡¨Lä¸Šç¬¬iä¸ªä½ç½®çš„å…ƒç´ ï¼Œå¹¶ç”¨eè¿”å›žã€‚â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”*/
 
-Status ListTraverse_Sq(SqList L, void (Visit)(LElemType_Sq)); 
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(12)ÓÃvisitº¯Êý·ÃÎÊË³Ðò±íL¡£©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+Status ListTraverse_Sq(SqList L, void(Visit)(LElemType_Sq));
+/*â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(12)ç”¨visitå‡½æ•°è®¿é—®é¡ºåºè¡¨Lã€‚â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”*/
 
 #endif

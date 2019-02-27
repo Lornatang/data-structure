@@ -1,180 +1,154 @@
 /***************************************
  *                                     *
- * ÎÄ¼ş¼Ğ: ¡ø02 ÏßĞÔ±í\01 SequenceList *
+ * æ–‡ä»¶å¤¹: â–²02 çº¿æ€§è¡¨\01 SequenceList *
  *                                     *
- * ÎÄ¼şÃû: SequenceList.c              *
+ * æ–‡ä»¶å: SequenceList.c              *
  *                                     *
- * Ëã  ·¨: 2.3¡¢2.4¡¢2.5¡¢2.6          * 
+ * ç®—  æ³•: 2.3ã€2.4ã€2.5ã€2.6          *
  *                                     *
  ***************************************/
 
 #ifndef SEQUENCELIST_C
 #define SEQUENCELIST_C
 
-#include "SequenceList.h" 				//**¡ø02 ÏßĞÔ±í**//
+#include "SequenceList.h"  //**â–²02 çº¿æ€§è¡¨**//
 
-/*¨T¨T¨T¨T¨[
-¨UËã·¨2.3 ¨U 
-¨^¨T¨T¨T¨T*/
-Status InitList_Sq(SqList *L)
-{
-	(*L).elem = (LElemType_Sq*)malloc(LIST_INIT_SIZE*sizeof(LElemType_Sq));
-	if(!(*L).elem)
-		exit(OVERFLOW); 				//·ÖÅäÄÚ´æÊ§°Ü
+/*â•â•â•â•â•—
+â•‘ç®—æ³•2.3 â•‘
+â•šâ•â•â•â•*/
+Status InitList_Sq(SqList *L) {
+  (*L).elem = (LElemType_Sq *)malloc(LIST_INIT_SIZE * sizeof(LElemType_Sq));
+  if (!(*L).elem) exit(OVERFLOW);  //åˆ†é…å†…å­˜å¤±è´¥
 
-	(*L).length = 0;					//³õÊ¼»¯Ë³Ğò±í³¤¶ÈÎª0
-	(*L).listsize = LIST_INIT_SIZE;		//Ë³Ğò±í³õÊ¼ÄÚ´æ·ÖÅäÁ¿
+  (*L).length = 0;                 //åˆå§‹åŒ–é¡ºåºè¡¨é•¿åº¦ä¸º0
+  (*L).listsize = LIST_INIT_SIZE;  //é¡ºåºè¡¨åˆå§‹å†…å­˜åˆ†é…é‡
 
-	return OK;							//³õÊ¼»¯³É¹¦	 
-} 
-
-void ClearList_Sq(SqList *L)
-{
-	(*L).length = 0;
+  return OK;  //åˆå§‹åŒ–æˆåŠŸ
 }
 
-void DestroyList_Sq(SqList *L)
-{
-	free((*L).elem);
+void ClearList_Sq(SqList *L) { (*L).length = 0; }
 
-	(*L).elem = NULL;					//ÊÍ·ÅÄÚ´æºóÖÃ¿ÕÖ¸Õë 
-	(*L).length = 0;
-	(*L).listsize = 0;
+void DestroyList_Sq(SqList *L) {
+  free((*L).elem);
+
+  (*L).elem = NULL;  //é‡Šæ”¾å†…å­˜åç½®ç©ºæŒ‡é’ˆ
+  (*L).length = 0;
+  (*L).listsize = 0;
 }
 
-Status ListEmpty_Sq(SqList L)
-{
-	return 	L.length==0 ? TRUE : FALSE;
+Status ListEmpty_Sq(SqList L) { return L.length == 0 ? TRUE : FALSE; }
+
+int ListLength_Sq(SqList L) { return L.length; }
+
+Status GetElem_Sq(SqList L, int i, LElemType_Sq *e) {
+  if (i < 1 || i > L.length)
+    return ERROR;  // iå€¼ä¸åˆæ³•
+  else
+    *e = L.elem[i - 1];
+
+  return OK;
 }
 
-int ListLength_Sq(SqList L)
-{
-	return L.length;	
+/*â•â•â•â•â•—
+â•‘ç®—æ³•2.6 â•‘
+â•šâ•â•â•â•*/
+int LocateElem_Sq(SqList L, LElemType_Sq e,
+                  Status(Compare)(LElemType_Sq, LElemType_Sq)) {
+  int i = 1;  // içš„åˆå€¼ä¸ºç¬¬ä¸€ä¸ªå…ƒç´ çš„ä½åº
+
+  while (i <= L.length && !Compare(e, L.elem[i - 1])) ++i;
+
+  if (i <= L.length)
+    return i;
+  else
+    return 0;
 }
 
-Status GetElem_Sq(SqList L, int i, LElemType_Sq *e)
-{ 
-	if(i<1 || i>L.length)
-		return ERROR;					//iÖµ²»ºÏ·¨
-	else
-		*e = L.elem[i-1];
+Status PriorElem_Sq(SqList L, LElemType_Sq cur_e, LElemType_Sq *pre_e) {
+  int i = 1;
 
-	return OK;
+  if (L.elem[0] != cur_e)  //ç¬¬ä¸€ä¸ªç»“ç‚¹æ— å‰é©±
+  {
+    while (i < L.length && L.elem[i] != cur_e) ++i;
+
+    if (i < L.length) {
+      *pre_e = L.elem[i - 1];
+      return OK;
+    }
+  }
+
+  return ERROR;
 }
 
-/*¨T¨T¨T¨T¨[
-¨UËã·¨2.6 ¨U 
-¨^¨T¨T¨T¨T*/
-int LocateElem_Sq(SqList L, LElemType_Sq e, Status(Compare)(LElemType_Sq, LElemType_Sq))
-{
-	int i = 1;							//iµÄ³õÖµÎªµÚÒ»¸öÔªËØµÄÎ»Ğò
-	
-	while(i<=L.length && !Compare(e, L.elem[i-1]))
-		++i;
+Status NextElem_Sq(SqList L, LElemType_Sq cur_e, LElemType_Sq *next_e) {
+  int i = 0;
 
-	if(i<=L.length)
-		return i;
-	else
-		return 0; 
+  while (i < L.length && L.elem[i] != cur_e) ++i;
+
+  if (i < L.length - 1)  //æœ€åä¸€ä¸ªç»“ç‚¹æ— åç»§
+  {
+    *next_e = L.elem[i + 1];
+    return OK;
+  }
+
+  return ERROR;
 }
 
-Status PriorElem_Sq(SqList L, LElemType_Sq cur_e, LElemType_Sq *pre_e)
-{
-	int i = 1;
-	
-	if(L.elem[0]!=cur_e)				//µÚÒ»¸ö½áµãÎŞÇ°Çı 
-	{
-		while(i<L.length && L.elem[i]!=cur_e)
-			++i;
-		
-		if(i<L.length)
-		{
-			*pre_e = L.elem[i-1];
-			return OK;
-		}	
-	}
-			
-	return ERROR;
+/*â•â•â•â•â•—
+â•‘ç®—æ³•2.4 â•‘
+â•šâ•â•â•â•*/
+Status ListInsert_Sq(SqList *L, int i, LElemType_Sq e) {
+  LElemType_Sq *newbase;
+  LElemType_Sq *p, *q;
+
+  if (i < 1 || i > (*L).length + 1) return ERROR;  // iå€¼ä¸åˆæ³•
+
+  if ((*L).length >= (*L).listsize)  //è‹¥å­˜å‚¨ç©ºé—´å·²æ»¡ï¼Œéœ€å¼€è¾Ÿæ–°ç©ºé—´
+  {
+    newbase = (LElemType_Sq *)realloc(
+        (*L).elem, ((*L).listsize + LISTINCREMENT) * sizeof(LElemType_Sq));
+    if (!newbase) exit(OVERFLOW);
+
+    (*L).elem = newbase;
+    (*L).listsize += LISTINCREMENT;
+  }
+
+  q = &(*L).elem[i - 1];  // qä¸ºæ’å…¥ä½ç½®
+
+  for (p = &(*L).elem[(*L).length - 1]; p >= q; --p)
+    *(p + 1) = *p;  //æ’å…¥ä½ç½®åŠä¹‹åçš„å…ƒç´ å³ç§»
+
+  *q = e;         //æ’å…¥e
+  (*L).length++;  //è¡¨é•¿å¢1
+
+  return OK;
 }
 
-Status NextElem_Sq(SqList L, LElemType_Sq cur_e, LElemType_Sq *next_e)
-{
-	int i = 0;
-	
-	while(i<L.length && L.elem[i]!=cur_e)
-		++i;
+/*â•â•â•â•â•—
+â•‘ç®—æ³•2.5 â•‘
+â•šâ•â•â•â•*/
+Status ListDelete_Sq(SqList *L, int i, LElemType_Sq *e) {
+  LElemType_Sq *p, *q;
 
-	if(i<L.length-1)					//×îºóÒ»¸ö½áµãÎŞºó¼Ì 
-	{
-		*next_e = L.elem[i+1];	
-		return OK;
-	}
+  if (i < 1 || i > (*L).length) return ERROR;  // iå€¼ä¸åˆæ³•
 
-	return ERROR;
+  p = &(*L).elem[i - 1];  // pä¸ºè¢«åˆ é™¤å…ƒç´ çš„ä½ç½®
+  *e = *p;
+  q = (*L).elem + (*L).length - 1;  //è¡¨å°¾å…ƒç´ ä½ç½®
+
+  for (++p; p <= q; ++p) *(p - 1) = *p;  //è¢«åˆ å…ƒç´ ä¹‹åçš„å…ƒç´ å·¦ç§»
+
+  (*L).length--;  //è¡¨é•¿å‡1
+
+  return OK;
 }
 
-/*¨T¨T¨T¨T¨[
-¨UËã·¨2.4 ¨U 
-¨^¨T¨T¨T¨T*/
-Status ListInsert_Sq(SqList *L, int i, LElemType_Sq e)
-{
-	LElemType_Sq *newbase; 
-	LElemType_Sq *p, *q;
+Status ListTraverse_Sq(SqList L, void(Visit)(LElemType_Sq)) {
+  int i;
 
-	if(i<1 || i>(*L).length+1)
-		return ERROR;					//iÖµ²»ºÏ·¨
+  for (i = 0; i < L.length; i++) Visit(L.elem[i]);
 
-	if((*L).length >= (*L).listsize)	//Èô´æ´¢¿Õ¼äÒÑÂú£¬Ğè¿ª±ÙĞÂ¿Õ¼ä 
-	{
-		newbase = (LElemType_Sq*)realloc((*L).elem, ((*L).listsize+LISTINCREMENT)*sizeof(LElemType_Sq));
-		if(!newbase)
-			exit(OVERFLOW);
-
-		(*L).elem = newbase;
-		(*L).listsize += LISTINCREMENT;
-	}
-	
-	q = &(*L).elem[i-1];				//qÎª²åÈëÎ»ÖÃ 
-	
-	for(p=&(*L).elem[(*L).length-1]; p>=q; --p)
-		*(p+1) = *p;					//²åÈëÎ»ÖÃ¼°Ö®ºóµÄÔªËØÓÒÒÆ 
-	
-	*q = e;								//²åÈëe 
-	(*L).length++;						//±í³¤Ôö1
-
-	return OK; 
-}
-
-/*¨T¨T¨T¨T¨[
-¨UËã·¨2.5 ¨U 
-¨^¨T¨T¨T¨T*/
-Status ListDelete_Sq(SqList *L, int i, LElemType_Sq *e)
-{
-	LElemType_Sq *p, *q;
-		
-	if(i<1 || i>(*L).length)
-		return ERROR;					//iÖµ²»ºÏ·¨
-	
-	p = &(*L).elem[i-1];				//pÎª±»É¾³ıÔªËØµÄÎ»ÖÃ 
-	*e = *p;
-	q = (*L).elem+(*L).length-1; 		//±íÎ²ÔªËØÎ»ÖÃ 
-	
-	for(++p; p<=q; ++p)
-		*(p-1) = *p;					//±»É¾ÔªËØÖ®ºóµÄÔªËØ×óÒÆ 
-
-	(*L).length--;						//±í³¤¼õ1
-
-	return OK;
-}
-
-Status ListTraverse_Sq(SqList L, void(Visit)(LElemType_Sq))
-{
-	int i;
-
-	for(i=0; i<L.length; i++)
-		Visit(L.elem[i]);
-	
-	return OK;
+  return OK;
 }
 
 #endif
