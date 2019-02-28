@@ -1,180 +1,166 @@
 /***************************************
  *					                   *
- * ÎÄ¼ş¼Ğ: ¡ø03 Õ»ºÍ¶ÓÁĞ\05 Expression *
+ * æ–‡ä»¶å¤¹: â–²03 æ ˆå’Œé˜Ÿåˆ—\05 Expression *
  * 					                   *
- * ÎÄ¼şÃû: Expression.c                *
+ * æ–‡ä»¶å: Expression.c                *
  * 				                       *
- * Ëã  ·¨: 3.4                         *
+ * ç®—  æ³•: 3.4                         *
  *                                     *
  ***************************************/
 
 #ifndef EXPRESSION_C
 #define EXPRESSION_C
 
-#include "Expression.h"		//**¡ø03 Õ»ºÍ¶ÓÁĞ**//
+#include "Expression.h"  //**â–²03 æ ˆå’Œé˜Ÿåˆ—**//
 
-/*¨T¨T¨T¨T¨[
-¨U Ëã·¨3.4¨U 
-¨^¨T¨T¨T¨T*/
-OperandType EvaluateExpression(char exp[])	//´Óexp¶ÁÈë±í´ïÊ½ 
+/*â•â•â•â•â•—
+â•‘ ç®—æ³•3.4â•‘
+â•šâ•â•â•â•*/
+OperandType EvaluateExpression(char exp[])  //ä»expè¯»å…¥è¡¨è¾¾å¼
 {
-	SqStack OPTR, OPND;						//·ûºÅÕ»ºÍÊı×ÖÕ» 
-	SElemType_Sq e, ch;
-	OperatorType theta, x;					//·ûºÅ 
-	OperandType a, b;						//Êı×Ö 
-	int i;
-	
-	InitStack_Sq(&OPTR);	
-	Push_Sq(&OPTR, '#');
-	InitStack_Sq(&OPND);
-	
-	i = 0;
-	ch = exp[i++];
-	while(ch!='#' || GetTop_OPTR(OPTR)!='#')
-	{
-		if(!In(ch))							//c²»ÊÇ·ûºÅÔòÈëÕ» 
-		{
-			Push_Sq(&OPND, ch);
-		 	ch = exp[i++];		
-		}
-		else
-		{
-			switch(Precede(GetTop_OPTR(OPTR), ch))
-			{
-				case '<': 					//Õ»ÖĞ·ûºÅÓÅÏÈ¼¶µÍ£¬¼ÌĞø½øÕ» 
-					Push_Sq(&OPTR, ch);			
-			  		ch = exp[i++];
- 					break;
- 
- 				case '=': 					//ÓÅÏÈ¼¶ÏàµÈÊ±£¬ËµÃ÷Óöµ½À¨ºÅ£¬ĞèÒªÍÑÀ¨ºÅ
-					Pop_Sq(&OPTR, &x);			 
-				 	ch = exp[i++];
-			  		break;
+  SqStack OPTR, OPND;  //ç¬¦å·æ ˆå’Œæ•°å­—æ ˆ
+  SElemType_Sq e, ch;
+  OperatorType theta, x;  //ç¬¦å·
+  OperandType a, b;       //æ•°å­—
+  int i;
 
-  			case '>': 
-					Pop_Sq(&OPTR, &theta);	//Õ»ÖĞ²Ù×÷·ûÓÅÏÈ¼¶¸ßÊ±£¬ÏÈ¼ÆËã£¬ÔÙ½µ¼ÆËã½á¹ûÑ¹ÈëÕ»£¬ 
-		  		Pop_Sq(&OPND, &b);
-		  		Pop_Sq(&OPND, &a);
-		  		Push_Sq(&OPND, Operate(a, theta, b));	 
-			  	break;						//Õâ¶ùÃ»ÓĞ¶Á×Ö·û£¬c±£ÁôµÄ»¹ÊÇ¸Õ²Å¶Áµ½µÄ×Ö·û 
-			}
-		}
-	}
-	
-	return GetTop_OPTR(OPND);	 
-} 
+  InitStack_Sq(&OPTR);
+  Push_Sq(&OPTR, '#');
+  InitStack_Sq(&OPND);
 
-OperatorType GetTop_OPTR(SqStack OPTR)
-{
-	SElemType_Sq e;
-	
-	GetTop_Sq(OPTR, &e);
-	
-	return e;
+  i = 0;
+  ch = exp[i++];
+  while (ch != '#' || GetTop_OPTR(OPTR) != '#') {
+    if (!In(ch))  // cä¸æ˜¯ç¬¦å·åˆ™å…¥æ ˆ
+    {
+      Push_Sq(&OPND, ch);
+      ch = exp[i++];
+    } else {
+      switch (Precede(GetTop_OPTR(OPTR), ch)) {
+        case '<':  //æ ˆä¸­ç¬¦å·ä¼˜å…ˆçº§ä½ï¼Œç»§ç»­è¿›æ ˆ
+          Push_Sq(&OPTR, ch);
+          ch = exp[i++];
+          break;
+
+        case '=':  //ä¼˜å…ˆçº§ç›¸ç­‰æ—¶ï¼Œè¯´æ˜é‡åˆ°æ‹¬å·ï¼Œéœ€è¦è„±æ‹¬å·
+          Pop_Sq(&OPTR, &x);
+          ch = exp[i++];
+          break;
+
+        case '>':
+          Pop_Sq(&OPTR,
+                 &theta);  //æ ˆä¸­æ“ä½œç¬¦ä¼˜å…ˆçº§é«˜æ—¶ï¼Œå…ˆè®¡ç®—ï¼Œå†é™è®¡ç®—ç»“æœå‹å…¥æ ˆï¼Œ
+          Pop_Sq(&OPND, &b);
+          Pop_Sq(&OPND, &a);
+          Push_Sq(&OPND, Operate(a, theta, b));
+          break;  //è¿™å„¿æ²¡æœ‰è¯»å­—ç¬¦ï¼Œcä¿ç•™çš„è¿˜æ˜¯åˆšæ‰è¯»åˆ°çš„å­—ç¬¦
+      }
+    }
+  }
+
+  return GetTop_OPTR(OPND);
 }
 
-Status In(SElemType_Sq c)
-{
-	switch(c)
-	{
-		case '+':
-		case '-':
-		case '*':
-		case '/':
-		case '(':
-		case ')':
-		case '#': 
-			return TRUE;
-		default : 
-			return FALSE;
-   }
+OperatorType GetTop_OPTR(SqStack OPTR) {
+  SElemType_Sq e;
+
+  GetTop_Sq(OPTR, &e);
+
+  return e;
 }
 
-OperatorType Precede(OperatorType o1, OperatorType o2)
-{
-	OperatorType f;
-	
-	switch(o2)
-	{
-		case '+':
-		case '-': 
-			if(o1=='(' || o1=='#')
-				f = '<';
-			else
-				f = '>';
-			break;
-			
-		case '*':
-		case '/': 
-			if(o1=='*' || o1=='/' || o1==')')
-                f = '>';
-			else
-                f = '<';
-			break;
-              
-		case '(': 
-			if(o1==')')
-			{
-				printf("À¨ºÅÆ¥Åä´íÎó£¡\n");
-				exit(ERROR);
-			}
-			else
-				f = '<';
-			break;
-			
-		case ')': 
-			switch(o1)
-			{
-				case '(':
-					f = '=';
-					break;
-				case '#':
-					printf("ÊäÈëÁË´íÎóµÄÀ¨ºÅ£¡\n");
-					exit(ERROR);
-				default:
-					f = '>';
-			}
-			break;
-			
-		case '#': 
-			switch(o1)
-			{
-				case '#': 
-					f = '=';
-					break;
-				case '(': 
-					printf("±í´ïÊ½ÖĞÓĞ¶àÓàÀ¨ºÅ£¡\n");
-     				exit(ERROR);
-				default:
-					f = '>';
-			}
-	}
-	
-	return f;
+Status In(SElemType_Sq c) {
+  switch (c) {
+    case '+':
+    case '-':
+    case '*':
+    case '/':
+    case '(':
+    case ')':
+    case '#':
+      return TRUE;
+    default:
+      return FALSE;
+  }
 }
 
-OperandType Operate(OperandType a, OperatorType theta, OperandType b)
-{
-	int x, y, z;
-	
-	x = a - 48;
-	y = b - 48;
-	
-	switch(theta)
-	{
-		case '+':
-			return x+y+48;
-			break;
-		case '-': 
-			return x-y+48;
-			break;
-		case '*':
-			return x*y+48;
-			break;
-		case '/':
-			return x/y+48;
-			break;
-	}
+OperatorType Precede(OperatorType o1, OperatorType o2) {
+  OperatorType f;
+
+  switch (o2) {
+    case '+':
+    case '-':
+      if (o1 == '(' || o1 == '#')
+        f = '<';
+      else
+        f = '>';
+      break;
+
+    case '*':
+    case '/':
+      if (o1 == '*' || o1 == '/' || o1 == ')')
+        f = '>';
+      else
+        f = '<';
+      break;
+
+    case '(':
+      if (o1 == ')') {
+        printf("æ‹¬å·åŒ¹é…é”™è¯¯ï¼\n");
+        exit(ERROR);
+      } else
+        f = '<';
+      break;
+
+    case ')':
+      switch (o1) {
+        case '(':
+          f = '=';
+          break;
+        case '#':
+          printf("è¾“å…¥äº†é”™è¯¯çš„æ‹¬å·ï¼\n");
+          exit(ERROR);
+        default:
+          f = '>';
+      }
+      break;
+
+    case '#':
+      switch (o1) {
+        case '#':
+          f = '=';
+          break;
+        case '(':
+          printf("è¡¨è¾¾å¼ä¸­æœ‰å¤šä½™æ‹¬å·ï¼\n");
+          exit(ERROR);
+        default:
+          f = '>';
+      }
+  }
+
+  return f;
+}
+
+OperandType Operate(OperandType a, OperatorType theta, OperandType b) {
+  int x, y, z;
+
+  x = a - 48;
+  y = b - 48;
+
+  switch (theta) {
+    case '+':
+      return x + y + 48;
+      break;
+    case '-':
+      return x - y + 48;
+      break;
+    case '*':
+      return x * y + 48;
+      break;
+    case '/':
+      return x / y + 48;
+      break;
+  }
 }
 
 #endif

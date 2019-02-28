@@ -1,10 +1,10 @@
 /******************************************
  *						      			  *
- * ÎÄ¼þ¼Ð: ¡ø03 Õ»ºÍ¶ÓÁÐ\01 SequenceStack *
+ * æ–‡ä»¶å¤¹: â–²03 æ ˆå’Œé˜Ÿåˆ—\01 SequenceStack *
  * 							    		  *
- * ÎÄ¼þÃû: SequenceStack.h    			  *
+ * æ–‡ä»¶å: SequenceStack.h    			  *
  * 							  			  *
- * ÄÚ  ÈÝ: Ë³ÐòÕ»Ïà¹Ø²Ù×÷ÁÐ±í 			  *
+ * å†…  å®¹: é¡ºåºæ ˆç›¸å…³æ“ä½œåˆ—è¡¨ 			  *
  *                            			  *
  ******************************************/
 
@@ -12,73 +12,69 @@
 #define SEQUENCESTACK_H
 
 #include <stdio.h>
-#include <stdlib.h>						//Ìá¹©malloc¡¢realloc¡¢free¡¢exitÔ­ÐÍ
-#include "../../¡ø01 Ð÷ÂÛ/Status.h"		//**¡ø01 Ð÷ÂÛ**//
+#include <stdlib.h>                 //æä¾›mallocã€reallocã€freeã€exitåŽŸåž‹
+#include "../../â–²01 ç»ªè®º/Status.h"  //**â–²01 ç»ªè®º**//
 
-/* ºê¶¨Òå */
-#define STACK_INIT_SIZE	100				//Ë³ÐòÕ»´æ´¢¿Õ¼äµÄ³õÊ¼·ÖÅäÁ¿
-#define STACKINCREMENT	10 				//Ë³ÐòÕ»´æ´¢¿Õ¼äµÄ·ÖÅäÔöÁ¿
+/* å®å®šä¹‰ */
+#define STACK_INIT_SIZE 100  //é¡ºåºæ ˆå­˜å‚¨ç©ºé—´çš„åˆå§‹åˆ†é…é‡
+#define STACKINCREMENT 10    //é¡ºåºæ ˆå­˜å‚¨ç©ºé—´çš„åˆ†é…å¢žé‡
 
-/* Ë³ÐòÕ»ÀàÐÍ¶¨Òå */
-/*ÔÚÃÔ¹¬¡¢±í´ïÊ½¡¢¶þ²æÊ÷¶þ²æÁ´±í¡¢º¢×ÓÐÖµÜÊ÷µÈËã·¨ÖÐ£¬´ËÀàÐÍÐèÒªÖØÐÂ¶¨Òå*/
-#if !defined MAZE_H				&&  \
-    !defined EXPRESSION_H		&&  \
-    !defined BINARYTREE_H		&&  \
-    !defined CHILDSIBLINGTREE_H	&&  \
-    !defined Question_8
+/* é¡ºåºæ ˆç±»åž‹å®šä¹‰ */
+/*åœ¨è¿·å®«ã€è¡¨è¾¾å¼ã€äºŒå‰æ ‘äºŒå‰é“¾è¡¨ã€å­©å­å…„å¼Ÿæ ‘ç­‰ç®—æ³•ä¸­ï¼Œæ­¤ç±»åž‹éœ€è¦é‡æ–°å®šä¹‰*/
+#if !defined MAZE_H && !defined EXPRESSION_H && !defined BINARYTREE_H && \
+    !defined CHILDSIBLINGTREE_H && !defined Question_8
 typedef int SElemType_Sq;
 #endif
-typedef struct
-{
-	SElemType_Sq *base;				//ÔÚÕ»¹¹ÔìÖ®Ç°ºÍÏú»ÙÖ®ºó£¬baseµÄÖµÎªNULL 
-	SElemType_Sq *top;				//Õ»¶¥Ö¸Õë 
-	int stacksize;					//µ±Ç°ÒÑ·ÖÅäµÄ´æ´¢¿Õ¼ä£¬ÒÔÔªËØÎªµ¥Î» 
-}SqStack;
+typedef struct {
+  SElemType_Sq *base;  //åœ¨æ ˆæž„é€ ä¹‹å‰å’Œé”€æ¯ä¹‹åŽï¼Œbaseçš„å€¼ä¸ºNULL
+  SElemType_Sq *top;   //æ ˆé¡¶æŒ‡é’ˆ
+  int stacksize;       //å½“å‰å·²åˆ†é…çš„å­˜å‚¨ç©ºé—´ï¼Œä»¥å…ƒç´ ä¸ºå•ä½
+} SqStack;
 
-/* Ë³ÐòÕ»º¯ÊýÁÐ±í */
+/* é¡ºåºæ ˆå‡½æ•°åˆ—è¡¨ */
 Status InitStack_Sq(SqStack *S);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(01)¹¹Ôì¿ÕÕ»S¡£ ©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”“
+â”ƒ(01)æž„é€ ç©ºæ ˆSã€‚ â”ƒ
+â”—â”â”â”â”â”â”â”â”*/
 
 Status DestroyStack_Sq(SqStack *S);
-/*©¥©¥©¥©¥©¥©¥©·
-©§(02)Ïú»ÙS¡£ ©§
-©»©¥©¥©¥©¥©¥©¥*/ 
- 
+/*â”â”â”â”â”â”â”“
+â”ƒ(02)é”€æ¯Sã€‚ â”ƒ
+â”—â”â”â”â”â”â”*/
+
 Status ClearStack_Sq(SqStack *S);
-/*©¥©¥©¥©¥©¥©¥©·
-©§(03)ÖÃ¿ÕS¡£ ©§
-©»©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”“
+â”ƒ(03)ç½®ç©ºSã€‚ â”ƒ
+â”—â”â”â”â”â”â”*/
 
 Status StackEmpty_Sq(SqStack S);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(04)ÅÐ¶ÏSÊÇ·ñÎª¿Õ¡£ ©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(04)åˆ¤æ–­Sæ˜¯å¦ä¸ºç©ºã€‚ â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”*/
 
 int StackLength_Sq(SqStack S);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(05)·µ»ØSÔªËØ¸öÊý¡£ ©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
- 
+/*â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(05)è¿”å›žSå…ƒç´ ä¸ªæ•°ã€‚ â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”*/
+
 Status GetTop_Sq(SqStack S, SElemType_Sq *e);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(06)ÓÃe»ñÈ¡Õ»¶¥ÔªËØ¡£ ©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(06)ç”¨eèŽ·å–æ ˆé¡¶å…ƒç´ ã€‚ â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”*/
 
 Status Push_Sq(SqStack *S, SElemType_Sq e);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(07)ÔªËØe½øÕ»¡£ ©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”“
+â”ƒ(07)å…ƒç´ eè¿›æ ˆã€‚ â”ƒ
+â”—â”â”â”â”â”â”â”â”*/
 
 Status Pop_Sq(SqStack *S, SElemType_Sq *e);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(08)ÔªËØe³öÕ»¡£ ©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”“
+â”ƒ(08)å…ƒç´ eå‡ºæ ˆã€‚ â”ƒ
+â”—â”â”â”â”â”â”â”â”*/
 
 Status StackTraverse_Sq(SqStack S, void(Visit)(SElemType_Sq));
-/*©¥©¥©¥©¥©¥©¥©·
-©§(09)·ÃÎÊÕ»¡£©§
-©»©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”“
+â”ƒ(09)è®¿é—®æ ˆã€‚â”ƒ
+â”—â”â”â”â”â”â”*/
 
 #endif

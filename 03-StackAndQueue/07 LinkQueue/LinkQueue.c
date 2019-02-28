@@ -1,133 +1,115 @@
 /**************************************
  *                                    *
- * ÎÄ¼þ¼Ð: ¡ø03 Õ»ºÍ¶ÓÁÐ\07 LinkQueue *
+ * ï¿½Ä¼ï¿½ï¿½ï¿½: ï¿½ï¿½03 Õ»ï¿½Í¶ï¿½ï¿½ï¿½\07 LinkQueue *
  *                                    *
- * ÎÄ¼þÃû: LinkQueue.c                *
+ * ï¿½Ä¼ï¿½ï¿½ï¿½: LinkQueue.c                *
  *                                    *
  *************************************/
 
 #ifndef LINKQUEUE_C
 #define LINKQUEUE_C
 
-#include "LinkQueue.h" 					//**¡ø03 Õ»ºÍ¶ÓÁÐ**//
-	
-Status InitQueue_L(LinkQueue *Q)
-{
-	(*Q).front = (*Q).rear = (QueuePtr)malloc(sizeof(QNode));
-	if(!(*Q).front)
-		exit(OVERFLOW);
+#include "LinkQueue.h"  //**ï¿½ï¿½03 Õ»ï¿½Í¶ï¿½ï¿½ï¿½**//
 
-	(*Q).front->next = NULL;
+Status InitQueue_L(LinkQueue *Q) {
+  (*Q).front = (*Q).rear = (QueuePtr)malloc(sizeof(QNode));
+  if (!(*Q).front) exit(OVERFLOW);
 
-	return OK;
+  (*Q).front->next = NULL;
+
+  return OK;
 }
 
-void ClearQueue_L(LinkQueue *Q)
-{
-	(*Q).rear = (*Q).front->next;
-	
-	while((*Q).rear)
-	{
-		(*Q).front->next = (*Q).rear->next;		
-		free((*Q).rear);		
-		(*Q).rear = (*Q).front->next;
-	}
-	
-	(*Q).rear = (*Q).front;
+void ClearQueue_L(LinkQueue *Q) {
+  (*Q).rear = (*Q).front->next;
+
+  while ((*Q).rear) {
+    (*Q).front->next = (*Q).rear->next;
+    free((*Q).rear);
+    (*Q).rear = (*Q).front->next;
+  }
+
+  (*Q).rear = (*Q).front;
 }
 
-void DestroyQueue_L(LinkQueue *Q)
-{
-	while((*Q).front)
-	{
-		(*Q).rear = (*Q).front->next;
-		free((*Q).front);
-		(*Q).front = (*Q).rear;	
-	}
+void DestroyQueue_L(LinkQueue *Q) {
+  while ((*Q).front) {
+    (*Q).rear = (*Q).front->next;
+    free((*Q).front);
+    (*Q).front = (*Q).rear;
+  }
 }
 
-Status QueueEmpty_L(LinkQueue Q)
-{
-	if(Q.front==Q.rear)
-		return TRUE;
-	else
-		return FALSE;
-} 
+Status QueueEmpty_L(LinkQueue Q) {
+  if (Q.front == Q.rear)
+    return TRUE;
+  else
+    return FALSE;
+}
 
-int QueueLength_L(LinkQueue Q)
-{
-	int count = 0;
-	QueuePtr p = Q.front;
-	
-	while(p!=Q.rear)
-	{
-		count++;
-		p = p->next;
-	}
-	
-	return count;
-} 
+int QueueLength_L(LinkQueue Q) {
+  int count = 0;
+  QueuePtr p = Q.front;
 
-Status GetHead_L(LinkQueue Q, QElemType_L *e)
-{
-	QueuePtr p;
-	
-	if(Q.front==Q.rear)
-		return ERROR;
-		
-	p = Q.front->next;
-	*e = p->data;
-	
-	return OK;
-} 
+  while (p != Q.rear) {
+    count++;
+    p = p->next;
+  }
 
-Status EnQueue_L(LinkQueue *Q, QElemType_L e)
-{
-	QueuePtr p;
-	
-	p = (QueuePtr)malloc(sizeof(QNode));
-	if(!p)
-		exit(OVERFLOW);
+  return count;
+}
 
-	p->data = e;
-	p->next = NULL;
-	
-	(*Q).rear->next = p;
-	(*Q).rear=p;
+Status GetHead_L(LinkQueue Q, QElemType_L *e) {
+  QueuePtr p;
 
-	return OK;
-} 
+  if (Q.front == Q.rear) return ERROR;
 
-Status DeQueue_L(LinkQueue *Q, QElemType_L *e)
-{
-	QueuePtr p;
-	
-	if((*Q).front==(*Q).rear)
-		return ERROR;
-		
-	p = (*Q).front->next;
-	*e = p->data;
-	
-	(*Q).front->next = p->next;
-	if((*Q).rear==p)
-		(*Q).rear = (*Q).front;
-		
-	free(p);
-	
-	return OK;
-} 
+  p = Q.front->next;
+  *e = p->data;
 
-void QueueTraverse_L(LinkQueue Q, void (Visit)(QElemType_L))
-{
-	QueuePtr p;
-	
-	p = Q.front->next;
-	
-	while(p)
-	{
-		Visit(p->data);
-		p = p->next;
-	}
-} 
+  return OK;
+}
+
+Status EnQueue_L(LinkQueue *Q, QElemType_L e) {
+  QueuePtr p;
+
+  p = (QueuePtr)malloc(sizeof(QNode));
+  if (!p) exit(OVERFLOW);
+
+  p->data = e;
+  p->next = NULL;
+
+  (*Q).rear->next = p;
+  (*Q).rear = p;
+
+  return OK;
+}
+
+Status DeQueue_L(LinkQueue *Q, QElemType_L *e) {
+  QueuePtr p;
+
+  if ((*Q).front == (*Q).rear) return ERROR;
+
+  p = (*Q).front->next;
+  *e = p->data;
+
+  (*Q).front->next = p->next;
+  if ((*Q).rear == p) (*Q).rear = (*Q).front;
+
+  free(p);
+
+  return OK;
+}
+
+void QueueTraverse_L(LinkQueue Q, void(Visit)(QElemType_L)) {
+  QueuePtr p;
+
+  p = Q.front->next;
+
+  while (p) {
+    Visit(p->data);
+    p = p->next;
+  }
+}
 
 #endif

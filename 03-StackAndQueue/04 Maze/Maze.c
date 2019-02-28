@@ -1,60 +1,60 @@
 /*********************************
  *					             *
- * ÎÄ¼ş¼Ğ: ¡ø03 Õ»ºÍ¶ÓÁĞ\04 Maze *
+ * æ–‡ä»¶å¤¹: â–²03 æ ˆå’Œé˜Ÿåˆ—\04 Maze *
  * 					             *
- * ÎÄ¼şÃû: Maze.c                *
+ * æ–‡ä»¶å: Maze.c                *
  * 				                 *
- * Ëã  ·¨: 3.3                   *
+ * ç®—  æ³•: 3.3                   *
  *                               *
  *********************************/
 
 #ifndef MAZE_C
 #define MAZE_C
 
-#include "Maze.h"							//**¡ø03 Õ»ºÍ¶ÓÁĞ**//
+#include "Maze.h"							//**â–²03 æ ˆå’Œé˜Ÿåˆ—**//
 
-/*¨T¨T¨T¨T¨[
-¨U Ëã·¨3.3¨U 
-¨^¨T¨T¨T¨T*/
+/*â•â•â•â•â•—
+â•‘ ç®—æ³•3.3â•‘ 
+â•šâ•â•â•â•*/
 Status MazePath(MazeType maze[][N], PosType start, PosType end)
 {
 	SqStack S;
-	SElemType_Sq nodeInf;					//nodeInf´æ´¢µ±Ç°Í¨µÀ¿éĞÅÏ¢ 
-	PosType curPos;							//µ±Ç°Î»ÖÃ 
-	int curStep;							//µ±Ç°Í¨µÀ¿éĞòºÅ 
+	SElemType_Sq nodeInf;					//nodeInfå­˜å‚¨å½“å‰é€šé“å—ä¿¡æ¯ 
+	PosType curPos;							//å½“å‰ä½ç½® 
+	int curStep;							//å½“å‰é€šé“å—åºå· 
 	
 	InitStack_Sq(&S);
-	curPos = start;							//Éè¶¨µ±Ç°Î»ÖÃÎª"³ö¿ÚÎ»ÖÃ" 
+	curPos = start;							//è®¾å®šå½“å‰ä½ç½®ä¸º"å‡ºå£ä½ç½®" 
 	curStep = 1;
 	
 	do
 	{
-		if(Pass(curPos, maze))				//µ±Ç°Î»ÖÃ¿ÉÍ¨¹ı£¬¼´ÊÇÎ´Ôø·ÃÎÊµÄÍ¨µÀ¿é 
+		if(Pass(curPos, maze))				//å½“å‰ä½ç½®å¯é€šè¿‡ï¼Œå³æ˜¯æœªæ›¾è®¿é—®çš„é€šé“å— 
 		{
-			FootPrint(curPos, maze);		//ÁôÏÂ×ã¼£
+			FootPrint(curPos, maze);		//ç•™ä¸‹è¶³è¿¹
 			ShowMaze(maze); 
 
-			SetSElemType(&nodeInf, curStep, curPos, East);	//ÉèÖÃÍ¨µÀ¿éĞÅÏ¢
-			Push_Sq(&S, nodeInf); 			//¼ÓÈëÂ·¾¶ 
+			SetSElemType(&nodeInf, curStep, curPos, East);	//è®¾ç½®é€šé“å—ä¿¡æ¯
+			Push_Sq(&S, nodeInf); 			//åŠ å…¥è·¯å¾„ 
 
-			if(EqualPosType(curPos, end))	//µ½´ïÖÕµã
+			if(EqualPosType(curPos, end))	//åˆ°è¾¾ç»ˆç‚¹
 			{
-				printf("\nÑ°Â·³É¹¦£¡£¡\n\n");
+				printf("\nå¯»è·¯æˆåŠŸï¼ï¼\n\n");
 				return TRUE;	
 			}
 			
-			curPos = NextPos(curPos, East);	//ÏÂÒ»Î»ÖÃÊÇµ±Ç°Î»ÖÃµÄ¶«ÁÚ 
-			curStep++;						//Ì½Ë÷ÏÂÒ»²½ 
+			curPos = NextPos(curPos, East);	//ä¸‹ä¸€ä½ç½®æ˜¯å½“å‰ä½ç½®çš„ä¸œé‚» 
+			curStep++;						//æ¢ç´¢ä¸‹ä¸€æ­¥ 
 		}
-		else								//µ±Ç°Î»ÖÃ²»ÄÜÍ¨¹ı 
+		else								//å½“å‰ä½ç½®ä¸èƒ½é€šè¿‡ 
 		{
 			if(!StackEmpty_Sq(S))
 			{
-				Pop_Sq(&S, &nodeInf);		//ĞŞ¸Ä½áµãÖ¸Ïò
+				Pop_Sq(&S, &nodeInf);		//ä¿®æ”¹ç»“ç‚¹æŒ‡å‘
 				 
-				while(nodeInf.di==North && !StackEmpty_Sq(S))	//´ËÍ¨µÀ¿é4¸ö·½Ïò¶¼±éÀú¹ı 
+				while(nodeInf.di==North && !StackEmpty_Sq(S))	//æ­¤é€šé“å—4ä¸ªæ–¹å‘éƒ½éå†è¿‡ 
 				{
-					MarkPrint(nodeInf.seat, maze);				//ÁôÏÂ²»ÄÜÍ¨¹ıµÄ±ê¼Ç£¬²¢ÍË»ØÒ»²½ 
+					MarkPrint(nodeInf.seat, maze);				//ç•™ä¸‹ä¸èƒ½é€šè¿‡çš„æ ‡è®°ï¼Œå¹¶é€€å›ä¸€æ­¥ 
 					ShowMaze(maze);
 
 					Pop_Sq(&S, &nodeInf);
@@ -62,7 +62,7 @@ Status MazePath(MazeType maze[][N], PosType start, PosType end)
 
 				if(nodeInf.di<North)
 				{
-					maze[nodeInf.seat.x][nodeInf.seat.y] = ++nodeInf.di;//¸Ä±äÌ½Ë÷·½Ïò£¬ÔÚÃÔ¹¬Êı×éÖĞÁôÏÂ±ê¼Ç	
+					maze[nodeInf.seat.x][nodeInf.seat.y] = ++nodeInf.di;//æ”¹å˜æ¢ç´¢æ–¹å‘ï¼Œåœ¨è¿·å®«æ•°ç»„ä¸­ç•™ä¸‹æ ‡è®°	
 					ShowMaze(maze);
 
 					Push_Sq(&S, nodeInf);
@@ -73,41 +73,41 @@ Status MazePath(MazeType maze[][N], PosType start, PosType end)
 		}		
 	}while(!StackEmpty_Sq(S));	
 	
-	printf("\nÑ°Â·Ê§°Ü£¡£¡\n\n");
+	printf("\nå¯»è·¯å¤±è´¥ï¼ï¼\n\n");
 	
 	return FALSE;	
 }
 
 void InitMaze(MazeType maze[][N], PosType *start, PosType *end) 
-{												//ÃÔ¹¬¹æÄ£ÎªN¡ÁN 
+{												//è¿·å®«è§„æ¨¡ä¸ºNÃ—N 
 	int i, j, tmp;
 		
-	srand((unsigned)time(NULL));				//ÓÃÏµÍ³Ê±¼ä×öËæ»úÊıÖÖ×Ó 
+	srand((unsigned)time(NULL));				//ç”¨ç³»ç»Ÿæ—¶é—´åšéšæœºæ•°ç§å­ 
 	
 	for(i=0; i<N; i++)
 	{
 		for(j=0; j<N; j++)
 		{
 			if(i==0 || j==0 || i==N-1 || j==N-1)
-				maze[i][j] = Wall;				//ÃÔ¹¬ÍâÇ½
+				maze[i][j] = Wall;				//è¿·å®«å¤–å¢™
 			else
 			{
-				tmp = rand()%X;					//Éú³ÉËæ»úÊıÌî³äÃÔ¹¬ 		
+				tmp = rand()%X;					//ç”Ÿæˆéšæœºæ•°å¡«å……è¿·å®« 		
 				if(!tmp)
-					maze[i][j] = Obstacle;		//1/XµÄ¸ÅÂÊÉú³ÉÕÏ°­ 
+					maze[i][j] = Obstacle;		//1/Xçš„æ¦‚ç‡ç”Ÿæˆéšœç¢ 
 				else
-					maze[i][j] = Way;			//ÆäËüµØ·½¼ÓÈëÂ·¾¶ 
+					maze[i][j] = Way;			//å…¶å®ƒåœ°æ–¹åŠ å…¥è·¯å¾„ 
 			}
 		}	
 	}
 	
-	(*start).x = 1;								//ÃÔ¹¬Èë¿Ú
+	(*start).x = 1;								//è¿·å®«å…¥å£
 	(*start).y = 0;
-	(*end).x = N-2;								//ÃÔ¹¬³ö¿Ú 
+	(*end).x = N-2;								//è¿·å®«å‡ºå£ 
 	(*end).y = N-1;	
 	
-	maze[1][0] = maze[N-2][N-1] = Way;			//¿ª·ÅÈë¿ÚºÍ³ö¿Ú 
-	maze[1][1] = maze[N-2][N-2] = Way;			//ÎªÁËÌá¸ß³É¹¦ÂÊ£¬Èë¿Ú´¦ºÍ³ö¿Ú´¦ÁÙ½üµÄ½áµãÒ»Ö±ÉèÎªÍ¨Â· 
+	maze[1][0] = maze[N-2][N-1] = Way;			//å¼€æ”¾å…¥å£å’Œå‡ºå£ 
+	maze[1][1] = maze[N-2][N-2] = Way;			//ä¸ºäº†æé«˜æˆåŠŸç‡ï¼Œå…¥å£å¤„å’Œå‡ºå£å¤„ä¸´è¿‘çš„ç»“ç‚¹ä¸€ç›´è®¾ä¸ºé€šè·¯ 
 }
 
 void PaintMaze(MazeType maze[][N])
@@ -117,39 +117,39 @@ void PaintMaze(MazeType maze[][N])
 	for(i=0; i<N; i++)
 		for(j=0; j<N; j++)
 		{
-			if(maze[i][j]==Wall)				//ÍâÇ½ 
-				printf("¨~");
-			else if(maze[i][j]==Obstacle)		//ÄÚ²¿ÕÏ°­ 
-				printf("¨ˆ");
-			else if(maze[i][j]==East)			//³¯¶«Ì½Ë÷
-				printf("¡ú");
-			else if(maze[i][j]==South)			//³¯ÄÏÌ½Ë÷
-				printf("¡ı");
-			else if(maze[i][j]==West)			//³¯Î÷Ì½Ë÷
-				printf("¡û");
-			else if(maze[i][j]==North)			//³¯±±Ì½Ë÷
-				printf("¡ü");
-			else if(maze[i][j]==DeadLock)		//·ÃÎÊ¹ıÇÒ²»ÄÜÍ¨¹ıµÄ½áµã 
-				printf("¡ï");
-			else								//Î´·ÃÎÊ¹ıµÄÂ·¾¶½áµã 
+			if(maze[i][j]==Wall)				//å¤–å¢™ 
+				printf("â–‡");
+			else if(maze[i][j]==Obstacle)		//å†…éƒ¨éšœç¢ 
+				printf("â–“");
+			else if(maze[i][j]==East)			//æœä¸œæ¢ç´¢
+				printf("â†’");
+			else if(maze[i][j]==South)			//æœå—æ¢ç´¢
+				printf("â†“");
+			else if(maze[i][j]==West)			//æœè¥¿æ¢ç´¢
+				printf("â†");
+			else if(maze[i][j]==North)			//æœåŒ—æ¢ç´¢
+				printf("â†‘");
+			else if(maze[i][j]==DeadLock)		//è®¿é—®è¿‡ä¸”ä¸èƒ½é€šè¿‡çš„ç»“ç‚¹ 
+				printf("â˜…");
+			else								//æœªè®¿é—®è¿‡çš„è·¯å¾„ç»“ç‚¹ 
 				printf("  ");
 
-			if(j!=0 && j%(N-1)==0)				//Ã¿¸ôN¸ö½áµã»»ĞĞ 
+			if(j!=0 && j%(N-1)==0)				//æ¯éš”Nä¸ªç»“ç‚¹æ¢è¡Œ 
 				printf("\n");
 		}
 }
 
-void ShowMaze(MazeType maze[][N])	//Ïàµ±ÓÚË¢ĞÂ²Ù×÷ 
+void ShowMaze(MazeType maze[][N])	//ç›¸å½“äºåˆ·æ–°æ“ä½œ 
 {
-	Wait(SleepTime);				//ÔİÍ£ 
-	system("cls");					//ÏÈÇå³ıÆÁÄ»ÏÖÓĞÄÚÈİ 
-	PaintMaze(maze);				//ÔÚÆÁÄ»ÉÏ»­³öÃÔ¹¬ 
+	Wait(SleepTime);				//æš‚åœ 
+	system("cls");					//å…ˆæ¸…é™¤å±å¹•ç°æœ‰å†…å®¹ 
+	PaintMaze(maze);				//åœ¨å±å¹•ä¸Šç”»å‡ºè¿·å®« 
 } 
 
 Status EqualPosType(PosType seat1, PosType seat2)
 {
 	if(seat1.x==seat2.x && seat1.y==seat2.y)
-		return TRUE;	//Á½Í¨µÀ¿é×ø±êÏàµÈ·µ»Ø1 
+		return TRUE;	//ä¸¤é€šé“å—åæ ‡ç›¸ç­‰è¿”å›1 
 	else
 		return ERROR;
 }
@@ -159,15 +159,15 @@ Status Pass(PosType seat, MazeType maze[][N])
 	int x = seat.x;
 	int y = seat.y;
 	
-	if(!IsCross(seat) && maze[x][y]==Way)	//½áµã²»ÄÜÔ½½ç
+	if(!IsCross(seat) && maze[x][y]==Way)	//ç»“ç‚¹ä¸èƒ½è¶Šç•Œ
 		return TRUE;
 	else
 		return ERROR;
 }
 
-void FootPrint(PosType seat, MazeType maze[][N])	//ËùÎ½ÁôÏÂ×ã¼£¼´ÉèÖÃÆäÏÂÒ»´Î·ÃÎÊ·½Ïò 
+void FootPrint(PosType seat, MazeType maze[][N])	//æ‰€è°“ç•™ä¸‹è¶³è¿¹å³è®¾ç½®å…¶ä¸‹ä¸€æ¬¡è®¿é—®æ–¹å‘ 
 {	
-	maze[seat.x][seat.y] = East; 					//³õÊ¼ÉèÖÃÏò¶«Ì½Ë÷ 
+	maze[seat.x][seat.y] = East; 					//åˆå§‹è®¾ç½®å‘ä¸œæ¢ç´¢ 
 } 
 
 void SetSElemType (SElemType_Sq *e, int ord, PosType seat, int di)
@@ -183,13 +183,13 @@ PosType NextPos(PosType seat, int di)
 
 	switch(di)
 	{
-		case East:  tmp.y++;			//Ïò¶« 
+		case East:  tmp.y++;			//å‘ä¸œ 
 			break;	
-		case South: tmp.x++;			//ÏòÄÏ
+		case South: tmp.x++;			//å‘å—
 			break;
-		case West:  tmp.y--;			//ÏòÎ÷ 
+		case West:  tmp.y--;			//å‘è¥¿ 
 			break;
-		case North: tmp.x--;			//Ïò±±
+		case North: tmp.x--;			//å‘åŒ—
 			break;
 	}
 	
@@ -202,7 +202,7 @@ Status IsCross(PosType seat)
 	int y = seat.y;
 	
 	if(x<0 || y<0 || x>N-1 || y>N-1)
-		return TRUE;					//Ô½½ç 
+		return TRUE;					//è¶Šç•Œ 
 	else
 		return FALSE; 
 }
@@ -212,7 +212,7 @@ void MarkPrint(PosType seat, MazeType maze[][N])
 	int x = seat.x;
 	int y = seat.y;
 	
-	maze[x][y] = DeadLock;			    //ÁôÏÂ²»ÄÜÍ¨¹ıµÄ±ê¼Ç 
+	maze[x][y] = DeadLock;			    //ç•™ä¸‹ä¸èƒ½é€šè¿‡çš„æ ‡è®° 
 }
 
 #endif

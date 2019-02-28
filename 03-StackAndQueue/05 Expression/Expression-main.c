@@ -1,23 +1,22 @@
 /***************************************
  *						               *
- * ÎÄ¼ş¼Ğ: ¡ø03 Õ»ºÍ¶ÓÁĞ\05 Expression *
+ * æ–‡ä»¶å¤¹: â–²03 æ ˆå’Œé˜Ÿåˆ—\05 Expression *
  * 						               *
- * ÄÚ  Èİ: ±í´ïÊ½ÇóÖµÏà¹Øº¯Êı²âÊÔ      *
+ * å†…  å®¹: è¡¨è¾¾å¼æ±‚å€¼ç›¸å…³å‡½æ•°æµ‹è¯•      *
  *                                     *
  ***************************************/
 
-#include "Expression.c"			//**¡ø03 Õ»ºÍ¶ÓÁĞ**//					
+#include "Expression.c"  //**â–²03 æ ˆå’Œé˜Ÿåˆ—**//
 
-int main(int argc, char **argv)
-{
-	char opnd;
-	char *exp = "(2+3)*4*6#";
-	
-	opnd = EvaluateExpression(exp);
-	
-	printf("×÷ÎªÊ¾Àı£¬%s µÄ¼ÆËã½á¹ûÎª£º%d\n", exp, opnd-'0');
-	
-	printf("\n");
-	
-	return 0;
+int main(int argc, char **argv) {
+  char opnd;
+  char *exp = "(2+3)*4*6#";
+
+  opnd = EvaluateExpression(exp);
+
+  printf("ä½œä¸ºç¤ºä¾‹ï¼Œ%s çš„è®¡ç®—ç»“æœä¸ºï¼š%d\n", exp, opnd - '0');
+
+  printf("\n");
+
+  return 0;
 }

@@ -1,109 +1,106 @@
 /****************************************
  *                                      *
- * ÎÄ¼þ¼Ð: ¡ø03 Õ»ºÍ¶ÓÁÐ\08 CylSeqQueue *
+ * ï¿½Ä¼ï¿½ï¿½ï¿½: ï¿½ï¿½03 Õ»ï¿½Í¶ï¿½ï¿½ï¿½\08 CylSeqQueue *
  *                                      *
- * ÄÚ  ÈÝ: Ñ­»·¶ÓÁÐÏà¹Øº¯Êý²âÊÔ         *
+ * ï¿½ï¿½  ï¿½ï¿½: Ñ­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Øºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½         *
  *                                      *
  ****************************************/
 
 #include <stdio.h>
-#include "CylSeqQueue.c"	//**¡ø03 Õ»ºÍ¶ÓÁÐ**//
-	
-void PrintElem(QElemType_CSq e);						//²âÊÔº¯Êý£¬´òÓ¡ÕûÐÍ 
-	
-int main(int argc, char **argv)
-{
-	CSqQueue Q;
-	int i;
-	QElemType_CSq e;
-	
-	printf("¨‹1\n¡øº¯Êý InitQueue_CSq ²âÊÔ...\n");		//1.º¯ÊýInitQueue_CSq²âÊÔ
-	{
-		printf("³õÊ¼»¯Ñ­»·Ë³Ðò¶ÓÁÐ Q ...\n");					 
-		InitQueue_CSq(&Q);
-		printf("\n");
-	}
-	PressEnter;
-	
-	printf("¨‹4\n¡øº¯Êý QueueEmpty_CSq ²âÊÔ...\n");		//4.º¯ÊýQueueEmpty_CSq²âÊÔ
-	{
-		QueueEmpty_CSq(Q) ? printf(" Q Îª¿Õ£¡£¡\n") : printf(" Q ²»Îª¿Õ£¡\n");
-		printf("\n");
-	}
-	PressEnter;
-	
-	printf("¨‹7\n¡øº¯Êý EnQueue_CSq ²âÊÔ...\n");		//7.º¯ÊýEnQueue_CSq²âÊÔ
-	{
-		for(i=1; i<=6; i++)									
-		{
-			printf("ÔªËØ \"%2d\" Èë¶ÓQ£¬", 2*i);
-			EnQueue_CSq(&Q, 2*i);
-			printf("£¨ÀÛ¼ÆµÚ %d ¸öÔªËØ£©...\n", QueueLength_CSq(Q));
-		}
-		printf("\n");
-	}
-	PressEnter;
-	
-	printf("¨‹9\n¡øº¯Êý QueueTraverse_CSq ²âÊÔ...\n");	//9.º¯ÊýQueueTraverse_CSq²âÊÔ
-	{
-		printf(" Q ÖÐµÄÔªËØÎª£ºQ = ");						 
-		QueueTraverse_CSq(Q, PrintElem);
-		printf("\n\n");
-	}
-	PressEnter;
-	
-	printf("¨‹8\n¡øº¯Êý DeQueue_CSq ²âÊÔ...\n");		//8.º¯ÊýDeQueue_CSq²âÊÔ
-	{
-		DeQueue_CSq(&Q, &e);
-		printf("¶ÓÍ·ÔªËØ \"%d\" ³ö¶Ó...\n", e);
-		printf(" Q ÖÐµÄÔªËØÎª£ºQ = ");						 
-		QueueTraverse_CSq(Q, PrintElem);
-		printf("\n\n");
-	}
-	PressEnter;
-	
-	printf("¨‹5\n¡øº¯Êý QueueLength_CSq ²âÊÔ...\n");	//5.º¯ÊýQueueLength_CSq²âÊÔ
-	{
-		i = QueueLength_CSq(Q);
-		printf(" Q µÄ³¤¶ÈÎª %d \n", i);
-		printf("\n");
-	}
-	PressEnter;
-	
-	printf("¨‹6\n¡øº¯Êý GetHead_CSq ²âÊÔ...\n");		//6.º¯ÊýGetHead_CSq²âÊÔ
-	{
-		GetHead_CSq(Q, &e);
-		printf("¶ÓÍ·ÔªËØµÄÖµÎª \"%d\" \n", e);
-		printf("\n");
-	}
-	PressEnter;
-	
-	printf("¨‹3\n¡øº¯Êý ClearQueue_CSq ²âÊÔ...\n");		//3.º¯ÊýClearQueue_CSq²âÊÔ
-	{
-		printf("Çå¿Õ Q Ç°£º");
-		QueueEmpty_CSq(Q) ? printf(" Q Îª¿Õ£¡£¡\n") : printf(" Q ²»Îª¿Õ£¡\n");
-		ClearQueue_CSq(&Q);
-		printf("Çå¿Õ Q ºó£º");
-		QueueEmpty_CSq(Q) ? printf(" Q Îª¿Õ£¡£¡\n") : printf(" Q ²»Îª¿Õ£¡\n");
-		printf("\n");
-	}
-	PressEnter;
-	
-	printf("¨‹2\n¡øº¯Êý DestroyQueue_CSq ²âÊÔ...\n");	//2.º¯ÊýDestroyQueue_CSq²âÊÔ
-	{
-		printf("Ïú»Ù Q Ç°£º");
-		Q.base!=NULL ? printf(" Q ´æÔÚ£¡\n") : printf(" Q ²»´æÔÚ£¡£¡\n");
-		DestroyQueue_CSq(&Q);
-		printf("Ïú»Ù Q ºó£º");
-		Q.base!=NULL ? printf(" Q ´æÔÚ£¡\n") : printf(" Q ²»´æÔÚ£¡£¡\n");
-		printf("\n");
-	}
-	PressEnter;
-		
-	return 0;
+#include "CylSeqQueue.c"  //**ï¿½ï¿½03 Õ»ï¿½Í¶ï¿½ï¿½ï¿½**//
+
+void PrintElem(QElemType_CSq e);  //ï¿½ï¿½ï¿½Ôºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¡ï¿½ï¿½ï¿½ï¿½
+
+int main(int argc, char **argv) {
+  CSqQueue Q;
+  int i;
+  QElemType_CSq e;
+
+  printf("ï¿½ï¿½1\nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ InitQueue_CSq ï¿½ï¿½ï¿½ï¿½...\n");  // 1.ï¿½ï¿½ï¿½ï¿½InitQueue_CSqï¿½ï¿½ï¿½ï¿½
+  {
+    printf("ï¿½ï¿½Ê¼ï¿½ï¿½Ñ­ï¿½ï¿½Ë³ï¿½ï¿½ï¿½ï¿½ï¿½ Q ...\n");
+    InitQueue_CSq(&Q);
+    printf("\n");
+  }
+  PressEnter;
+
+  printf("ï¿½ï¿½4\nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ QueueEmpty_CSq ï¿½ï¿½ï¿½ï¿½...\n");  // 4.ï¿½ï¿½ï¿½ï¿½QueueEmpty_CSqï¿½ï¿½ï¿½ï¿½
+  {
+    QueueEmpty_CSq(Q) ? printf(" Q Îªï¿½Õ£ï¿½ï¿½ï¿½\n") : printf(" Q ï¿½ï¿½Îªï¿½Õ£ï¿½\n");
+    printf("\n");
+  }
+  PressEnter;
+
+  printf("ï¿½ï¿½7\nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ EnQueue_CSq ï¿½ï¿½ï¿½ï¿½...\n");  // 7.ï¿½ï¿½ï¿½ï¿½EnQueue_CSqï¿½ï¿½ï¿½ï¿½
+  {
+    for (i = 1; i <= 6; i++) {
+      printf("Ôªï¿½ï¿½ \"%2d\" ï¿½ï¿½ï¿½Qï¿½ï¿½", 2 * i);
+      EnQueue_CSq(&Q, 2 * i);
+      printf("ï¿½ï¿½ï¿½Û¼Æµï¿½ %d ï¿½ï¿½Ôªï¿½Ø£ï¿½...\n", QueueLength_CSq(Q));
+    }
+    printf("\n");
+  }
+  PressEnter;
+
+  printf(
+      "ï¿½ï¿½9\nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ QueueTraverse_CSq ï¿½ï¿½ï¿½ï¿½...\n");  // 9.ï¿½ï¿½ï¿½ï¿½QueueTraverse_CSqï¿½ï¿½ï¿½ï¿½
+  {
+    printf(" Q ï¿½Ðµï¿½Ôªï¿½ï¿½Îªï¿½ï¿½Q = ");
+    QueueTraverse_CSq(Q, PrintElem);
+    printf("\n\n");
+  }
+  PressEnter;
+
+  printf("ï¿½ï¿½8\nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ DeQueue_CSq ï¿½ï¿½ï¿½ï¿½...\n");  // 8.ï¿½ï¿½ï¿½ï¿½DeQueue_CSqï¿½ï¿½ï¿½ï¿½
+  {
+    DeQueue_CSq(&Q, &e);
+    printf("ï¿½ï¿½Í·Ôªï¿½ï¿½ \"%d\" ï¿½ï¿½ï¿½ï¿½...\n", e);
+    printf(" Q ï¿½Ðµï¿½Ôªï¿½ï¿½Îªï¿½ï¿½Q = ");
+    QueueTraverse_CSq(Q, PrintElem);
+    printf("\n\n");
+  }
+  PressEnter;
+
+  printf("ï¿½ï¿½5\nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ QueueLength_CSq ï¿½ï¿½ï¿½ï¿½...\n");  // 5.ï¿½ï¿½ï¿½ï¿½QueueLength_CSqï¿½ï¿½ï¿½ï¿½
+  {
+    i = QueueLength_CSq(Q);
+    printf(" Q ï¿½Ä³ï¿½ï¿½ï¿½Îª %d \n", i);
+    printf("\n");
+  }
+  PressEnter;
+
+  printf("ï¿½ï¿½6\nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ GetHead_CSq ï¿½ï¿½ï¿½ï¿½...\n");  // 6.ï¿½ï¿½ï¿½ï¿½GetHead_CSqï¿½ï¿½ï¿½ï¿½
+  {
+    GetHead_CSq(Q, &e);
+    printf("ï¿½ï¿½Í·Ôªï¿½Øµï¿½ÖµÎª \"%d\" \n", e);
+    printf("\n");
+  }
+  PressEnter;
+
+  printf("ï¿½ï¿½3\nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ClearQueue_CSq ï¿½ï¿½ï¿½ï¿½...\n");  // 3.ï¿½ï¿½ï¿½ï¿½ClearQueue_CSqï¿½ï¿½ï¿½ï¿½
+  {
+    printf("ï¿½ï¿½ï¿½ Q Ç°ï¿½ï¿½");
+    QueueEmpty_CSq(Q) ? printf(" Q Îªï¿½Õ£ï¿½ï¿½ï¿½\n") : printf(" Q ï¿½ï¿½Îªï¿½Õ£ï¿½\n");
+    ClearQueue_CSq(&Q);
+    printf("ï¿½ï¿½ï¿½ Q ï¿½ï¿½");
+    QueueEmpty_CSq(Q) ? printf(" Q Îªï¿½Õ£ï¿½ï¿½ï¿½\n") : printf(" Q ï¿½ï¿½Îªï¿½Õ£ï¿½\n");
+    printf("\n");
+  }
+  PressEnter;
+
+  printf(
+      "ï¿½ï¿½2\nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ DestroyQueue_CSq ï¿½ï¿½ï¿½ï¿½...\n");  // 2.ï¿½ï¿½ï¿½ï¿½DestroyQueue_CSqï¿½ï¿½ï¿½ï¿½
+  {
+    printf("ï¿½ï¿½ï¿½ï¿½ Q Ç°ï¿½ï¿½");
+    Q.base != NULL ? printf(" Q ï¿½ï¿½ï¿½Ú£ï¿½\n") : printf(" Q ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½\n");
+    DestroyQueue_CSq(&Q);
+    printf("ï¿½ï¿½ï¿½ï¿½ Q ï¿½ï¿½");
+    Q.base != NULL ? printf(" Q ï¿½ï¿½ï¿½Ú£ï¿½\n") : printf(" Q ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½\n");
+    printf("\n");
+  }
+  PressEnter;
+
+  return 0;
 }
 
-void PrintElem(QElemType_CSq e)
-{
-	printf("%d ", e);
-}
+void PrintElem(QElemType_CSq e) { printf("%d ", e); }

@@ -1,30 +1,30 @@
 /****************************************
  *                                      *
- * ÎÄ¼ş¼Ğ: ¡ø03 Õ»ºÍ¶ÓÁĞ\09 BankQueuing *
+ * æ–‡ä»¶å¤¹: â–²03 æ ˆå’Œé˜Ÿåˆ—\09 BankQueuing *
  *                                      *
- * ÎÄ¼şÃû: BankQueuing.c                *
+ * æ–‡ä»¶å: BankQueuing.c                *
  *                                      *
- * Ëã  ·¨: 3.6¡¢3.7                     * 
+ * ç®—  æ³•: 3.6ã€3.7                     * 
  *                                      *
  ****************************************/
 
 #ifndef BANKQUEUING_C
 #define BANKQUEUING_C
 
-#include "BankQueuing.h" 				//**¡ø03 Õ»ºÍ¶ÓÁĞ**//
+#include "BankQueuing.h" 				//**â–²03 æ ˆå’Œé˜Ÿåˆ—**//
 
-/*¨T¨T¨T¨T¨[
-¨U Ëã·¨3.6¨U 
-¨^¨T¨T¨T¨T*/
-void Bank_Simulation_1()				//ÒøĞĞÒµÎñÄ£Äâ£¬Í³¼ÆÒ»ÌìÄÚ¿Í»§ÔÚÒøĞĞ¶ºÁôµÄÆ½¾ùÊ±¼ä 
+/*â•â•â•â•â•—
+â•‘ ç®—æ³•3.6â•‘ 
+â•šâ•â•â•â•*/
+void Bank_Simulation_1()				//é“¶è¡Œä¸šåŠ¡æ¨¡æ‹Ÿï¼Œç»Ÿè®¡ä¸€å¤©å†…å®¢æˆ·åœ¨é“¶è¡Œé€—ç•™çš„å¹³å‡æ—¶é—´ 
 {
 	char eventType;
 	
-	OpenForDay();						//³õÊ¼»¯
+	OpenForDay();						//åˆå§‹åŒ–
 
 	while(MoreEvent())
 	{
-		EventDrived(&eventType);		//ÊÂ¼şÇı¶¯
+		EventDrived(&eventType);		//äº‹ä»¶é©±åŠ¨
 		
 		switch(eventType)
 		{
@@ -46,18 +46,18 @@ void OpenForDay()
 {	
 	int i;
 	
-	gTotalTime = 0;					//³õÊ¼»¯ÀÛ¼ÆÊ±¼äºÍ¿Í»§ÊıÎª0 
+	gTotalTime = 0;					//åˆå§‹åŒ–ç´¯è®¡æ—¶é—´å’Œå®¢æˆ·æ•°ä¸º0 
 	gCustomerNum = 0;
 			
-	InitList_L(&gEv);				//³õÊ¼»¯ÊÂ¼şÁ´±íÎª¿Õ±í
+	InitList_L(&gEv);				//åˆå§‹åŒ–äº‹ä»¶é“¾è¡¨ä¸ºç©ºè¡¨
 
-	gEn.OccurTime = 0;				//Éè¶¨µÚÒ»¸ö¿Í»§µ½´ïÊÂ¼ş 
+	gEn.OccurTime = 0;				//è®¾å®šç¬¬ä¸€ä¸ªå®¢æˆ·åˆ°è¾¾äº‹ä»¶ 
 	gEn.NType = Arrive;
 	 
-	OrderInsert(gEv, gEn, cmp);		//²åÈëÊÂ¼ş±í
+	OrderInsert(gEv, gEn, cmp);		//æ’å…¥äº‹ä»¶è¡¨
 	
 	for(i=1; i<=4; ++i) 
-		InitQueue_L(&gQ[i]);		//ÖÃ¿Õ¶ÓÁĞ
+		InitQueue_L(&gQ[i]);		//ç½®ç©ºé˜Ÿåˆ—
 
 	Show();
 }
@@ -80,34 +80,34 @@ void EventDrived(char *event)
 		*event = 'D';
 }
 
-void CustomerArrived()							//´¦Àí¿Í»§µ½´ïÊÂ¼ş£¬gEn.NType=0 
+void CustomerArrived()							//å¤„ç†å®¢æˆ·åˆ°è¾¾äº‹ä»¶ï¼ŒgEn.NType=0 
 {	
 	int durtime, intertime; 
 	int cur_LeftTime, suc_ArrivalTime;
 	int i;
 	
-	++gCustomerNum;								//×Ü¿Í»§ÊıÔöÒ» 
+	++gCustomerNum;								//æ€»å®¢æˆ·æ•°å¢ä¸€ 
 	
-	Random(&durtime, &intertime);				//Éú³Éµ±Ç°¿Í»§°ìÀíÒµÎñĞèÒªµÄÊ±¼äºÍÏÂÒ»¸ö¿Í»§´ïµ½Ê±¼ä¼ä¸ô
-	cur_LeftTime    = gEn.OccurTime + durtime;	//µ±Ç°¿Í»§µÄÀë¿ªÊ±¼ä 
-	suc_ArrivalTime = gEn.OccurTime + intertime;//ÏÂÒ»¸ö¿Í»§µ½´ïÊ±¼ä 
+	Random(&durtime, &intertime);				//ç”Ÿæˆå½“å‰å®¢æˆ·åŠç†ä¸šåŠ¡éœ€è¦çš„æ—¶é—´å’Œä¸‹ä¸€ä¸ªå®¢æˆ·è¾¾åˆ°æ—¶é—´é—´éš”
+	cur_LeftTime    = gEn.OccurTime + durtime;	//å½“å‰å®¢æˆ·çš„ç¦»å¼€æ—¶é—´ 
+	suc_ArrivalTime = gEn.OccurTime + intertime;//ä¸‹ä¸€ä¸ªå®¢æˆ·åˆ°è¾¾æ—¶é—´ 
 			
-	gCustomerRcd.ArrivedTime = gEn.OccurTime;	//¼ÇÂ¼µ±Ç°¿Í»§ĞÅÏ¢ 
+	gCustomerRcd.ArrivedTime = gEn.OccurTime;	//è®°å½•å½“å‰å®¢æˆ·ä¿¡æ¯ 
 	gCustomerRcd.Duration    = durtime;
 	gCustomerRcd.Count       = gCustomerNum;
 
-	i = Minimum(gQ);							//Çó³¤¶È×î¶Ì¶ÓÁĞ
-	EnQueue_L(&gQ[i], gCustomerRcd); 			//µ±Ç°¿Í»§½øÈë×î¶Ì¶ÓÁĞ
+	i = Minimum(gQ);							//æ±‚é•¿åº¦æœ€çŸ­é˜Ÿåˆ—
+	EnQueue_L(&gQ[i], gCustomerRcd); 			//å½“å‰å®¢æˆ·è¿›å…¥æœ€çŸ­é˜Ÿåˆ—
 	Show();
 	
-	if(suc_ArrivalTime<gCloseTime)				//ÒøĞĞÉĞÎ´¹ØÃÅ£¬½«ÏÂÒ»¿Í»§µ½´ïÊÂ¼ş²åÈëÊÂ¼ş±í
+	if(suc_ArrivalTime<gCloseTime)				//é“¶è¡Œå°šæœªå…³é—¨ï¼Œå°†ä¸‹ä¸€å®¢æˆ·åˆ°è¾¾äº‹ä»¶æ’å…¥äº‹ä»¶è¡¨
 	{
-		gEn.OccurTime = suc_ArrivalTime;		//gEnµÄ²ÎÊıÒÑ¾­¸Ä±ä 
+		gEn.OccurTime = suc_ArrivalTime;		//gEnçš„å‚æ•°å·²ç»æ”¹å˜ 
 		gEn.NType = Arrive;
 		OrderInsert(gEv, gEn, cmp);
 	}
 
-	if(QueueLength_L(gQ[i])==1)					//Éè¶¨µÚi¶ÓÁĞµÄ¶ÓÍ·¿Í»§µÄÀë¿ªÊÂ¼ş²¢²åÈëÊÂ¼ş±í
+	if(QueueLength_L(gQ[i])==1)					//è®¾å®šç¬¬ié˜Ÿåˆ—çš„é˜Ÿå¤´å®¢æˆ·çš„ç¦»å¼€äº‹ä»¶å¹¶æ’å…¥äº‹ä»¶è¡¨
 	{
 		gEn.OccurTime = cur_LeftTime;
 		gEn.NType = i;		
@@ -115,16 +115,16 @@ void CustomerArrived()							//´¦Àí¿Í»§µ½´ïÊÂ¼ş£¬gEn.NType=0
 	}
 }
 
-void CustomerDeparture()						//´¦Àí¿Í»§Àë¿ªÊÂ¼ş,gEn.NType>0
+void CustomerDeparture()						//å¤„ç†å®¢æˆ·ç¦»å¼€äº‹ä»¶,gEn.NType>0
 {
 	int i = gEn.NType;
 	
-	DeQueue_L(&gQ[i], &gCustomerRcd);			//É¾³ıµÚi¶ÓÁĞµÄÅÅÍ·¿Í»§
+	DeQueue_L(&gQ[i], &gCustomerRcd);			//åˆ é™¤ç¬¬ié˜Ÿåˆ—çš„æ’å¤´å®¢æˆ·
 	Show();
 		
-	gTotalTime += gEn.OccurTime - gCustomerRcd.ArrivedTime;	//ÀÛ¼Æ¿Í»§¶ºÁôÊ±¼ä
+	gTotalTime += gEn.OccurTime - gCustomerRcd.ArrivedTime;	//ç´¯è®¡å®¢æˆ·é€—ç•™æ—¶é—´
 	
-	if(!QueueEmpty_L(gQ[i]))					//Éè¶¨µÚi¶ÓÁĞµÄµÚÒ»¸öÀë¿ªÊÂ¼ş²¢²åÈëÊÂ¼ş±í 
+	if(!QueueEmpty_L(gQ[i]))					//è®¾å®šç¬¬ié˜Ÿåˆ—çš„ç¬¬ä¸€ä¸ªç¦»å¼€äº‹ä»¶å¹¶æ’å…¥äº‹ä»¶è¡¨ 
 	{
 		GetHead_L(gQ[i], &gCustomerRcd);
 		gEn.OccurTime += gCustomerRcd.Duration;
@@ -135,30 +135,30 @@ void CustomerDeparture()						//´¦Àí¿Í»§Àë¿ªÊÂ¼ş,gEn.NType>0
 
 void Invalid()
 {
-	printf("ÔËĞĞ´íÎó£¡");
+	printf("è¿è¡Œé”™è¯¯ï¼");
 		exit(OVERFLOW);
 }
 
 void CloseForDay()
 {
-	printf("µ±Ìì×Ü¹²ÓĞ%d¸ö¿Í»§£¬Æ½¾ù¶ºÁôÊ±¼äÎª%d·ÖÖÓ¡£\n",gCustomerNum,gTotalTime/gCustomerNum);
+	printf("å½“å¤©æ€»å…±æœ‰%dä¸ªå®¢æˆ·ï¼Œå¹³å‡é€—ç•™æ—¶é—´ä¸º%dåˆ†é’Ÿã€‚\n",gCustomerNum,gTotalTime/gCustomerNum);
 }
 
-int cmp(Event a, Event b)					//±È½ÏÁ½ÊÂ¼ş·¢Éú´ÎĞò 
+int cmp(Event a, Event b)					//æ¯”è¾ƒä¸¤äº‹ä»¶å‘ç”Ÿæ¬¡åº 
 {
-	if(a.OccurTime<b.OccurTime)				//aÍíÓÚb·¢Éú 
+	if(a.OccurTime<b.OccurTime)				//aæ™šäºbå‘ç”Ÿ 
 		return -1;
-	if(a.OccurTime==b.OccurTime)			//a¡¢bÍ¬Ê±·¢Éú 
+	if(a.OccurTime==b.OccurTime)			//aã€båŒæ—¶å‘ç”Ÿ 
 		return 0;
-	if(a.OccurTime>b.OccurTime)				//aÔçÓÚb·¢Éú 
+	if(a.OccurTime>b.OccurTime)				//aæ—©äºbå‘ç”Ÿ 
 		return 1;
 }
 
 void Random(int *durtime, int *intertime)
 {
 	srand((unsigned)time(NULL));
-	*durtime = rand()%DurationTime+1;		//°ìÒµÎñÊ±¼ä³ÖĞø1µ½20·ÖÖÓ
-	*intertime = rand()%IntervalTime+1; 	//ÏÂÒ»¸ö¹Ë¿ÍÀ´µÄÊ±¼äÎª¼ä¸ô1µ½10·ÖÖÓ 
+	*durtime = rand()%DurationTime+1;		//åŠä¸šåŠ¡æ—¶é—´æŒç»­1åˆ°20åˆ†é’Ÿ
+	*intertime = rand()%IntervalTime+1; 	//ä¸‹ä¸€ä¸ªé¡¾å®¢æ¥çš„æ—¶é—´ä¸ºé—´éš”1åˆ°10åˆ†é’Ÿ 
 }
 
 Status OrderInsert(EventList gEv, Event gEn, int (cmp)(Event,Event))
@@ -167,9 +167,9 @@ Status OrderInsert(EventList gEv, Event gEn, int (cmp)(Event,Event))
 	EventList p, pre, s;
 	
 	pre = gEv;
-	p = gEv->next;							//pÖ¸ÏòµÚÒ»¸öÊÂ¼ş 
+	p = gEv->next;							//pæŒ‡å‘ç¬¬ä¸€ä¸ªäº‹ä»¶ 
 	
-	while(p && cmp(gEn, p->data)==1)		//²éÕÒgEnÔÚÊÂ¼ş±íÖĞÓ¦¸Ã²åÈëµÄÎ»ÖÃ
+	while(p && cmp(gEn, p->data)==1)		//æŸ¥æ‰¾gEnåœ¨äº‹ä»¶è¡¨ä¸­åº”è¯¥æ’å…¥çš„ä½ç½®
 	{
 		pre = p;
 		p = p->next;
@@ -179,7 +179,7 @@ Status OrderInsert(EventList gEv, Event gEn, int (cmp)(Event,Event))
 	if(!s)
 		exit(OVERFLOW);
 	
-	s->data = gEn;							//½«gEn²åÈëÊÂ¼ş±í
+	s->data = gEn;							//å°†gEnæ’å…¥äº‹ä»¶è¡¨
 	s->next = pre->next;
 	pre->next = s;
 	
@@ -206,7 +206,7 @@ int Minimum()
 void Show()
 {
 	int i;
-	QueuePtr p;								//¼ÇÂ¼µ½À´µÄ¿Í»§ÊÇµÚ¼¸¸ö 
+	QueuePtr p;								//è®°å½•åˆ°æ¥çš„å®¢æˆ·æ˜¯ç¬¬å‡ ä¸ª 
 	
 	system("cls");
 	
@@ -217,16 +217,16 @@ void Show()
 			if(p==gQ[i].front)
 			{
 				if(i==1)
-					printf("¹ñÌ¨¢Ù¡ñ");
+					printf("æŸœå°â‘ â—");
 				if(i==2)
-					printf("¹ñÌ¨¢Ú¡ñ");
+					printf("æŸœå°â‘¡â—");
 				if(i==3)
-					printf("¹ñÌ¨¢Û¡ñ");
+					printf("æŸœå°â‘¢â—");
 				if(i==4)
-					printf("¹ñÌ¨¢Ü¡ñ");
+					printf("æŸœå°â‘£â—");
 			}
 			else
-				printf("£¨%03d£©",p->data.Count);			
+				printf("ï¼ˆ%03dï¼‰",p->data.Count);			
 
 	
 			if(p==gQ[i].rear)
@@ -237,24 +237,24 @@ void Show()
 	Wait(SleepTime);
 }
 
-/*¨T¨T¨T¨T¨[
-¨U Ëã·¨3.7¨U 
-¨^¨T¨T¨T¨T*/
+/*â•â•â•â•â•—
+â•‘ ç®—æ³•3.7â•‘ 
+â•šâ•â•â•â•*/
 void Bank_Simulation_2()
 {
-	OpenForDay();							//³õÊ¼»¯
+	OpenForDay();							//åˆå§‹åŒ–
 	
 	while(!ListEmpty_L(gEv))
 	{
 		ListDelete_L(gEv, 1, &gEn);
 		
 		if(gEn.NType==Arrive)
-			CustomerArrived();				//´¦Àí¿Í»§µ½´ïÊÂ¼ş 
+			CustomerArrived();				//å¤„ç†å®¢æˆ·åˆ°è¾¾äº‹ä»¶ 
 		else
-			CustomerDeparture();			//´¦Àí¿Í»§Àë¿ªÊÂ¼ş 
+			CustomerDeparture();			//å¤„ç†å®¢æˆ·ç¦»å¼€äº‹ä»¶ 
 	}
 	
-	printf("µ±Ìì×Ü¹²ÓĞ%d¸ö¿Í»§£¬Æ½¾ù¶ºÁôÊ±¼äÎª%d·ÖÖÓ¡£\n",gCustomerNum,gTotalTime/gCustomerNum);//¼ÆËãÆ½¾ù¶ºÁôÊ±¼ä	
+	printf("å½“å¤©æ€»å…±æœ‰%dä¸ªå®¢æˆ·ï¼Œå¹³å‡é€—ç•™æ—¶é—´ä¸º%dåˆ†é’Ÿã€‚\n",gCustomerNum,gTotalTime/gCustomerNum);//è®¡ç®—å¹³å‡é€—ç•™æ—¶é—´	
 }
 
 #endif

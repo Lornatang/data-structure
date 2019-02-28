@@ -1,28 +1,28 @@
 /*************************************
  *							      	 *
- * ÎÄ¼þ¼Ð: ¡ø03 Õ»ºÍ¶ÓÁÐ\03 LineEdit *
+ * æ–‡ä»¶å¤¹: â–²03 æ ˆå’Œé˜Ÿåˆ—\03 LineEdit *
  * 							      	 *
- * ÎÄ¼þÃû: LineEdit.h             	 *
+ * æ–‡ä»¶å: LineEdit.h             	 *
  * 							      	 *
- * ÄÚ  ÈÝ: ÐÐ±à¼­³ÌÐòÏà¹Ø²Ù×÷ÁÐ±í  	 *
+ * å†…  å®¹: è¡Œç¼–è¾‘ç¨‹åºç›¸å…³æ“ä½œåˆ—è¡¨  	 *
  *                                	 *
  *************************************/
 
 #ifndef LINEEDIT_H
 #define LINEEDIT_H
 
-#include <stdio.h> 
-#include "../01 SequenceStack/SequenceStack.c" 		//**¡ø03 Õ»ºÍ¶ÓÁÐ**//
+#include <stdio.h>
+#include "../01 SequenceStack/SequenceStack.c"  //**â–²03 æ ˆå’Œé˜Ÿåˆ—**//
 
-/* ÐÐ±à¼­³ÌÐòº¯ÊýÁÐ±í */
+/* è¡Œç¼–è¾‘ç¨‹åºå‡½æ•°åˆ—è¡¨ */
 void LineEdit(char Buffer[]);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(01)Ëã·¨3.2£ºÐÐ±à¼­³ÌÐò¡£ ©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(01)ç®—æ³•3.2ï¼šè¡Œç¼–è¾‘ç¨‹åºã€‚ â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”â”â”*/
 
 void Print(SElemType_Sq e);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(02)´òÓ¡ÔªËØe¡£ ©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”“
+â”ƒ(02)æ‰“å°å…ƒç´ eã€‚ â”ƒ
+â”—â”â”â”â”â”â”â”â”*/
 
 #endif

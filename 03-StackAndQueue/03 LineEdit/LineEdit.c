@@ -1,67 +1,61 @@
 /*************************************
  *					     			 *
- * ÎÄ¼ş¼Ğ: ¡ø03 Õ»ºÍ¶ÓÁĞ\03 LineEdit *
+ * æ–‡ä»¶å¤¹: â–²03 æ ˆå’Œé˜Ÿåˆ—\03 LineEdit *
  * 					     			 *
- * ÎÄ¼şÃû: LineEdit.c    			 *
+ * æ–‡ä»¶å: LineEdit.c    			 *
  * 				         			 *
- * Ëã  ·¨: 3.2           			 *
+ * ç®—  æ³•: 3.2           			 *
  *                       			 *
  *************************************/
 
 #ifndef LINEEDIT_C
 #define LINEEDIT_C
 
-#include "LineEdit.h"				//**¡ø03 Õ»ºÍ¶ÓÁĞ**//
+#include "LineEdit.h"  //**â–²03 æ ˆå’Œé˜Ÿåˆ—**//
 
-/*¨T¨T¨T¨T¨[
-¨U Ëã·¨3.2¨U 
-¨^¨T¨T¨T¨T*/
-/* ÓëÑÏÎµÃô¿Î±¾ËùÊöËã·¨ÂÔÓĞ²î±ğ£¬µ«Ëã·¨Ë¼ÏëÒ»ÖÂ */
-void LineEdit(char Buffer[])
-{
-	SqStack S;						//½ÓÊÕÊäÈëµÄ×Ö·û
-	SElemType_Sq e;
-	int i;
-	char ch;
-	
-	InitStack_Sq(&S);
-	
-	i = 0;
-	ch = Buffer[i++];
-	while(ch!='\0')
-	{
-		while(ch!='\0' && ch!='\n')
-		{
-			switch(ch)
-			{
-				case '#': Pop_Sq(&S, &e);
-					break;
-				case '@': ClearStack_Sq(&S);
-					break;
-				default : Push_Sq(&S, ch);
-			}
-			ch = Buffer[i++];
-		}
-		
-		if(ch=='\n')
-		{
-			Push_Sq(&S, ch);			
-			StackTraverse_Sq(S, Print);
-			ClearStack_Sq(&S);
-			ch = Buffer[i++];
-		}
-	}
-	
-	if(ch=='\0')
-	{
-		StackTraverse_Sq(S, Print);
-		DestroyStack_Sq(&S);
-	}
+/*â•â•â•â•â•—
+â•‘ ç®—æ³•3.2â•‘
+â•šâ•â•â•â•*/
+/* ä¸ä¸¥è”šæ•è¯¾æœ¬æ‰€è¿°ç®—æ³•ç•¥æœ‰å·®åˆ«ï¼Œä½†ç®—æ³•æ€æƒ³ä¸€è‡´ */
+void LineEdit(char Buffer[]) {
+  SqStack S;  //æ¥æ”¶è¾“å…¥çš„å­—ç¬¦
+  SElemType_Sq e;
+  int i;
+  char ch;
+
+  InitStack_Sq(&S);
+
+  i = 0;
+  ch = Buffer[i++];
+  while (ch != '\0') {
+    while (ch != '\0' && ch != '\n') {
+      switch (ch) {
+        case '#':
+          Pop_Sq(&S, &e);
+          break;
+        case '@':
+          ClearStack_Sq(&S);
+          break;
+        default:
+          Push_Sq(&S, ch);
+      }
+      ch = Buffer[i++];
+    }
+
+    if (ch == '\n') {
+      Push_Sq(&S, ch);
+      StackTraverse_Sq(S, Print);
+      ClearStack_Sq(&S);
+      ch = Buffer[i++];
+    }
+  }
+
+  if (ch == '\0') {
+    StackTraverse_Sq(S, Print);
+    DestroyStack_Sq(&S);
+  }
 }
 
-void Print(SElemType_Sq e)
-{
-	printf("%c", e);
-}
+void Print(SElemType_Sq e) { printf("%c", e); }
 
 #endif

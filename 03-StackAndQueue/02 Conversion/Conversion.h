@@ -1,23 +1,23 @@
 /***************************************
  *							    	   *
- * ÎÄ¼þ¼Ð: ¡ø03 Õ»ºÍ¶ÓÁÐ\02 Conversion *
+ * æ–‡ä»¶å¤¹: â–²03 æ ˆå’Œé˜Ÿåˆ—\02 Conversion *
  * 							    	   *
- * ÎÄ¼þÃû: Conversion.h         	   *
+ * æ–‡ä»¶å: Conversion.h         	   *
  * 							    	   *
- * ÄÚ  ÈÝ: ½øÖÆ×ª»»Ïà¹Ø²Ù×÷ÁÐ±í 	   *
+ * å†…  å®¹: è¿›åˆ¶è½¬æ¢ç›¸å…³æ“ä½œåˆ—è¡¨ 	   *
  *                              	   *
  ***************************************/
 
 #ifndef CONVERSION_H
 #define CONVERSION_H
 
-#include <stdio.h> 
-#include "../01 SequenceStack/SequenceStack.c" 		//**¡ø03 Õ»ºÍ¶ÓÁÐ**//
+#include <stdio.h>
+#include "../01 SequenceStack/SequenceStack.c"  //**â–²03 æ ˆå’Œé˜Ÿåˆ—**//
 
-/* ½øÖÆ×ª»»º¯ÊýÁÐ±í */
+/* è¿›åˆ¶è½¬æ¢å‡½æ•°åˆ—è¡¨ */
 void conversion(int i);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(01)Ëã·¨3.1£ºÊ®½øÖÆÊý×ª°Ë½øÖÆÊý¡£ ©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(01)ç®—æ³•3.1ï¼šåè¿›åˆ¶æ•°è½¬å…«è¿›åˆ¶æ•°ã€‚ â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”*/
 
 #endif

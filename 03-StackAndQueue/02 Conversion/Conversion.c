@@ -1,41 +1,38 @@
 /***************************************
  *					     			   *
- * ÎÄ¼ş¼Ğ: ¡ø03 Õ»ºÍ¶ÓÁĞ\02 Conversion *
+ * æ–‡ä»¶å¤¹: â–²03 æ ˆå’Œé˜Ÿåˆ—\02 Conversion *
  * 					     			   *
- * ÎÄ¼şÃû: Conversion.c  			   *
+ * æ–‡ä»¶å: Conversion.c  			   *
  * 				         			   *
- * Ëã  ·¨: 3.1           			   * 
+ * ç®—  æ³•: 3.1           			   *
  *                       			   *
  ***************************************/
 
 #ifndef CONVERSION_C
 #define CONVERSION_C
 
-#include "Conversion.h"					//**¡ø03 Õ»ºÍ¶ÓÁĞ**//
+#include "Conversion.h"  //**â–²03 æ ˆå’Œé˜Ÿåˆ—**//
 
-/*¨T¨T¨T¨T¨[
-¨U Ëã·¨3.1¨U 
-¨^¨T¨T¨T¨T*/
-void conversion(int i)
-{	
-	SqStack S; 
-	SElemType_Sq e;
-	
-	InitStack_Sq(&S);
+/*â•â•â•â•â•—
+â•‘ ç®—æ³•3.1â•‘
+â•šâ•â•â•â•*/
+void conversion(int i) {
+  SqStack S;
+  SElemType_Sq e;
 
-	printf("Ê®½øÖÆÊı %d ×ª»»Îª°Ë½øÖÆÊıºóÎª£º0", i);
-	
-	while(i)
-	{
-		Push_Sq(&S, i%8);				//½øÕ»Ê±´ÓµÍÎ»µ½¸ßÎ» 
-		i = i/8;
-	}
-	
-	while(!StackEmpty_Sq(S))
-	{
-		Pop_Sq(&S, &e);					//³öÕ»Ê±´Ó¸ßÎ»µ½µÍÎ» 
-		printf("%d", e);
-	}
-} 
+  InitStack_Sq(&S);
+
+  printf("åè¿›åˆ¶æ•° %d è½¬æ¢ä¸ºå…«è¿›åˆ¶æ•°åä¸ºï¼š0", i);
+
+  while (i) {
+    Push_Sq(&S, i % 8);  //è¿›æ ˆæ—¶ä»ä½ä½åˆ°é«˜ä½
+    i = i / 8;
+  }
+
+  while (!StackEmpty_Sq(S)) {
+    Pop_Sq(&S, &e);  //å‡ºæ ˆæ—¶ä»é«˜ä½åˆ°ä½ä½
+    printf("%d", e);
+  }
+}
 
 #endif

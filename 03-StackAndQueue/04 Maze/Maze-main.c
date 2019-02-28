@@ -1,29 +1,27 @@
 /*********************************
  *						         *
- * ÎÄ¼þ¼Ð: ¡ø03 Õ»ºÍ¶ÓÁÐ\04 Maze *
+ * ï¿½Ä¼ï¿½ï¿½ï¿½: ï¿½ï¿½03 Õ»ï¿½Í¶ï¿½ï¿½ï¿½\04 Maze *
  * 						         *
- * ÄÚ  ÈÝ: ÃÔ¹¬Ïà¹Øº¯Êý²âÊÔ      *
+ * ï¿½ï¿½  ï¿½ï¿½: ï¿½Ô¹ï¿½ï¿½ï¿½Øºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½      *
  *                               *
  *********************************/
 
-#include "Maze.c"						//**¡ø03 Õ»ºÍ¶ÓÁÐ**//					
+#include "Maze.c"  //**ï¿½ï¿½03 Õ»ï¿½Í¶ï¿½ï¿½ï¿½**//
 
-int main(int argc, char *argv[])
-{
-	MazeType maze[N][N];
-	PosType start, end;
-	SElemType_Sq e;
-	char Re = 'Y';
-	
-	while(Re=='Y' || Re=='y')
-	{ 
-		InitMaze(maze, &start, &end);	//³õÊ¼»¯ÃÔ¹¬£¬°üÀ¨³öÈë¿Ú 
-		ShowMaze(maze);					//ÏÔÊ¾ÃÔ¹¬µÄ³õÊ¼×´Ì¬ 
-		MazePath(maze,start,end);		//ÃÔ¹¬Ñ°Â·
-		
-		printf("ÖØÖÃ£¿£¨Y/N£©£º");
-		scanf("%c", &Re);
-	}
-	
-	return 0;
+int main(int argc, char *argv[]) {
+  MazeType maze[N][N];
+  PosType start, end;
+  SElemType_Sq e;
+  char Re = 'Y';
+
+  while (Re == 'Y' || Re == 'y') {
+    InitMaze(maze, &start, &end);  //ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½Ô¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    ShowMaze(maze);                //ï¿½ï¿½Ê¾ï¿½Ô¹ï¿½ï¿½Ä³ï¿½Ê¼×´Ì¬
+    MazePath(maze, start, end);  //ï¿½Ô¹ï¿½Ñ°Â·
+
+    printf("ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½Y/Nï¿½ï¿½ï¿½ï¿½");
+    scanf("%c", &Re);
+  }
+
+  return 0;
 }

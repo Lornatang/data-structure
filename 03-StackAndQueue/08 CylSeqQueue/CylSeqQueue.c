@@ -1,95 +1,81 @@
 /****************************************
  *                                      *
- * ÎÄ¼ş¼Ğ: ¡ø03 Õ»ºÍ¶ÓÁĞ\08 CylSeqQueue *
+ * æ–‡ä»¶å¤¹: â–²03 æ ˆå’Œé˜Ÿåˆ—\08 CylSeqQueue *
  *                                      *
- * ÎÄ¼şÃû: CylSeqQueue.c                *
+ * æ–‡ä»¶å: CylSeqQueue.c                *
  *                                      *
  ****************************************/
 
 #ifndef CYLSEQQUEUE_C
 #define CYLSEQQUEUE_C
 
-#include "CylSeqQueue.h" 				//**¡ø03 Õ»ºÍ¶ÓÁĞ**//
+#include "CylSeqQueue.h"  //**â–²03 æ ˆå’Œé˜Ÿåˆ—**//
 
-Status InitQueue_CSq(CSqQueue *Q)
-{
-	(*Q).base = (QElemType_CSq *)malloc(MAXQSIZE*sizeof(QElemType_CSq));
-	if(!(*Q).base)
-		exit(OVERFLOW);
+Status InitQueue_CSq(CSqQueue *Q) {
+  (*Q).base = (QElemType_CSq *)malloc(MAXQSIZE * sizeof(QElemType_CSq));
+  if (!(*Q).base) exit(OVERFLOW);
 
-	(*Q).front = (*Q).rear = 0;
+  (*Q).front = (*Q).rear = 0;
 
-	return OK;
+  return OK;
 }
 
-void ClearQueue_CSq(CSqQueue *Q)
-{
-	(*Q).front = (*Q).rear = 0;
+void ClearQueue_CSq(CSqQueue *Q) { (*Q).front = (*Q).rear = 0; }
+
+void DestroyQueue_CSq(CSqQueue *Q) {
+  if ((*Q).base) free((*Q).base);
+
+  (*Q).base = NULL;
+  (*Q).front = (*Q).rear = 0;
 }
 
-void DestroyQueue_CSq(CSqQueue *Q)
-{
-	if((*Q).base)
-		free((*Q).base);
-		
-	(*Q).base = NULL;
-	(*Q).front = (*Q).rear = 0;
+Status QueueEmpty_CSq(CSqQueue Q) {
+  if (Q.front == Q.rear)  //é˜Ÿåˆ—ç©ºçš„æ ‡å¿—
+    return TRUE;
+  else
+    return FALSE;
 }
 
-Status QueueEmpty_CSq(CSqQueue Q)
-{
-	if(Q.front==Q.rear) 						//¶ÓÁĞ¿ÕµÄ±êÖ¾
-		return TRUE;
-	else
-		return FALSE;
+int QueueLength_CSq(CSqQueue Q) {
+  return (Q.rear - Q.front + MAXQSIZE) % MAXQSIZE;  //é˜Ÿåˆ—é•¿åº¦
 }
 
-int QueueLength_CSq(CSqQueue Q)
-{
-	return (Q.rear-Q.front+MAXQSIZE) % MAXQSIZE;//¶ÓÁĞ³¤¶È 
+Status GetHead_CSq(CSqQueue Q, QElemType_CSq *e) {
+  if (Q.front == Q.rear)  //é˜Ÿåˆ—ç©º
+    return ERROR;
+
+  *e = Q.base[Q.front];
+
+  return OK;
 }
 
-Status GetHead_CSq(CSqQueue Q, QElemType_CSq *e)
-{
-	if(Q.front==Q.rear)							//¶ÓÁĞ¿Õ
-		return ERROR;
-		
-	*e = Q.base[Q.front];
-	
-	return OK;
+Status EnQueue_CSq(CSqQueue *Q, QElemType_CSq e) {
+  if (((*Q).rear + 1) % MAXQSIZE == (*Q).front)  //é˜Ÿåˆ—æ»¡
+    return ERROR;
+
+  (*Q).base[(*Q).rear] = e;
+  (*Q).rear = ((*Q).rear + 1) % MAXQSIZE;
+
+  return OK;
 }
 
-Status EnQueue_CSq(CSqQueue *Q, QElemType_CSq e)
-{
-	if(((*Q).rear+1)%MAXQSIZE == (*Q).front)	//¶ÓÁĞÂú
-		return ERROR;
-		
-	(*Q).base[(*Q).rear] = e;
-	(*Q).rear = ((*Q).rear+1)%MAXQSIZE;
-	
-	return OK;
+Status DeQueue_CSq(CSqQueue *Q, QElemType_CSq *e) {
+  if ((*Q).front == (*Q).rear)  //é˜Ÿåˆ—ç©º
+    return ERROR;
+
+  *e = (*Q).base[(*Q).front];
+  (*Q).front = ((*Q).front + 1) % MAXQSIZE;
+
+  return OK;
 }
 
-Status DeQueue_CSq(CSqQueue *Q, QElemType_CSq *e)
-{
-	if((*Q).front==(*Q).rear)					//¶ÓÁĞ¿Õ
-		return ERROR;
-		
-	*e = (*Q).base[(*Q).front];
-	(*Q).front = ((*Q).front+1)%MAXQSIZE;
-	
-	return OK;
-}
+void QueueTraverse_CSq(CSqQueue Q, void(Visit)(QElemType_CSq)) {
+  int i = Q.front;
 
-void QueueTraverse_CSq(CSqQueue Q, void(Visit)(QElemType_CSq))
-{
-	int i = Q.front;
-	
-	while(i!=Q.rear)
-	{
-		Visit(Q.base[i]);
-		i = (i+1)%MAXQSIZE;
-	}
+  while (i != Q.rear) {
+    Visit(Q.base[i]);
+    i = (i + 1) % MAXQSIZE;
+  }
 }
 
 #endif

@@ -1,10 +1,10 @@
 /****************************************
  *                                      *
- * ÎÄ¼þ¼Ð: ¡ø03 Õ»ºÍ¶ÓÁÐ\08 CylSeqQueue *
+ * æ–‡ä»¶å¤¹: â–²03 æ ˆå’Œé˜Ÿåˆ—\08 CylSeqQueue *
  *                                      *
- * ÎÄ¼þÃû: CylSeqQueue.h                *
+ * æ–‡ä»¶å: CylSeqQueue.h                *
  *                                      *
- * ÄÚ  ÈÝ: Ñ­»·¶ÓÁÐÏà¹Ø²Ù×÷ÁÐ±í         *
+ * å†…  å®¹: å¾ªçŽ¯é˜Ÿåˆ—ç›¸å…³æ“ä½œåˆ—è¡¨         *
  *                                      *
  ****************************************/
 
@@ -12,65 +12,65 @@
 #define CYLSEQQUEUE_H
 
 #include <stdio.h>
-#include <stdlib.h>						//Ìá¹©malloc¡¢realloc¡¢free¡¢exitÔ­ÐÍ
-#include "../../¡ø01 Ð÷ÂÛ/Status.h"		//**¡ø01 Ð÷ÂÛ**//
+#include <stdlib.h>                 //æä¾›mallocã€reallocã€freeã€exitåŽŸåž‹
+#include "../../â–²01 ç»ªè®º/Status.h"  //**â–²01 ç»ªè®º**//
 
-/* ºê¶¨Òå */
-#define MAXQSIZE 1000					//×î´ó¶ÓÁÐ³¤¶È
+/* å®å®šä¹‰ */
+#define MAXQSIZE 1000  //æœ€å¤§é˜Ÿåˆ—é•¿åº¦
 
-/* Ñ­»·¶ÓÁÐÀàÐÍ¶¨Òå */
+/* å¾ªçŽ¯é˜Ÿåˆ—ç±»åž‹å®šä¹‰ */
 typedef int QElemType_CSq;
-typedef struct							//¶ÓÁÐµÄË³Ðò´æ´¢½á¹¹
+typedef struct  //é˜Ÿåˆ—çš„é¡ºåºå­˜å‚¨ç»“æž„
 {
-	QElemType_CSq *base;				//³õÊ¼»¯µÄ¶¯Ì¬·ÖÅä´æ´¢¿Õ¼ä 
-	int front;							//Í·Ö¸Õë£¬Èô¶ÓÁÐ²»¿Õ£¬Ö¸Ïò¶ÓÍ·ÔªËØ 
-	int rear;							//Î²Ö¸Õë£¬Èô¶ÓÁÐ²»¿Õ£¬Ö¸Ïò¶ÓÁÐÎ²ÔªËØµÄÏÂÒ»¸öÎ»ÖÃ 
-}CSqQueue;
+  QElemType_CSq *base;  //åˆå§‹åŒ–çš„åŠ¨æ€åˆ†é…å­˜å‚¨ç©ºé—´
+  int front;            //å¤´æŒ‡é’ˆï¼Œè‹¥é˜Ÿåˆ—ä¸ç©ºï¼ŒæŒ‡å‘é˜Ÿå¤´å…ƒç´ 
+  int rear;  //å°¾æŒ‡é’ˆï¼Œè‹¥é˜Ÿåˆ—ä¸ç©ºï¼ŒæŒ‡å‘é˜Ÿåˆ—å°¾å…ƒç´ çš„ä¸‹ä¸€ä¸ªä½ç½®
+} CSqQueue;
 
-/* Ñ­»·¶ÓÁÐº¯ÊýÁÐ±í */
+/* å¾ªçŽ¯é˜Ÿåˆ—å‡½æ•°åˆ—è¡¨ */
 Status InitQueue_CSq(CSqQueue *Q);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(01)³õÊ¼»¯Ñ­»·¶ÓÁÐQ¡£ ©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(01)åˆå§‹åŒ–å¾ªçŽ¯é˜Ÿåˆ—Qã€‚ â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”*/
 
 void ClearQueue_CSq(CSqQueue *Q);
-/*©¥©¥©¥©¥©¥©¥©·
-©§(02)ÖÃ¿ÕQ¡£ ©§
-©»©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”“
+â”ƒ(02)ç½®ç©ºQã€‚ â”ƒ
+â”—â”â”â”â”â”â”*/
 
 void DestroyQueue_CSq(CSqQueue *Q);
-/*©¥©¥©¥©¥©¥©¥©·
-©§(03)Ïú»ÙQ¡£ ©§
-©»©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”“
+â”ƒ(03)é”€æ¯Qã€‚ â”ƒ
+â”—â”â”â”â”â”â”*/
 
 Status QueueEmpty_CSq(CSqQueue Q);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(04)ÅÐ¶ÏQÊÇ·ñÎª¿Õ¡£ ©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(04)åˆ¤æ–­Qæ˜¯å¦ä¸ºç©ºã€‚ â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”*/
 
 int QueueLength_CSq(CSqQueue Q);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(05)·µ»ØQÔªËØ¸öÊý¡£ ©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(05)è¿”å›žQå…ƒç´ ä¸ªæ•°ã€‚ â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”*/
 
 Status GetHead_CSq(CSqQueue Q, QElemType_CSq *e);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(06)ÓÃe»ñÈ¡¶ÓÍ·ÔªËØ¡£ ©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(06)ç”¨eèŽ·å–é˜Ÿå¤´å…ƒç´ ã€‚ â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”*/
 
 Status EnQueue_CSq(CSqQueue *Q, QElemType_CSq e);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(07)ÔªËØeÈë¶Ó¡£ ©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”“
+â”ƒ(07)å…ƒç´ eå…¥é˜Ÿã€‚ â”ƒ
+â”—â”â”â”â”â”â”â”â”*/
 
 Status DeQueue_CSq(CSqQueue *Q, QElemType_CSq *e);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(08)ÔªËØe³ö¶Ó¡£ ©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”“
+â”ƒ(08)å…ƒç´ eå‡ºé˜Ÿã€‚ â”ƒ
+â”—â”â”â”â”â”â”â”â”*/
 
 void QueueTraverse_CSq(CSqQueue Q, void(Visit)(QElemType_CSq));
-/*©¥©¥©¥©¥©¥©¥©¥©·
-©§(09)·ÃÎÊ¶ÓÁÐ¡£©§
-©»©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”“
+â”ƒ(09)è®¿é—®é˜Ÿåˆ—ã€‚â”ƒ
+â”—â”â”â”â”â”â”â”*/
 
 #endif

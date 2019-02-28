@@ -1,110 +1,107 @@
 /******************************************
  *						      			  *
- * ÎÄ¼ş¼Ğ: ¡ø03 Õ»ºÍ¶ÓÁĞ\01 SequenceStack *
+ * æ–‡ä»¶å¤¹: â–²03 æ ˆå’Œé˜Ÿåˆ—\01 SequenceStack *
  * 						      			  *
- * ÄÚ  Èİ: Ë³ĞòÕ»Ïà¹Øº¯Êı²âÊÔ 			  *
+ * å†…  å®¹: é¡ºåºæ ˆç›¸å…³å‡½æ•°æµ‹è¯• 			  *
  *                            			  *
  ******************************************/
 
 #include <stdio.h>
-#include "SequenceStack.c" 								//**¡ø03 Õ»ºÍ¶ÓÁĞ**//
-	
+#include "SequenceStack.c"  //**â–²03 æ ˆå’Œé˜Ÿåˆ—**//
+
 void PrintElem(SElemType_Sq e);
-	//²âÊÔº¯Êı£¬´òÓ¡ÕûĞÍ 
+//æµ‹è¯•å‡½æ•°ï¼Œæ‰“å°æ•´å‹
 
-int main(int argc, char **argv)
-{
-	SqStack S;
-	int i;
-	SElemType_Sq e;
-	
-	printf("¨‹1\n¡øº¯Êı InitStack ²âÊÔ...\n");			//1.º¯ÊıInitStack²âÊÔ
-	{
-		printf("³õÊ¼»¯Ë³ĞòÕ» S ...\n");					 
-		InitStack_Sq(&S);
-		printf("\n");
-	}
-	PressEnter;
-	
-	printf("¨‹4\n¡øº¯Êı StackEmpty ²âÊÔ...\n");			//4.º¯ÊıStackEmpty²âÊÔ
-	{
-		StackEmpty_Sq(S) ? printf(" S Îª¿Õ£¡£¡\n") : printf(" S ²»Îª¿Õ£¡\n");
-		printf("\n");
-	}
-	PressEnter;
-	
-	printf("¨‹7\n¡øº¯Êı Push ²âÊÔ...\n");					//7.º¯ÊıPush²âÊÔ
-	{
-		for(i=1; i<=6; i++)									
-		{
-			printf("½« \"%2d\" Ñ¹ÈëÕ» S ", 2*i);
-			Push_Sq(&S, 2*i);
-			printf("£¨ÀÛ¼ÆµÚ %d ¸öÔªËØ£©...\n", S.top-S.base);
-		}
-		printf("\n");
-	}
-	PressEnter;
-	
-	printf("¨‹9\n¡øº¯Êı StackTraverse ²âÊÔ...\n");		//9.º¯ÊıStackTraverse²âÊÔ
-	{
-		printf(" S ÖĞµÄÔªËØÎª£ºS = ");						 
-		StackTraverse_Sq(S, PrintElem);
-		printf("\n\n");
-	}
-	PressEnter;
-	
-	printf("¨‹8\n¡øº¯Êı Pop ²âÊÔ...\n");					//8.º¯ÊıPop²âÊÔ
-	{
-		Pop_Sq(&S, &e);
-		printf("Õ»¶¥ÔªËØ \"%d\" ³öÕ»...\n", e);
-		printf(" S ÖĞµÄÔªËØÎª£ºS = ");						 
-		StackTraverse_Sq(S, PrintElem);
-		printf("\n\n");
-	}
-	PressEnter;
-	
-	printf("¨‹5\n¡øº¯Êı StackLength ²âÊÔ...\n");			//5.º¯ÊıStackLength²âÊÔ
-	{
-		i = StackLength_Sq(S);
-		printf(" S µÄ³¤¶ÈÎª %d \n", i);
-		printf("\n");
-	}
-	PressEnter;
-	
-	printf("¨‹6\n¡øº¯Êı GetTop ²âÊÔ...\n");				//6.º¯ÊıGetTop²âÊÔ
-	{
-		GetTop_Sq(S, &e);
-		printf("Õ»¶¥ÔªËØµÄÖµÎª \"%d\" \n", e);
-		printf("\n");
-	}
-	PressEnter;
-	
-	printf("¨‹3\n¡øº¯Êı ClearStack ²âÊÔ...\n");			//3.º¯ÊıClearStack²âÊÔ
-	{
-		printf("Çå¿Õ S Ç°£º");
-		StackEmpty_Sq(S) ? printf(" S Îª¿Õ£¡£¡\n") : printf(" S ²»Îª¿Õ£¡\n");
-		ClearStack_Sq(&S);
-		printf("Çå¿Õ S ºó£º");
-		StackEmpty_Sq(S) ? printf(" S Îª¿Õ£¡£¡\n") : printf(" S ²»Îª¿Õ£¡\n");
-		printf("\n");
-	}
-	PressEnter;
-	
-	printf("¨‹2\n¡øº¯Êı DestroyStack ²âÊÔ...\n");			//2.º¯ÊıDestroyStack²âÊÔ
-	{
-		printf("Ïú»Ù S Ç°£º");
-		S.base!=NULL && S.top!=NULL ? printf(" S ´æÔÚ£¡\n") : printf(" S ²»´æÔÚ£¡£¡\n");
-		DestroyStack_Sq(&S);
-		printf("Ïú»Ù S ºó£º");
-		S.base!=NULL && S.top!=NULL ? printf(" S ´æÔÚ£¡\n") : printf(" S ²»´æÔÚ£¡£¡\n");
-		printf("\n");
-	}
-	PressEnter;
-		
-	return 0;
+int main(int argc, char **argv) {
+  SqStack S;
+  int i;
+  SElemType_Sq e;
+
+  printf("â–¼1\nâ–²å‡½æ•° InitStack æµ‹è¯•...\n");  // 1.å‡½æ•°InitStackæµ‹è¯•
+  {
+    printf("åˆå§‹åŒ–é¡ºåºæ ˆ S ...\n");
+    InitStack_Sq(&S);
+    printf("\n");
+  }
+  PressEnter;
+
+  printf("â–¼4\nâ–²å‡½æ•° StackEmpty æµ‹è¯•...\n");  // 4.å‡½æ•°StackEmptyæµ‹è¯•
+  {
+    StackEmpty_Sq(S) ? printf(" S ä¸ºç©ºï¼ï¼\n") : printf(" S ä¸ä¸ºç©ºï¼\n");
+    printf("\n");
+  }
+  PressEnter;
+
+  printf("â–¼7\nâ–²å‡½æ•° Push æµ‹è¯•...\n");  // 7.å‡½æ•°Pushæµ‹è¯•
+  {
+    for (i = 1; i <= 6; i++) {
+      printf("å°† \"%2d\" å‹å…¥æ ˆ S ", 2 * i);
+      Push_Sq(&S, 2 * i);
+      printf("ï¼ˆç´¯è®¡ç¬¬ %d ä¸ªå…ƒç´ ï¼‰...\n", S.top - S.base);
+    }
+    printf("\n");
+  }
+  PressEnter;
+
+  printf("â–¼9\nâ–²å‡½æ•° StackTraverse æµ‹è¯•...\n");  // 9.å‡½æ•°StackTraverseæµ‹è¯•
+  {
+    printf(" S ä¸­çš„å…ƒç´ ä¸ºï¼šS = ");
+    StackTraverse_Sq(S, PrintElem);
+    printf("\n\n");
+  }
+  PressEnter;
+
+  printf("â–¼8\nâ–²å‡½æ•° Pop æµ‹è¯•...\n");  // 8.å‡½æ•°Popæµ‹è¯•
+  {
+    Pop_Sq(&S, &e);
+    printf("æ ˆé¡¶å…ƒç´  \"%d\" å‡ºæ ˆ...\n", e);
+    printf(" S ä¸­çš„å…ƒç´ ä¸ºï¼šS = ");
+    StackTraverse_Sq(S, PrintElem);
+    printf("\n\n");
+  }
+  PressEnter;
+
+  printf("â–¼5\nâ–²å‡½æ•° StackLength æµ‹è¯•...\n");  // 5.å‡½æ•°StackLengthæµ‹è¯•
+  {
+    i = StackLength_Sq(S);
+    printf(" S çš„é•¿åº¦ä¸º %d \n", i);
+    printf("\n");
+  }
+  PressEnter;
+
+  printf("â–¼6\nâ–²å‡½æ•° GetTop æµ‹è¯•...\n");  // 6.å‡½æ•°GetTopæµ‹è¯•
+  {
+    GetTop_Sq(S, &e);
+    printf("æ ˆé¡¶å…ƒç´ çš„å€¼ä¸º \"%d\" \n", e);
+    printf("\n");
+  }
+  PressEnter;
+
+  printf("â–¼3\nâ–²å‡½æ•° ClearStack æµ‹è¯•...\n");  // 3.å‡½æ•°ClearStackæµ‹è¯•
+  {
+    printf("æ¸…ç©º S å‰ï¼š");
+    StackEmpty_Sq(S) ? printf(" S ä¸ºç©ºï¼ï¼\n") : printf(" S ä¸ä¸ºç©ºï¼\n");
+    ClearStack_Sq(&S);
+    printf("æ¸…ç©º S åï¼š");
+    StackEmpty_Sq(S) ? printf(" S ä¸ºç©ºï¼ï¼\n") : printf(" S ä¸ä¸ºç©ºï¼\n");
+    printf("\n");
+  }
+  PressEnter;
+
+  printf("â–¼2\nâ–²å‡½æ•° DestroyStack æµ‹è¯•...\n");  // 2.å‡½æ•°DestroyStackæµ‹è¯•
+  {
+    printf("é”€æ¯ S å‰ï¼š");
+    S.base != NULL &&S.top != NULL ? printf(" S å­˜åœ¨ï¼\n")
+                                   : printf(" S ä¸å­˜åœ¨ï¼ï¼\n");
+    DestroyStack_Sq(&S);
+    printf("é”€æ¯ S åï¼š");
+    S.base != NULL &&S.top != NULL ? printf(" S å­˜åœ¨ï¼\n")
+                                   : printf(" S ä¸å­˜åœ¨ï¼ï¼\n");
+    printf("\n");
+  }
+  PressEnter;
+
+  return 0;
 }
 
-void PrintElem(SElemType_Sq e)
-{
-	printf("%d ", e);
-}
+void PrintElem(SElemType_Sq e) { printf("%d ", e); }

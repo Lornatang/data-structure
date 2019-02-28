@@ -1,109 +1,106 @@
 /**************************************
  *                                    *
- * ÎÄ¼þ¼Ð: ¡ø03 Õ»ºÍ¶ÓÁÐ\07 LinkQueue *
+ * ï¿½Ä¼ï¿½ï¿½ï¿½: ï¿½ï¿½03 Õ»ï¿½Í¶ï¿½ï¿½ï¿½\07 LinkQueue *
  *                                    *
- * ÄÚ  ÈÝ: Á´¶ÓÏà¹Øº¯Êý²âÊÔ           *
+ * ï¿½ï¿½  ï¿½ï¿½: ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Øºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½           *
  *                                    *
  *************************************/
 
 #include <stdio.h>
-#include "LinkQueue.c" 		//**03 Õ»ºÍ¶ÓÁÐ**//
-	
-void PrintElem(QElemType_L e);						//²âÊÔº¯Êý£¬´òÓ¡ÕûÐÍ 
-	
-int main(int argc, char **argv)
-{
-	LinkQueue Q;
-	int i;
-	QElemType_L e;
-	
-	printf("¨‹1\n¡øº¯Êý InitQueue_L ²âÊÔ...\n");	//1.º¯ÊýInitQueue_L²âÊÔ
-	{
-		printf("³õÊ¼»¯Á´¶Ó Q ...\n");					 
-		InitQueue_L(&Q);
-		printf("\n");
-	} 
-	PressEnter;
-	
-	printf("¨‹4\n¡øº¯Êý QueueEmpty_L ²âÊÔ...\n");	//4.º¯ÊýQueueEmpty_L²âÊÔ
-	{
-		QueueEmpty_L(Q) ? printf(" Q Îª¿Õ£¡£¡\n") : printf(" Q ²»Îª¿Õ£¡\n");
-		printf("\n");
-	} 
-	PressEnter;
-	
-	printf("¨‹7\n¡øº¯Êý EnQueue_L ²âÊÔ...\n");		//7.º¯ÊýEnQueue_L²âÊÔ
-	{
-		for(i=1; i<=6; i++)									
-		{
-			printf("ÔªËØ \"%2d\" Èë¶Ó£¬", 2*i);
-			EnQueue_L(&Q, 2*i);
-			printf("£¨ÀÛ¼ÆµÚ %d ¸öÔªËØ£©...\n", QueueLength_L(Q));
-		}
-		printf("\n");
-	} 
-	PressEnter;
-	
-	printf("¨‹9\n¡øº¯Êý QueueTraverse_L ²âÊÔ...\n");//9.º¯ÊýQueueTraverse_L²âÊÔ
-	{
-		printf(" Q ÖÐµÄÔªËØÎª£ºQ = ");						 
-		QueueTraverse_L(Q, PrintElem);
-		printf("\n\n");
-	} 
-	PressEnter;
-	
-	printf("¨‹8\n¡øº¯Êý DeQueue_L ²âÊÔ...\n");		//8.º¯ÊýDeQueue_L²âÊÔ
-	{
-		DeQueue_L(&Q, &e);
-		printf("¶ÓÍ·ÔªËØ \"%d\" ³ö¶Ó...\n", e);
-		printf(" Q ÖÐµÄÔªËØÎª£ºQ = ");						 
-		QueueTraverse_L(Q, PrintElem);
-		printf("\n\n");
-	} 
-	PressEnter;
-	
-	printf("¨‹5\n¡øº¯Êý QueueLength_L ²âÊÔ...\n");	//5.º¯ÊýQueueLength_L²âÊÔ
-	{
-		i = QueueLength_L(Q);
-		printf(" Q µÄ³¤¶ÈÎª %d \n", i);
-		printf("\n");
-	} 
-	PressEnter;
-	
-	printf("¨‹6\n¡øº¯Êý GetHead_L ²âÊÔ...\n");		//6.º¯ÊýGetHead_L²âÊÔ
-	{
-		GetHead_L(Q, &e);
-		printf("¶ÓÍ·ÔªËØµÄÖµÎª \"%d\" \n", e);
-		printf("\n");
-	} 
-	PressEnter;
-	
-	printf("¨‹3\n¡øº¯Êý ClearQueue_L ²âÊÔ...\n");	//3.º¯ÊýClearQueue_L²âÊÔ
-	{
-		printf("Çå¿Õ Q Ç°£º");
-		QueueEmpty_L(Q) ? printf(" Q Îª¿Õ£¡£¡\n") : printf(" Q ²»Îª¿Õ£¡\n");
-		ClearQueue_L(&Q);
-		printf("Çå¿Õ Q ºó£º");
-		QueueEmpty_L(Q) ? printf(" Q Îª¿Õ£¡£¡\n") : printf(" Q ²»Îª¿Õ£¡\n");
-		printf("\n");
-	} 
-	PressEnter;
-	
-	printf("¨‹2\n¡øº¯Êý DestroyQueue_L ²âÊÔ...\n");	//2.º¯ÊýDestroyQueue_L²âÊÔ
-	{
-		printf("Ïú»Ù Q Ç°£º");
-		Q.front!=NULL && Q.rear!=NULL ? printf(" Q ´æÔÚ£¡\n") : printf(" Q ²»´æÔÚ£¡£¡\n");
-		DestroyQueue_L(&Q);
-		printf("Ïú»Ù Q ºó£º");
-		Q.front!=NULL && Q.rear!=NULL ? printf(" Q ´æÔÚ£¡\n") : printf(" Q ²»´æÔÚ£¡£¡\n");
-		printf("\n");
-	} 
-	PressEnter;
-		
-	return 0;
+#include "LinkQueue.c"  //**03 Õ»ï¿½Í¶ï¿½ï¿½ï¿½**//
+
+void PrintElem(QElemType_L e);  //ï¿½ï¿½ï¿½Ôºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¡ï¿½ï¿½ï¿½ï¿½
+
+int main(int argc, char **argv) {
+  LinkQueue Q;
+  int i;
+  QElemType_L e;
+
+  printf("ï¿½ï¿½1\nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ InitQueue_L ï¿½ï¿½ï¿½ï¿½...\n");  // 1.ï¿½ï¿½ï¿½ï¿½InitQueue_Lï¿½ï¿½ï¿½ï¿½
+  {
+    printf("ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Q ...\n");
+    InitQueue_L(&Q);
+    printf("\n");
+  }
+  PressEnter;
+
+  printf("ï¿½ï¿½4\nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ QueueEmpty_L ï¿½ï¿½ï¿½ï¿½...\n");  // 4.ï¿½ï¿½ï¿½ï¿½QueueEmpty_Lï¿½ï¿½ï¿½ï¿½
+  {
+    QueueEmpty_L(Q) ? printf(" Q Îªï¿½Õ£ï¿½ï¿½ï¿½\n") : printf(" Q ï¿½ï¿½Îªï¿½Õ£ï¿½\n");
+    printf("\n");
+  }
+  PressEnter;
+
+  printf("ï¿½ï¿½7\nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ EnQueue_L ï¿½ï¿½ï¿½ï¿½...\n");  // 7.ï¿½ï¿½ï¿½ï¿½EnQueue_Lï¿½ï¿½ï¿½ï¿½
+  {
+    for (i = 1; i <= 6; i++) {
+      printf("Ôªï¿½ï¿½ \"%2d\" ï¿½ï¿½Ó£ï¿½", 2 * i);
+      EnQueue_L(&Q, 2 * i);
+      printf("ï¿½ï¿½ï¿½Û¼Æµï¿½ %d ï¿½ï¿½Ôªï¿½Ø£ï¿½...\n", QueueLength_L(Q));
+    }
+    printf("\n");
+  }
+  PressEnter;
+
+  printf("ï¿½ï¿½9\nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ QueueTraverse_L ï¿½ï¿½ï¿½ï¿½...\n");  // 9.ï¿½ï¿½ï¿½ï¿½QueueTraverse_Lï¿½ï¿½ï¿½ï¿½
+  {
+    printf(" Q ï¿½Ðµï¿½Ôªï¿½ï¿½Îªï¿½ï¿½Q = ");
+    QueueTraverse_L(Q, PrintElem);
+    printf("\n\n");
+  }
+  PressEnter;
+
+  printf("ï¿½ï¿½8\nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ DeQueue_L ï¿½ï¿½ï¿½ï¿½...\n");  // 8.ï¿½ï¿½ï¿½ï¿½DeQueue_Lï¿½ï¿½ï¿½ï¿½
+  {
+    DeQueue_L(&Q, &e);
+    printf("ï¿½ï¿½Í·Ôªï¿½ï¿½ \"%d\" ï¿½ï¿½ï¿½ï¿½...\n", e);
+    printf(" Q ï¿½Ðµï¿½Ôªï¿½ï¿½Îªï¿½ï¿½Q = ");
+    QueueTraverse_L(Q, PrintElem);
+    printf("\n\n");
+  }
+  PressEnter;
+
+  printf("ï¿½ï¿½5\nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ QueueLength_L ï¿½ï¿½ï¿½ï¿½...\n");  // 5.ï¿½ï¿½ï¿½ï¿½QueueLength_Lï¿½ï¿½ï¿½ï¿½
+  {
+    i = QueueLength_L(Q);
+    printf(" Q ï¿½Ä³ï¿½ï¿½ï¿½Îª %d \n", i);
+    printf("\n");
+  }
+  PressEnter;
+
+  printf("ï¿½ï¿½6\nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ GetHead_L ï¿½ï¿½ï¿½ï¿½...\n");  // 6.ï¿½ï¿½ï¿½ï¿½GetHead_Lï¿½ï¿½ï¿½ï¿½
+  {
+    GetHead_L(Q, &e);
+    printf("ï¿½ï¿½Í·Ôªï¿½Øµï¿½ÖµÎª \"%d\" \n", e);
+    printf("\n");
+  }
+  PressEnter;
+
+  printf("ï¿½ï¿½3\nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ClearQueue_L ï¿½ï¿½ï¿½ï¿½...\n");  // 3.ï¿½ï¿½ï¿½ï¿½ClearQueue_Lï¿½ï¿½ï¿½ï¿½
+  {
+    printf("ï¿½ï¿½ï¿½ Q Ç°ï¿½ï¿½");
+    QueueEmpty_L(Q) ? printf(" Q Îªï¿½Õ£ï¿½ï¿½ï¿½\n") : printf(" Q ï¿½ï¿½Îªï¿½Õ£ï¿½\n");
+    ClearQueue_L(&Q);
+    printf("ï¿½ï¿½ï¿½ Q ï¿½ï¿½");
+    QueueEmpty_L(Q) ? printf(" Q Îªï¿½Õ£ï¿½ï¿½ï¿½\n") : printf(" Q ï¿½ï¿½Îªï¿½Õ£ï¿½\n");
+    printf("\n");
+  }
+  PressEnter;
+
+  printf("ï¿½ï¿½2\nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ DestroyQueue_L ï¿½ï¿½ï¿½ï¿½...\n");  // 2.ï¿½ï¿½ï¿½ï¿½DestroyQueue_Lï¿½ï¿½ï¿½ï¿½
+  {
+    printf("ï¿½ï¿½ï¿½ï¿½ Q Ç°ï¿½ï¿½");
+    Q.front != NULL &&Q.rear != NULL ? printf(" Q ï¿½ï¿½ï¿½Ú£ï¿½\n")
+                                     : printf(" Q ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½\n");
+    DestroyQueue_L(&Q);
+    printf("ï¿½ï¿½ï¿½ï¿½ Q ï¿½ï¿½");
+    Q.front != NULL &&Q.rear != NULL ? printf(" Q ï¿½ï¿½ï¿½Ú£ï¿½\n")
+                                     : printf(" Q ï¿½ï¿½ï¿½ï¿½ï¿½Ú£ï¿½ï¿½ï¿½\n");
+    printf("\n");
+  }
+  PressEnter;
+
+  return 0;
 }
 
-void PrintElem(QElemType_L e)
-{
-	printf("%d ", e);
-}
+void PrintElem(QElemType_L e) { printf("%d ", e); }
