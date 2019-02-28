@@ -1,15 +1,15 @@
 /**************************************
  *                                    *
- * �ļ���: ��03 ջ�Ͷ���\07 LinkQueue *
+ * 文件夹: ▲03 栈和队列\07 LinkQueue *
  *                                    *
- * �ļ���: LinkQueue.c                *
+ * 文件名: LinkQueue.c                *
  *                                    *
  *************************************/
 
 #ifndef LINKQUEUE_C
 #define LINKQUEUE_C
 
-#include "LinkQueue.h"  //**��03 ջ�Ͷ���**//
+#include "LinkQueue.h"  //**▲03 栈和队列**//
 
 Status InitQueue_L(LinkQueue *Q) {
   (*Q).front = (*Q).rear = (QueuePtr)malloc(sizeof(QNode));
