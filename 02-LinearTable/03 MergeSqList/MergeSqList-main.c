@@ -1,51 +1,45 @@
 /**************************************
  *                                    *
- * ÎÄ¼ş¼Ğ: ¡ø02 ÏßĞÔ±í\03 MergeSqList *
+ * æ–‡ä»¶å¤¹: â–²02 çº¿æ€§è¡¨\03 MergeSqList *
  *                                    *
- * ÄÚ  Èİ: Ë³Ğò±í¹é²¢Ïà¹Øº¯Êı²âÊÔ     *
+ * å†…  å®¹: é¡ºåºè¡¨å½’å¹¶ç›¸å…³å‡½æ•°æµ‹è¯•     *
  *                                    *
  **************************************/
 
 #include <stdio.h>
-#include "MergeSqList.c"				//**¡ø02 ÏßĞÔ±í**//
-	
-void PrintElem(LElemType_Sq e);			//²âÊÔº¯Êı£¬´òÓ¡ÕûĞÍ 
-	
-int main(int argc, char **argv)
-{
-	SqList La, Lb, Lc1, Lc2;
-	LElemType_Sq a[4] = {3, 5, 8, 11};
-	LElemType_Sq b[7] = {2, 6, 8, 9, 11, 15, 20};
-	int i;
-	
-	InitList_Sq(&La);					//³õÊ¼»¯La 
-	for(i=1; i<=4; i++)
-		ListInsert_Sq(&La, i, a[i-1]);	
-	InitList_Sq(&Lb);					//³õÊ¼»¯Lb 
-	for(i=1; i<=7; i++)
-		ListInsert_Sq(&Lb, i, b[i-1]);
+#include "MergeSqList.c"  //**â–²02 çº¿æ€§è¡¨**//
 
-	printf("La = ");					//Êä³öLa 
-	ListTraverse_Sq(La, PrintElem); 
-	printf("\n");
-	printf("Lb = ");					//Êä³öLb 
-	ListTraverse_Sq(Lb, PrintElem); 
-	printf("\n\n");
-	
-	MergeSqList_1(La, Lb, &Lc1);		//ºÏ²¢AÓëB,Ëã·¨2.6 
-	printf("ºÏ²¢LaºÍLbÎªLc1 = "); 		//Êä³öLc1 
-	ListTraverse_Sq(Lc1, PrintElem);
-	printf("\n\n");
+void PrintElem(LElemType_Sq e);  //æµ‹è¯•å‡½æ•°ï¼Œæ‰“å°æ•´å‹
 
-	MergeSqList_2(La, Lb, &Lc2);		//ºÏ²¢AÓëB,Ëã·¨2.7  
-	printf("ºÏ²¢LaºÍLbÎªLc2 = "); 		//Êä³öLc2 
-	ListTraverse_Sq(Lc2, PrintElem);
-	printf("\n\n");
-	
-	return 0;
+int main(int argc, char **argv) {
+  SqList La, Lb, Lc1, Lc2;
+  LElemType_Sq a[4] = {3, 5, 8, 11};
+  LElemType_Sq b[7] = {2, 6, 8, 9, 11, 15, 20};
+  int i;
+
+  InitList_Sq(&La);  //åˆå§‹åŒ–La
+  for (i = 1; i <= 4; i++) ListInsert_Sq(&La, i, a[i - 1]);
+  InitList_Sq(&Lb);  //åˆå§‹åŒ–Lb
+  for (i = 1; i <= 7; i++) ListInsert_Sq(&Lb, i, b[i - 1]);
+
+  printf("La = ");  //è¾“å‡ºLa
+  ListTraverse_Sq(La, PrintElem);
+  printf("\n");
+  printf("Lb = ");  //è¾“å‡ºLb
+  ListTraverse_Sq(Lb, PrintElem);
+  printf("\n\n");
+
+  MergeSqList_1(La, Lb, &Lc1);   //åˆå¹¶Aä¸B,ç®—æ³•2.6
+  printf("åˆå¹¶Laå’ŒLbä¸ºLc1 = ");  //è¾“å‡ºLc1
+  ListTraverse_Sq(Lc1, PrintElem);
+  printf("\n\n");
+
+  MergeSqList_2(La, Lb, &Lc2);   //åˆå¹¶Aä¸B,ç®—æ³•2.7
+  printf("åˆå¹¶Laå’ŒLbä¸ºLc2 = ");  //è¾“å‡ºLc2
+  ListTraverse_Sq(Lc2, PrintElem);
+  printf("\n\n");
+
+  return 0;
 }
 
-void PrintElem(LElemType_Sq e)
-{
-	printf("%d ", e);
-}
+void PrintElem(LElemType_Sq e) { printf("%d ", e); }

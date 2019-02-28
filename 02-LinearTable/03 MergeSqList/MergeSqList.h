@@ -1,10 +1,10 @@
 /**************************************
  *                                    *
- * ÎÄ¼þ¼Ð: ¡ø02 ÏßÐÔ±í\03 MergeSqList *
+ * æ–‡ä»¶å¤¹: â–²02 çº¿æ€§è¡¨\03 MergeSqList *
  *                                    *
- * ÎÄ¼þÃû: MergeSqList.h              *
+ * æ–‡ä»¶å: MergeSqList.h              *
  *                                    *
- * ÄÚ  ÈÝ: Ë³Ðò±í¹é²¢Ïà¹Ø²Ù×÷ÁÐ±í     *
+ * å†…  å®¹: é¡ºåºè¡¨å½’å¹¶ç›¸å…³æ“ä½œåˆ—è¡¨     *
  *                                    *
  **************************************/
 
@@ -12,17 +12,17 @@
 #define MERGESQLIST_H
 
 #include <stdlib.h>
-#include "../01 SequenceList/SequenceList.c"		//**¡ø02 ÏßÐÔ±í**//
+#include "../01 SequenceList/SequenceList.c"  //**â–²02 çº¿æ€§è¡¨**//
 
-/* Ë³Ðò±í¹é²¢º¯ÊýÁÐ±í */
+/* é¡ºåºè¡¨å½’å¹¶å‡½æ•°åˆ—è¡¨ */
 void MergeSqList_1(SqList La, SqList Lb, SqList *Lc);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(01)Ëã·¨2.2£ºÇóC=A+B£¬A,B,C¾ùÎª·ÇµÝ¼õÐòÁÐ ©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(01)ç®—æ³•2.2ï¼šæ±‚C=A+Bï¼ŒA,B,Cå‡ä¸ºéžé€’å‡åºåˆ— â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”*/
 
 void MergeSqList_2(SqList La, SqList Lb, SqList *Lc);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(02)Ëã·¨2.7£ºÇóC=A+B£¬A,B,C¾ùÎª·ÇµÝ¼õÐòÁÐ ©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(02)ç®—æ³•2.7ï¼šæ±‚C=A+Bï¼ŒA,B,Cå‡ä¸ºéžé€’å‡åºåˆ— â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”*/
 
 #endif

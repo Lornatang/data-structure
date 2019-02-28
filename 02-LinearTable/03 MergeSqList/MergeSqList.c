@@ -1,97 +1,93 @@
 /**************************************
  *                                    *
- * ÎÄ¼ş¼Ğ: ¡ø02 ÏßĞÔ±í\03 MergeSqList *
+ * æ–‡ä»¶å¤¹: â–²02 çº¿æ€§è¡¨\03 MergeSqList *
  *                                    *
- * ÎÄ¼şÃû: MergeSqList.c              *
+ * æ–‡ä»¶å: MergeSqList.c              *
  *                                    *
- * Ëã  ·¨: 2.2¡¢2.7                   * 
+ * ç®—  æ³•: 2.2ã€2.7                   *
  *                                    *
  **************************************/
 
 #ifndef MERGESQLIST_C
 #define MERGESQLIST_C
 
-#include "MergeSqList.h"					//**¡ø02 ÏßĞÔ±í**//
+#include "MergeSqList.h"  //**â–²02 çº¿æ€§è¡¨**//
 
-/*¨T¨T¨T¨T¨[
-¨U Ëã·¨2.2¨U 
-¨^¨T¨T¨T¨T*/
-void MergeSqList_1(SqList La, SqList Lb, SqList *Lc)	//µ÷ÓÃË³Ğò±íº¯Êı½øĞĞºÏ²¢ 
+/*â•â•â•â•â•—
+â•‘ ç®—æ³•2.2â•‘
+â•šâ•â•â•â•*/
+void MergeSqList_1(SqList La, SqList Lb, SqList *Lc)  //è°ƒç”¨é¡ºåºè¡¨å‡½æ•°è¿›è¡Œåˆå¹¶
 {
-	int La_len, Lb_len; 
-	int i, j, k;
-	LElemType_Sq ai, bj;
-	
-	i = j = 1;
-	k = 0;
-	
-	InitList_Sq(Lc);					//³õÊ¼»¯Lc	
-	La_len = ListLength_Sq(La);			//»ñÈ¡La¡¢Lb³¤¶È 
-	Lb_len = ListLength_Sq(Lb);	 
+  int La_len, Lb_len;
+  int i, j, k;
+  LElemType_Sq ai, bj;
 
-	while(i<=La_len && j<=Lb_len)		//La¼°Lb¾ùÎ´É¨ÃèÍê 
-	{
-		GetElem_Sq(La, i, &ai);
-     	GetElem_Sq(Lb, j, &bj);
-     	
-     	if(ai<=bj)
-     	{
-     		ListInsert_Sq(Lc, ++k, ai);
-     		i++;
-     	}
-     	else
-     	{
-			ListInsert_Sq(Lc, ++k, bj);
-			j++;
-		}
-	} 
-	
-	while(i<=La_len)					//±íLa»¹Î´É¨ÃèÍê 
-	{
-		GetElem_Sq(La, i++, &ai);
-		ListInsert_Sq(Lc, ++k, ai);
-	}
-   
-	while(j<=Lb_len)					//±íLb»¹Î´É¨ÃèÍê
-	{
-		GetElem_Sq(Lb, j++, &bj);
-		ListInsert_Sq(Lc, ++k, bj);
-	}
+  i = j = 1;
+  k = 0;
+
+  InitList_Sq(Lc);             //åˆå§‹åŒ–Lc
+  La_len = ListLength_Sq(La);  //è·å–Laã€Lbé•¿åº¦
+  Lb_len = ListLength_Sq(Lb);
+
+  while (i <= La_len && j <= Lb_len)  // LaåŠLbå‡æœªæ‰«æå®Œ
+  {
+    GetElem_Sq(La, i, &ai);
+    GetElem_Sq(Lb, j, &bj);
+
+    if (ai <= bj) {
+      ListInsert_Sq(Lc, ++k, ai);
+      i++;
+    } else {
+      ListInsert_Sq(Lc, ++k, bj);
+      j++;
+    }
+  }
+
+  while (i <= La_len)  //è¡¨Laè¿˜æœªæ‰«æå®Œ
+  {
+    GetElem_Sq(La, i++, &ai);
+    ListInsert_Sq(Lc, ++k, ai);
+  }
+
+  while (j <= Lb_len)  //è¡¨Lbè¿˜æœªæ‰«æå®Œ
+  {
+    GetElem_Sq(Lb, j++, &bj);
+    ListInsert_Sq(Lc, ++k, bj);
+  }
 }
 
-/*¨T¨T¨T¨T¨[
-¨U Ëã·¨2.7¨U 
-¨^¨T¨T¨T¨T*/
-void MergeSqList_2(SqList La, SqList Lb, SqList *Lc)
-{
-	LElemType_Sq *pa, *pb, *pc;
-	LElemType_Sq *pa_last, *pb_last;
-		
-	pa = La.elem;						//Ö¸ÏòLaµÚÒ»¸öÔªËØ 
-	pb = Lb.elem;						//Ö¸ÏòLbµÚÒ»¸öÔªËØ
-	
-										//²»ÓÃInitList_Sq´´½¨Lc 
-	(*Lc).listsize = (*Lc).length = La.length + Lb.length;
-	pc = (*Lc).elem = (LElemType_Sq *)malloc((*Lc).listsize*sizeof(LElemType_Sq));
-	if(!pc) 
-		exit(OVERFLOW);
-	
-	pa_last = La.elem + La.length - 1;	//Ö¸ÏòLa×îºóÒ»¸öÔªËØ
-	pb_last = Lb.elem + Lb.length - 1;	//Ö¸ÏòLb×îºóÒ»¸öÔªËØ
-	
-	while(pa<=pa_last && pb<=pb_last) 	//LaºÍLb¾ùÎ´É¨ÃèÍê 
-	{
-		if(*pa <= *pb)
-			*pc++ = *pa++;
-		else
-			*pc++ = *pb++;
-	}
-	
-	while(pa <= pa_last)				//±íLaÎ´É¨ÃèÍê 
-		*pc++ = *pa++;					//²åÈëLaµÄÊ£ÓàÔªËØ
+/*â•â•â•â•â•—
+â•‘ ç®—æ³•2.7â•‘
+â•šâ•â•â•â•*/
+void MergeSqList_2(SqList La, SqList Lb, SqList *Lc) {
+  LElemType_Sq *pa, *pb, *pc;
+  LElemType_Sq *pa_last, *pb_last;
 
-	while(pb <= pb_last)				//±íLbÎ´É¨ÃèÍê
-		*pc++ = *pb++;					//²åÈëLbµÄÊ£ÓàÔªËØ
+  pa = La.elem;  //æŒ‡å‘Laç¬¬ä¸€ä¸ªå…ƒç´ 
+  pb = Lb.elem;  //æŒ‡å‘Lbç¬¬ä¸€ä¸ªå…ƒç´ 
+
+  //ä¸ç”¨InitList_Sqåˆ›å»ºLc
+  (*Lc).listsize = (*Lc).length = La.length + Lb.length;
+  pc = (*Lc).elem =
+      (LElemType_Sq *)malloc((*Lc).listsize * sizeof(LElemType_Sq));
+  if (!pc) exit(OVERFLOW);
+
+  pa_last = La.elem + La.length - 1;  //æŒ‡å‘Laæœ€åä¸€ä¸ªå…ƒç´ 
+  pb_last = Lb.elem + Lb.length - 1;  //æŒ‡å‘Lbæœ€åä¸€ä¸ªå…ƒç´ 
+
+  while (pa <= pa_last && pb <= pb_last)  // Laå’ŒLbå‡æœªæ‰«æå®Œ
+  {
+    if (*pa <= *pb)
+      *pc++ = *pa++;
+    else
+      *pc++ = *pb++;
+  }
+
+  while (pa <= pa_last)  //è¡¨Laæœªæ‰«æå®Œ
+    *pc++ = *pa++;       //æ’å…¥Laçš„å‰©ä½™å…ƒç´ 
+
+  while (pb <= pb_last)  //è¡¨Lbæœªæ‰«æå®Œ
+    *pc++ = *pb++;       //æ’å…¥Lbçš„å‰©ä½™å…ƒç´ 
 }
 
 #endif
