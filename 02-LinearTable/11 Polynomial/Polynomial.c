@@ -1,275 +1,250 @@
 /*************************************
  *				     	             *
- * Œƒº˛º–: °¯02 œﬂ–‘±Ì\11 Polynomial *
+ * Êñá‰ª∂Â§π: ‚ñ≤02 Á∫øÊÄßË°®\11 Polynomial *
  * 					                 *
- * Œƒº˛√˚: Polynomial.c              *
+ * Êñá‰ª∂Âêç: Polynomial.c              *
  * 				                     *
- * À„  ∑®: 2.22°¢2.23                * 
+ * ÁÆó  Ê≥ï: 2.22„ÄÅ2.23                *
  *                                   *
  *************************************/
 
-#ifndef	POLYNOMIAL_C
-#define	POLYNOMIAL_C
+#ifndef POLYNOMIAL_C
+#define POLYNOMIAL_C
 
-#include "Polynomial.h"					//**°¯02 œﬂ–‘±Ì**//
+#include "Polynomial.h"  //**‚ñ≤02 Á∫øÊÄßË°®**//
 
-/*®T®T®T®T®T®[
-®U À„∑®2.22 ®U 
-®^®T®T®T®T®T*/
-void CreatPolyn_P(FILE *fp, Polynomial *P, int m)
-{
-	PositionPtr h;
-	ElemType_P e;
-	int i;
-	Link p;
+/*‚ïê‚ïê‚ïê‚ïê‚ïê‚ïó
+‚ïë ÁÆóÊ≥ï2.22 ‚ïë
+‚ïö‚ïê‚ïê‚ïê‚ïê‚ïê*/
+void CreatPolyn_P(FILE *fp, Polynomial *P, int m) {
+  PositionPtr h;
+  ElemType_P e;
+  int i;
+  Link p;
 
-	InitList_E(P);						//≥ı ºªØ“ª∏ˆ¿©’πµƒµ•¡¥±Ì¥Ê∑≈∂‡œÓ Ω 
-	h = GetHead_E(*P);					//ªÒ»°∂‡œÓ ΩÕ∑÷∏’Î 
+  InitList_E(P);      //ÂàùÂßãÂåñ‰∏Ä‰∏™Êâ©Â±ïÁöÑÂçïÈìæË°®Â≠òÊîæÂ§öÈ°πÂºè
+  h = GetHead_E(*P);  //Ëé∑ÂèñÂ§öÈ°πÂºèÂ§¥ÊåáÈíà
 
-	e.coef = 0.0;
-	e.expn = -1;
-	SetCurElem_E(h, e);			    	//…Ë÷√Õ∑Ω·µ„µƒ ˝æ›‘™Àÿ 
-	h->next = NULL;
-	
-	for(i=1; i<=m; i++)					//“¿¥Œ¬º»În∏ˆ∑«0œÓ 
-	{
-		Scanf(fp, "%f%d", &(e.coef), &(e.expn));
-		MakeNode_E(&p, e);
-		p->next = NULL;
-		InsFirst_E(P, h, p);
-		h = h->next;
-	} 
-} 
+  e.coef = 0.0;
+  e.expn = -1;
+  SetCurElem_E(h, e);  //ËÆæÁΩÆÂ§¥ÁªìÁÇπÁöÑÊï∞ÊçÆÂÖÉÁ¥†
+  h->next = NULL;
 
-void DestroyPolyn_P(Polynomial *P)
-{
-	DestroyList_E(P);
+  for (i = 1; i <= m; i++)  //‰æùÊ¨°ÂΩïÂÖ•n‰∏™Èùû0È°π
+  {
+    Scanf(fp, "%f%d", &(e.coef), &(e.expn));
+    MakeNode_E(&p, e);
+    p->next = NULL;
+    InsFirst_E(P, h, p);
+    h = h->next;
+  }
 }
 
-int PolynLength_P(Polynomial P)
-{
-	return ListLength_E(P);
+void DestroyPolyn_P(Polynomial *P) { DestroyList_E(P); }
+
+int PolynLength_P(Polynomial P) { return ListLength_E(P); }
+
+/*‚ïê‚ïê‚ïê‚ïê‚ïê‚ïó
+‚ïë ÁÆóÊ≥ï2.23 ‚ïë
+‚ïö‚ïê‚ïê‚ïê‚ïê‚ïê*/
+void AddPolyn_P(Polynomial *Pa, Polynomial *Pb) {
+  PositionPtr ha, hb;
+  PositionPtr qa, qb;
+  ElemType_P a, b;
+  float sum;
+
+  ha = GetHead_E(*Pa);  // ha„ÄÅhbÂàÜÂà´ÊåáÂêëPa„ÄÅPbÂ§¥ÁªìÁÇπ
+  hb = GetHead_E(*Pb);
+  qa = NextPos_E(ha);  // qa„ÄÅqbÂàÜÂà´ÊåáÂêëPa„ÄÅPbÁöÑÂΩìÂâçÁªìÁÇπ
+  qb = NextPos_E(hb);
+
+  while (qa && qb)  // qa„ÄÅqbÂùáÈùûÁ©∫
+  {
+    a = GetCurElem_E(qa);  // aÂíåb‰∏∫‰∏§Ë°®‰∏≠ÂΩìÂâçÊØîËæÉÂÖÉÁ¥†
+    b = GetCurElem_E(qb);
+
+    switch (Cmp_exp(a, b))  //ÊØîËæÉÂΩìÂâçÂÖÉÁ¥†ÁöÑÊåáÊï∞Â§ßÂ∞è
+    {
+      case -1:  //Â§öÈ°πÂºèPa‰∏≠ÂΩìÂâçÁªìÁÇπÁöÑÊåáÊï∞ÂÄºËæÉÂ∞è
+        ha = qa;
+        qa = NextPos_E(ha);
+        break;
+      case 0:  //‰∏§ËÄÖÊï∞ÂÄºÁõ∏Á≠â
+        sum = a.coef + b.coef;
+        if (sum != 0.0)  //Áõ∏Âä†‰∏çËÉΩÊäµÊ∂àÊó∂Êõ¥Êñ∞PaÁªìÁÇπÁöÑÁ≥ªÊï∞ÂÄº
+        {
+          qa->data.coef = sum;
+          SetCurElem_E(qa, qa->data);
+          ha = qa;  //Ê≠§Êó∂haÈúÄÂêéÁßª
+        } else      //Áõ∏Âä†ÊäµÊ∂àÊó∂ÔºåÂà†Èô§Pa‰∏≠ÂΩìÂâçÁªìÁÇπ
+        {
+          DelFirst_E(Pa, ha, &qa);
+          FreeNode_E(&qa);
+        }
+        DelFirst_E(Pb, hb, &qb);  //Âà†Èô§Pb‰∏≠Êâ´ÊèèËøáÁöÑÁªìÁÇπ
+        FreeNode_E(&qb);
+        qb = NextPos_E(hb);  // qa„ÄÅqbÂùáÂêéÁßª
+        qa = NextPos_E(ha);
+        break;
+      case 1:                     //Â§öÈ°πÂºèPb‰∏≠ÂΩìÂâçÁªìÁÇπÁöÑÊåáÊï∞ÂÄºËæÉÂ∞è
+        DelFirst_E(Pb, hb, &qb);  //Êëò‰∏ãPbÂΩìÂâçÁªìÁÇπ
+        InsFirst_E(Pa, ha, qb);   //Â∞ÜÊëò‰∏ãÁªìÁÇπÈìæÂÖ•Pa‰∏≠
+        qb = NextPos_E(hb);
+        ha = NextPos_E(ha);
+        break;
+    }  // switch
+  }    // while
+
+  if (qb)  //Ëã•PbËøòÊú™Êâ´ÊèèÂÆåÔºåÂ∞ÜÂâ©‰ΩôÈ°πÈìæÊé•Âà∞PaÂêé
+    Append_E(Pa, qb);
+
+  FreeNode_E(&hb);                 //ÈáäÊîæPbÂ§¥ÁªìÁÇπ
+  (*Pb).head = (*Pb).tail = NULL;  //ËÆæÁΩÆPb‰∏∫ÈîÄÊØÅÁä∂ÊÄÅ
+  (*Pb).len = 0;
 }
 
-/*®T®T®T®T®T®[
-®U À„∑®2.23 ®U 
-®^®T®T®T®T®T*/
-void AddPolyn_P(Polynomial *Pa, Polynomial *Pb)
-{
-	PositionPtr ha, hb;
-	PositionPtr qa, qb;
-	ElemType_P a, b;
-	float sum;
-	 
-	ha = GetHead_E(*Pa);					//ha°¢hb∑÷±÷∏œÚPa°¢PbÕ∑Ω·µ„ 
-	hb = GetHead_E(*Pb);	
-	qa = NextPos_E(ha);						//qa°¢qb∑÷±÷∏œÚPa°¢Pbµƒµ±«∞Ω·µ„
-	qb = NextPos_E(hb);
+void SubtractPolyn_P(Polynomial *Pa, Polynomial *Pb) {
+  PositionPtr ha, hb;
+  PositionPtr qa, qb;
+  PositionPtr r;
+  ElemType_P a, b;
+  float sum;
 
-	while(qa && qb)							//qa°¢qbæ˘∑«ø’
-	{
-		a = GetCurElem_E(qa);				//a∫ÕbŒ™¡Ω±Ì÷–µ±«∞±»Ωœ‘™Àÿ 
-		b = GetCurElem_E(qb);
+  ha = GetHead_E(*Pa);  // ha„ÄÅhbÂàÜÂà´ÊåáÂêëPa„ÄÅPbÂ§¥ÁªìÁÇπ
+  hb = GetHead_E(*Pb);
+  qa = NextPos_E(ha);  // qa„ÄÅqbÂàÜÂà´ÊåáÂêëPa„ÄÅPbÁöÑÂΩìÂâçÁªìÁÇπ
+  qb = NextPos_E(hb);
 
-		switch(Cmp_exp(a,b))				//±»Ωœµ±«∞‘™Àÿµƒ÷∏ ˝¥Û–° 
-		{
-			case -1:						//∂‡œÓ ΩPa÷–µ±«∞Ω·µ„µƒ÷∏ ˝÷µΩœ–°
-				ha = qa;
-				qa = NextPos_E(ha);
-				break;
-			case 0:							//¡Ω’ﬂ ˝÷µœ‡µ» 
-				sum = a.coef + b.coef;
-				if(sum != 0.0)				//œ‡º”≤ªƒ‹µ÷œ˚ ±∏¸–¬PaΩ·µ„µƒœµ ˝÷µ 
-				{
-					qa->data.coef = sum;
-					SetCurElem_E(qa, qa->data);
-					ha = qa;				//¥À ±ha–Ë∫Û“∆ 
-				}
-				else						//œ‡º”µ÷œ˚ ±£¨…æ≥˝Pa÷–µ±«∞Ω·µ„
-				{
-					DelFirst_E(Pa, ha, &qa);
-					FreeNode_E(&qa);
-				}
-				DelFirst_E(Pb, hb, &qb);	//…æ≥˝Pb÷–…®√Ëπ˝µƒΩ·µ„ 
-				FreeNode_E(&qb);
-				qb = NextPos_E(hb);			//qa°¢qbæ˘∫Û“∆ 
-				qa = NextPos_E(ha);
-				break;
-			case 1:							//∂‡œÓ ΩPb÷–µ±«∞Ω·µ„µƒ÷∏ ˝÷µΩœ–°
-				DelFirst_E(Pb, hb, &qb);	//’™œ¬Pbµ±«∞Ω·µ„
-				InsFirst_E(Pa, ha, qb); 	//Ω´’™œ¬Ω·µ„¡¥»ÎPa÷–
-				qb = NextPos_E(hb);
-				ha = NextPos_E(ha); 
-				break; 
-		}//switch
-	}//while
-	
-	if(qb)									//»ÙPbªπŒ¥…®√ËÕÍ£¨Ω´ £”‡œÓ¡¥Ω”µΩPa∫Û 
-		Append_E(Pa, qb);
+  while (qa && qb)  // qa„ÄÅqbÂùáÈùûÁ©∫
+  {
+    a = GetCurElem_E(qa);  // aÂíåb‰∏∫‰∏§Ë°®‰∏≠ÂΩìÂâçÊØîËæÉÂÖÉÁ¥†
+    b = GetCurElem_E(qb);
 
-	FreeNode_E(&hb);						// Õ∑≈PbÕ∑Ω·µ„
-	(*Pb).head = (*Pb).tail = NULL;			//…Ë÷√PbŒ™œ˙ªŸ◊¥Ã¨ 
-	(*Pb).len = 0;		 
+    switch (Cmp_exp(a, b))  //ÊØîËæÉÂΩìÂâçÂÖÉÁ¥†ÁöÑÊåáÊï∞Â§ßÂ∞è
+    {
+      case -1:  //Â§öÈ°πÂºèPa‰∏≠ÂΩìÂâçÁªìÁÇπÁöÑÊåáÊï∞ÂÄºËæÉÂ∞è
+        ha = qa;
+        qa = NextPos_E(ha);
+        break;
+      case 0:  //‰∏§ËÄÖÊï∞ÂÄºÁõ∏Á≠â
+        sum = a.coef - b.coef;
+        if (sum != 0.0)  //Áõ∏Âáè‰∏çËÉΩÊäµÊ∂àÊó∂Êõ¥Êñ∞PaÁªìÁÇπÁöÑÁ≥ªÊï∞ÂÄº
+        {
+          qa->data.coef = sum;
+          SetCurElem_E(qa, qa->data);
+          ha = qa;  //Ê≠§Êó∂haÈúÄÂêéÁßª
+        } else      //Áõ∏Âä†ÊäµÊ∂àÊó∂ÔºåÂà†Èô§Pa‰∏≠ÂΩìÂâçÁªìÁÇπ
+        {
+          DelFirst_E(Pa, ha, &qa);
+          FreeNode_E(&qa);
+        }
+        DelFirst_E(Pb, hb, &qb);  //Âà†Èô§Pb‰∏≠Êâ´ÊèèËøáÁöÑÁªìÁÇπ
+        FreeNode_E(&qb);
+        qb = NextPos_E(hb);  // qa„ÄÅqbÂùáÂêéÁßª
+        qa = NextPos_E(ha);
+        break;
+      case 1:                     //Â§öÈ°πÂºèPb‰∏≠ÂΩìÂâçÁªìÁÇπÁöÑÊåáÊï∞ÂÄºËæÉÂ∞è
+        DelFirst_E(Pb, hb, &qb);  //Êëò‰∏ãPbÂΩìÂâçÁªìÁÇπ
+        qb->data.coef = -qb->data.coef;  //ÊîπÂèòÂΩìÂâçÁªìÁÇπÁ¨¶Âè∑
+        InsFirst_E(Pa, ha, qb);          //Â∞ÜÊëò‰∏ãÁªìÁÇπÈìæÂÖ•Pa‰∏≠
+        qb = NextPos_E(hb);
+        ha = NextPos_E(ha);
+        break;
+    }  // switch
+  }    // while
+
+  if (qb)  // PbËøòÊú™Êâ´ÊèèÂÆå
+  {
+    r = qb;
+    while (r) {
+      r->data.coef = -r->data.coef;  //ÊîπÂèòÂâ©‰ΩôÁªìÁÇπÁ¨¶Âè∑
+      r = r->next;
+    }
+    Append_E(Pa, qb);
+  }
+
+  FreeNode_E(&hb);  //ÈáäÊîæPbÂ§¥ÁªìÁÇπ
+  (*Pb).head = (*Pb).tail = NULL;
+  (*Pb).len = 0;
 }
 
-void SubtractPolyn_P(Polynomial *Pa, Polynomial *Pb)
-{
-	PositionPtr ha, hb;
-	PositionPtr qa, qb;
-	PositionPtr r;
-	ElemType_P a, b;
-	float sum;
-	 
-	ha = GetHead_E(*Pa);					//ha°¢hb∑÷±÷∏œÚPa°¢PbÕ∑Ω·µ„ 
-	hb = GetHead_E(*Pb);	
-	qa = NextPos_E(ha);						//qa°¢qb∑÷±÷∏œÚPa°¢Pbµƒµ±«∞Ω·µ„
-	qb = NextPos_E(hb);
-	
-	while(qa && qb)							//qa°¢qbæ˘∑«ø’
-	{
-		a = GetCurElem_E(qa);				//a∫ÕbŒ™¡Ω±Ì÷–µ±«∞±»Ωœ‘™Àÿ 
-		b = GetCurElem_E(qb);
+void MultiplyPolyn_P(Polynomial *Pa, Polynomial *Pb) {
+  Polynomial Pc, Ptmp;
+  int i, j, la, lb;
+  PositionPtr ha;
+  PositionPtr qa, qb;
+  Link s;
 
-		switch(Cmp_exp(a,b))				//±»Ωœµ±«∞‘™Àÿµƒ÷∏ ˝¥Û–° 
-		{
-			case -1:						//∂‡œÓ ΩPa÷–µ±«∞Ω·µ„µƒ÷∏ ˝÷µΩœ–°
-				ha = qa;
-				qa = NextPos_E(ha);
-				break;
-			case 0:							//¡Ω’ﬂ ˝÷µœ‡µ» 
-				sum = a.coef - b.coef;
-				if(sum != 0.0)				//œ‡ºı≤ªƒ‹µ÷œ˚ ±∏¸–¬PaΩ·µ„µƒœµ ˝÷µ 
-				{
-					qa->data.coef = sum;
-					SetCurElem_E(qa, qa->data);
-					ha = qa;				//¥À ±ha–Ë∫Û“∆ 
-				}
-				else						//œ‡º”µ÷œ˚ ±£¨…æ≥˝Pa÷–µ±«∞Ω·µ„
-				{
-					DelFirst_E(Pa, ha, &qa);
-					FreeNode_E(&qa);
-				}
-				DelFirst_E(Pb, hb, &qb);	//…æ≥˝Pb÷–…®√Ëπ˝µƒΩ·µ„ 
-				FreeNode_E(&qb);
-				qb = NextPos_E(hb);			//qa°¢qbæ˘∫Û“∆ 
-				qa = NextPos_E(ha);
-				break;
-			case 1:							//∂‡œÓ ΩPb÷–µ±«∞Ω·µ„µƒ÷∏ ˝÷µΩœ–°
-				DelFirst_E(Pb, hb, &qb);	//’™œ¬Pbµ±«∞Ω·µ„
-				qb->data.coef = - qb->data.coef;	//∏ƒ±‰µ±«∞Ω·µ„∑˚∫≈ 
-				InsFirst_E(Pa, ha, qb); 	//Ω´’™œ¬Ω·µ„¡¥»ÎPa÷–
-				qb = NextPos_E(hb);
-				ha = NextPos_E(ha); 
-				break; 
-		}//switch
-	}//while
+  la = PolynLength_P(*Pa);
+  lb = PolynLength_P(*Pb);
+  ha = (*Pa).head;
 
-	if(qb)									//PbªπŒ¥…®√ËÕÍ
-	{
-		r = qb;
-		while(r)							
-		{
-			r->data.coef = - r->data.coef;	//∏ƒ±‰ £”‡Ω·µ„∑˚∫≈ 
-			r = r->next;
-		}
-		Append_E(Pa, qb);	
-	} 
+  InitList_E(&Pc);
 
-	FreeNode_E(&hb);						// Õ∑≈PbÕ∑Ω·µ„
-	(*Pb).head = (*Pb).tail = NULL;
-	(*Pb).len = 0;
+  for (i = 1; i <= la; i++) {
+    InitList_E(&Ptmp);
+
+    DelFirst_E(Pa, ha, &qa);
+    qb = (*Pb).head->next;
+
+    for (j = 1; j <= lb; j++) {
+      s = (Link)malloc(sizeof(ELNode));  //Áî≥ËØ∑Á©∫Èó¥
+      if (!s) exit(OVERFLOW);
+
+      s->data.coef = qa->data.coef * qb->data.coef;  //Á≥ªÊï∞Áõ∏‰πò
+      s->data.expn = qa->data.expn + qb->data.expn;  //ÊåáÊï∞Áõ∏Âä†
+      s->next = NULL;
+
+      Append_E(&Ptmp, s);
+
+      qb = qb->next;
+    }
+
+    AddPolyn_P(&Pc, &Ptmp);
+  }
+
+  AddPolyn_P(Pa, &Pc);
+
+  DestroyPolyn_P(Pb);
 }
 
-void MultiplyPolyn_P(Polynomial *Pa, Polynomial *Pb)
-{
-	Polynomial Pc, Ptmp;
-	int i, j, la, lb;
-	PositionPtr ha;
-	PositionPtr qa, qb;
-	Link s;
-	
-	la = PolynLength_P(*Pa);
-	lb = PolynLength_P(*Pb);
-	ha = (*Pa).head;
+int Cmp_exp(ElemType_P c1, ElemType_P c2) {
+  int i = c1.expn - c2.expn;
 
-	InitList_E(&Pc);
-	
-	for(i=1; i<=la; i++)
-	{
-		InitList_E(&Ptmp);
-
-		DelFirst_E(Pa, ha, &qa);
-		qb = (*Pb).head->next;
-
-		for(j=1; j<=lb; j++)
-		{
-			s = (Link)malloc(sizeof(ELNode));				//…Í«Îø’º‰ 	
-			if(!s)
-				exit(OVERFLOW);
-			
-			s->data.coef = qa->data.coef * qb->data.coef;	//œµ ˝œ‡≥À 
-			s->data.expn = qa->data.expn + qb->data.expn;	//÷∏ ˝œ‡º” 
-			s->next = NULL;
-			
-			Append_E(&Ptmp, s);
-			 
-			qb = qb->next;
-		}
-		
-		AddPolyn_P(&Pc, &Ptmp);		
-	}
-	
-	AddPolyn_P(Pa, &Pc);
-	
-	DestroyPolyn_P(Pb);
+  if (i < 0)
+    return -1;
+  else if (i == 0)
+    return 0;
+  else
+    return 1;
 }
 
-int Cmp_exp(ElemType_P c1, ElemType_P c2)
-{
-	int i = c1.expn - c2.expn; 
-	
-	if(i<0)
-		return -1;
-	else if(i==0)
-		return 0;
-	else
-		return 1;
-} 
+void PrintPolyn_P(Polynomial P) {
+  int i;
+  Link p;
 
-void PrintPolyn_P(Polynomial P)
-{
-	int i;
-	Link p;
-	
-	p = P.head->next;
-	for(i=1; i<=P.len; i++)
-	{
-		if(i==1)
-			printf("%g", p->data.coef);
-		else
-		{
-			if(p->data.coef>0)
-			{
-				printf(" + ");
-				printf("%g", p->data.coef);
-			}
-			else
-			{
-				printf(" - ");
-				printf("%g", -p->data.coef);
-			}				
-		}
-		
-		if(p->data.expn)
-		{
-			printf("x");
-			
-			if(p->data.expn!=1)
-				printf("^%d", p->data.expn);
-		}
-		
-		p = p->next;
-	}
+  p = P.head->next;
+  for (i = 1; i <= P.len; i++) {
+    if (i == 1)
+      printf("%g", p->data.coef);
+    else {
+      if (p->data.coef > 0) {
+        printf(" + ");
+        printf("%g", p->data.coef);
+      } else {
+        printf(" - ");
+        printf("%g", -p->data.coef);
+      }
+    }
+
+    if (p->data.expn) {
+      printf("x");
+
+      if (p->data.expn != 1) printf("^%d", p->data.expn);
+    }
+
+    p = p->next;
+  }
 }
 
 #endif

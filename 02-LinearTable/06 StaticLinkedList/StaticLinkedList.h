@@ -1,115 +1,114 @@
 /********************************
  *						        *
- * ÎÄ¼þ¼Ð: ¡ø02 ÏßÐÔ±í          *
+ * æ–‡ä»¶å¤¹: â–²02 çº¿æ€§è¡¨          *
  * 							    *
- * ÎÄ¼þÃû: StaticLinkedList.h   *
+ * æ–‡ä»¶å: StaticLinkedList.h   *
  * 							    *
- * ÄÚ  ÈÝ: ¾²Ì¬Á´±íÏà¹Ø²Ù×÷ÁÐ±í *
+ * å†…  å®¹: é™æ€é“¾è¡¨ç›¸å…³æ“ä½œåˆ—è¡¨ *
  *                              *
  ********************************/
 
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-¡ï±¸×¢£º                                          ©§
-¡ï1.Îª²Ù×÷·½±ã£¬ÌØÎªÉêÇëµ½µÄ¿Õ¼ä¶ÎÉèÒ»¡°Í·½áµã¡±¡£©§
-¡ï2.Ä£ÄâÏµÍ³¶¯Ì¬ÉêÇë¿Õ¼ä¹ý³Ì¡£                    ©§
-¡ï3.¸ö±ð²Ù×÷»áÓëÑÏÎµÃôÊý¾Ý½á¹¹¿Î±¾ÓÐËù²îÒì¡£      ©§       
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/ 
- 
+/*â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“
+â˜…å¤‡æ³¨ï¼š                                          â”ƒ
+â˜…1.ä¸ºæ“ä½œæ–¹ä¾¿ï¼Œç‰¹ä¸ºç”³è¯·åˆ°çš„ç©ºé—´æ®µè®¾ä¸€â€œå¤´ç»“ç‚¹â€ã€‚â”ƒ
+â˜…2.æ¨¡æ‹Ÿç³»ç»ŸåŠ¨æ€ç”³è¯·ç©ºé—´è¿‡ç¨‹ã€‚                    â”ƒ
+â˜…3.ä¸ªåˆ«æ“ä½œä¼šä¸Žä¸¥è”šæ•æ•°æ®ç»“æž„è¯¾æœ¬æœ‰æ‰€å·®å¼‚ã€‚      â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”*/
+
 #ifndef STATICLINKEDLIST_H
 #define STATICLINKEDLIST_H
 
-#include <stdlib.h>						////Ìá¹©malloc¡¢realloc¡¢free¡¢exitÔ­ÐÍ
-#include "../../¡ø01 Ð÷ÂÛ/Status.h"		//**¡ø01 Ð÷ÂÛ**//
+#include <stdlib.h>  ////æä¾›mallocã€reallocã€freeã€exitåŽŸåž‹
+#include "../../01-Introduction/Status.h"  //**â–²01 ç»ªè®º**//
 
-/* ºê¶¨Òå */ 
-#define MAXSIZE 1000					//¾²Ì¬Á´±íµÄ×î´ó³¤¶È
+/* å®å®šä¹‰ */
+#define MAXSIZE 1000  //é™æ€é“¾è¡¨çš„æœ€å¤§é•¿åº¦
 
-/* ¾²Ì¬Á´±íÀàÐÍ¶¨Òå */
-typedef int SLinkList;					//¾²Ì¬Á´±íÀàÐÍ
+/* é™æ€é“¾è¡¨ç±»åž‹å®šä¹‰ */
+typedef int SLinkList;  //é™æ€é“¾è¡¨ç±»åž‹
 typedef int LElemType_S;
-typedef struct 
-{
-	LElemType_S data;
-	int cur;							//curÊÇÓÎ±ê£¬×öÖ¸ÕëÓÃ£¬Çø±ðÓÚÊý×éÏÂ±ê 
-}Component[MAXSIZE];					//Á´±í¿Õ¼äÀàÐÍ 
+typedef struct {
+  LElemType_S data;
+  int cur;             // curæ˜¯æ¸¸æ ‡ï¼ŒåšæŒ‡é’ˆç”¨ï¼ŒåŒºåˆ«äºŽæ•°ç»„ä¸‹æ ‡
+} Component[MAXSIZE];  //é“¾è¡¨ç©ºé—´ç±»åž‹
 
-/* È«¾Ö±äÁ¿ */
-Component SPACE;						//¾²Ì¬Á´±í¿Õ¼ä 
+/* å…¨å±€å˜é‡ */
+Component SPACE;  //é™æ€é“¾è¡¨ç©ºé—´
 
-/*	¾²Ì¬Á´±íº¯ÊýÁÐ±í */
+/*	é™æ€é“¾è¡¨å‡½æ•°åˆ—è¡¨ */
 void InitSpace_SL();
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(01)Ëã·¨2.14£º½«Ò»Î¬Êý×éSPACEÖÐ¸÷·ÖÁ¿Á´³ÉÒ»¸ö´óµÄ±¸ÓÃ¿Õ¼ä¡£ ©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(01)ç®—æ³•2.14ï¼šå°†ä¸€ç»´æ•°ç»„SPACEä¸­å„åˆ†é‡é“¾æˆä¸€ä¸ªå¤§çš„å¤‡ç”¨ç©ºé—´ã€‚ â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”*/
 
 int Malloc_SL();
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(02)Ëã·¨2.15£ºÎª²åÈëÊý¾ÝÉêÇë¿Õ¼ä¡£©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(02)ç®—æ³•2.15ï¼šä¸ºæ’å…¥æ•°æ®ç”³è¯·ç©ºé—´ã€‚â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”*/
 
 void Free_SL(int k);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(03)Ëã·¨2.16£º½«ÏÂ±êÎªkµÄ¿ÕÏÐ½áµã»ØÊÕ¡£ ©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(03)ç®—æ³•2.16ï¼šå°†ä¸‹æ ‡ä¸ºkçš„ç©ºé—²ç»“ç‚¹å›žæ”¶ã€‚ â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”*/
 
 int InitList_SL(SLinkList *H);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(04)³õÊ¼»¯¾²Ì¬Á´±í£¬½¨Á¢Í·½áµã¡£©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(04)åˆå§‹åŒ–é™æ€é“¾è¡¨ï¼Œå»ºç«‹å¤´ç»“ç‚¹ã€‚â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”*/
 
 Status ClearList_SL(SLinkList H);
-/*©¥©¥©¥©¥©¥©·
-©§(05)ÖÃ¿Õ¡£©§
-©»©¥©¥©¥©¥©¥*/ 
+/*â”â”â”â”â”â”“
+â”ƒ(05)ç½®ç©ºã€‚â”ƒ
+â”—â”â”â”â”â”*/
 
 void DestroyList_SL(SLinkList *H);
-/*©¥©¥©¥©¥©¥©·
-©§(06)Ïú»Ù¡£©§
-©»©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”“
+â”ƒ(06)é”€æ¯ã€‚â”ƒ
+â”—â”â”â”â”â”*/
 
 Status ListEmpty_SL(SLinkList H);
-/*©¥©¥©¥©¥©¥©·
-©§(07)ÅÐ¿Õ¡£©§
-©»©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”“
+â”ƒ(07)åˆ¤ç©ºã€‚â”ƒ
+â”—â”â”â”â”â”*/
 
 int ListLength_SL(SLinkList H);
-/*©¥©¥©¥©¥©¥©·
-©§(08)Çó³¤¡£©§
-©»©¥©¥©¥©¥©¥*/ 
+/*â”â”â”â”â”â”“
+â”ƒ(08)æ±‚é•¿ã€‚â”ƒ
+â”—â”â”â”â”â”*/
 
 Status GetElem_SL(SLinkList H, int i, LElemType_S *e);
-/*©¥©¥©¥©¥©¥©·
-©§(09)È¡Öµ¡£©§
-©»©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”“
+â”ƒ(09)å–å€¼ã€‚â”ƒ
+â”—â”â”â”â”â”*/
 
 int LocateElem_SL(SLinkList H, LElemType_S e);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(10)Ëã·¨2.13£º·µ»ØÔªËØeµÄÎ»Ðò¡£ ©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(10)ç®—æ³•2.13ï¼šè¿”å›žå…ƒç´ eçš„ä½åºã€‚ â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”*/
 
 Status PriorElem_SL(SLinkList H, LElemType_S cur_e, LElemType_S *pre_e);
-/*©¥©¥©¥©¥©¥©·
-©§(11)Ç°Çý¡£©§
-©»©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”“
+â”ƒ(11)å‰é©±ã€‚â”ƒ
+â”—â”â”â”â”â”*/
 
 Status NextElem_SL(SLinkList H, LElemType_S cur_e, LElemType_S *next_e);
-/*©¥©¥©¥©¥©¥©·
-©§(12)ºó¼Ì¡£©§
-©»©¥©¥©¥©¥©¥*/ 
+/*â”â”â”â”â”â”“
+â”ƒ(12)åŽç»§ã€‚â”ƒ
+â”—â”â”â”â”â”*/
 
 Status ListInsert_SL(SLinkList H, int i, LElemType_S e);
-/*©¥©¥©¥©¥©¥©·
-©§(13)²åÈë¡£©§
-©»©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”“
+â”ƒ(13)æ’å…¥ã€‚â”ƒ
+â”—â”â”â”â”â”*/
 
 Status ListDelete_SL(SLinkList H, int i, LElemType_S *e);
-/*©¥©¥©¥©¥©¥©·
-©§(14)É¾³ý¡£©§
-©»©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”“
+â”ƒ(14)åˆ é™¤ã€‚â”ƒ
+â”—â”â”â”â”â”*/
 
 Status ListTraverse_SL(SLinkList H, void(Visit)(LElemType_S));
-/*©¥©¥©¥©¥©¥©·
-©§(15)·ÃÎÊ¡£©§
-©»©¥©¥©¥©¥©¥*/ 
+/*â”â”â”â”â”â”“
+â”ƒ(15)è®¿é—®ã€‚â”ƒ
+â”—â”â”â”â”â”*/
 
 #endif

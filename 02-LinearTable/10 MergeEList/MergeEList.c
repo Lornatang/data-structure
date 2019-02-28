@@ -1,83 +1,74 @@
 /*************************************
  *					                 *
- * ÎÄ¼ş¼Ğ: ¡ø02 ÏßĞÔ±í\10 MergeEList *
+ * æ–‡ä»¶å¤¹: â–²02 çº¿æ€§è¡¨\10 MergeEList *
  * 					                 *
- * ÎÄ¼şÃû: MergeEList.c              *
+ * æ–‡ä»¶å: MergeEList.c              *
  * 				                     *
- * Ëã  ·¨: 2.21                      * 
+ * ç®—  æ³•: 2.21                      *
  *                                   *
  *************************************/
 
 #ifndef MERGEELIST_C
 #define MERGEELIST_C
 
-#include "MergeEList.h"					//**¡ø02 ÏßĞÔ±í**//
+#include "MergeEList.h"  //**â–²02 çº¿æ€§è¡¨**//
 
-/*¨T¨T¨T¨T¨T¨[
-¨U Ëã·¨2.21 ¨U 
-¨^¨T¨T¨T¨T¨T*/
-Status MergeEList_L(ELinkList La, ELinkList Lb, ELinkList *Lc, int(Compare)(LElemType_E c1, LElemType_E c2))
-{
-	Link ha, hb, pa, pb, q;
-	LElemType_E c1, c2;
+/*â•â•â•â•â•â•—
+â•‘ ç®—æ³•2.21 â•‘
+â•šâ•â•â•â•â•*/
+Status MergeEList_L(ELinkList La, ELinkList Lb, ELinkList *Lc,
+                    int(Compare)(LElemType_E c1, LElemType_E c2)) {
+  Link ha, hb, pa, pb, q;
+  LElemType_E c1, c2;
 
-	if(!InitList_E(Lc))					//´æ´¢·ÖÅäÊ§°Ü 
-		return ERROR;
+  if (!InitList_E(Lc))  //å­˜å‚¨åˆ†é…å¤±è´¥
+    return ERROR;
 
-	ha = GetHead_E(La); 				//haÖ¸ÏòLaÍ·½áµã
-	hb = GetHead_E(Lb); 				//hbÖ¸ÏòLbÍ·½áµã
-	pa = NextPos_E(ha);					//paÖ¸ÏòLaµÚÒ»¸ö½áµã 
-	pb = NextPos_E(hb);					//pbÖ¸ÏòLbµÚÒ»¸ö½áµã
-	while(!ListEmpty_E(La) && !ListEmpty_E(Lb))
-	{									//LaÓëLb·Ç¿Õ 
-		c1 = GetCurElem_E(pa);			//c1¡¢c2Îªµ±Ç°±È½ÏµÄÔªËØ
-		c2 = GetCurElem_E(pb);
-		if(Compare(c1, c2)<=0)
-		{
-			DelFirst_E(&La, ha, &q);
-			InsFirst_E(Lc, (*Lc).tail, q);
-			pa = NextPos_E(ha);
-		}
-		else
-		{
-			DelFirst_E(&Lb, hb, &q);
-			InsFirst_E(Lc, (*Lc).tail, q);
-			pb=NextPos_E(hb);
-		}
-	}
+  ha = GetHead_E(La);                             // haæŒ‡å‘Laå¤´ç»“ç‚¹
+  hb = GetHead_E(Lb);                             // hbæŒ‡å‘Lbå¤´ç»“ç‚¹
+  pa = NextPos_E(ha);                             // paæŒ‡å‘Laç¬¬ä¸€ä¸ªç»“ç‚¹
+  pb = NextPos_E(hb);                             // pbæŒ‡å‘Lbç¬¬ä¸€ä¸ªç»“ç‚¹
+  while (!ListEmpty_E(La) && !ListEmpty_E(Lb)) {  // Laä¸Lbéç©º
+    c1 = GetCurElem_E(pa);  // c1ã€c2ä¸ºå½“å‰æ¯”è¾ƒçš„å…ƒç´ 
+    c2 = GetCurElem_E(pb);
+    if (Compare(c1, c2) <= 0) {
+      DelFirst_E(&La, ha, &q);
+      InsFirst_E(Lc, (*Lc).tail, q);
+      pa = NextPos_E(ha);
+    } else {
+      DelFirst_E(&Lb, hb, &q);
+      InsFirst_E(Lc, (*Lc).tail, q);
+      pb = NextPos_E(hb);
+    }
+  }
 
-	if(!ListEmpty_E(La))
-		Append_E(Lc, pa);
-	else
-		Append_E(Lc, pb);
+  if (!ListEmpty_E(La))
+    Append_E(Lc, pa);
+  else
+    Append_E(Lc, pb);
 
-	FreeNode_E(&ha);
-	FreeNode_E(&hb);
+  FreeNode_E(&ha);
+  FreeNode_E(&hb);
 
-	return OK;
+  return OK;
 }
 
-int Cmp(LElemType_E c1, LElemType_E c2)
-{
-	return c1-c2;
-}
+int Cmp(LElemType_E c1, LElemType_E c2) { return c1 - c2; }
 
-Status CreateList_ascend(FILE *fp, ELinkList *L, int count)
-{													//°´·Ç½µĞòĞòÁĞ´´½¨Á´±íL 
-	int i;
-	LElemType_E e;
-		
-	InitList_E(L);
-	if(!L)
-		return ERROR;
+Status CreateList_ascend(FILE *fp, ELinkList *L,
+                         int count) {  //æŒ‰éé™åºåºåˆ—åˆ›å»ºé“¾è¡¨L
+  int i;
+  LElemType_E e;
 
-	for(i=1; i<=count; i++)
-	{	
-		Scanf(fp, "%d", &e);
-		ListInsert_L_E(L, i, e);
-	}
-	
-	return OK;
+  InitList_E(L);
+  if (!L) return ERROR;
+
+  for (i = 1; i <= count; i++) {
+    Scanf(fp, "%d", &e);
+    ListInsert_L_E(L, i, e);
+  }
+
+  return OK;
 }
 
 #endif

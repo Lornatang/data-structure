@@ -1,51 +1,45 @@
 /*************************************
  *						             *
- * ÎÄ¼þ¼Ð: ¡ø02 ÏßÐÔ±í\07 Difference *
+ * æ–‡ä»¶å¤¹: â–²02 çº¿æ€§è¡¨\07 Difference *
  * 						        	 *
- * ÄÚ  ÈÝ: Ëã·¨2.17Ïà¹Øº¯Êý²âÊÔ 	 *
+ * å†…  å®¹: ç®—æ³•2.17ç›¸å…³å‡½æ•°æµ‹è¯• 	 *
  *                              	 *
  *************************************/
 
 #include <stdio.h>
-#include "Difference.c"					//**¡ø02 ÏßÐÔ±í**//
-	
-void PrintElem(LElemType_S e);			//²âÊÔº¯Êý£¬´òÓ¡ÕûÐÍ
+#include "Difference.c"  //**â–²02 çº¿æ€§è¡¨**//
 
-int main(int argc, char **argv)
-{
-	SLinkList S;
-	FILE *fp;
-	int len_A, len_B, i;
-	LElemType_S A[100], B[100];
-	
-	len_A = 3;
-	len_B = 5;
-	
-	fp = fopen("TestData.txt", "r");	//ÎÄ¼þÖ¸Õë£¬Ö¸ÏòÊý¾ÝÔ´
-	for(i=0; i<len_A; i++)				//¼¯ºÏA 
-		Scanf(fp, "%d", &A[i]);
-	for(i=0; i<len_B; i++)				//¼¯ºÏB 
-		Scanf(fp, "%d", &B[i]);
-	fclose(fp);
-	
-	printf("A = ");
-	for(i=0; i<len_A; i++)
-		PrintElem(A[i]);
-	printf("\n");
-	printf("B = ");
-	for(i=0; i<len_B; i++)
-		PrintElem(B[i]);
-	printf("\n\n");
-	
-	printf("S = (A-B)¡È(B-A) = ");
-	difference(&S, A, len_A, B, len_B);
-	ListTraverse_SL(S, PrintElem);
-	printf("\n\n");
+void PrintElem(LElemType_S e);  //æµ‹è¯•å‡½æ•°ï¼Œæ‰“å°æ•´åž‹
 
-	return 0;
+int main(int argc, char **argv) {
+  SLinkList S;
+  FILE *fp;
+  int len_A, len_B, i;
+  LElemType_S A[100], B[100];
+
+  len_A = 3;
+  len_B = 5;
+
+  fp = fopen("TestData.txt", "r");  //æ–‡ä»¶æŒ‡é’ˆï¼ŒæŒ‡å‘æ•°æ®æº
+  for (i = 0; i < len_A; i++)       //é›†åˆA
+    Scanf(fp, "%d", &A[i]);
+  for (i = 0; i < len_B; i++)  //é›†åˆB
+    Scanf(fp, "%d", &B[i]);
+  fclose(fp);
+
+  printf("A = ");
+  for (i = 0; i < len_A; i++) PrintElem(A[i]);
+  printf("\n");
+  printf("B = ");
+  for (i = 0; i < len_B; i++) PrintElem(B[i]);
+  printf("\n\n");
+
+  printf("S = (A-B)âˆª(B-A) = ");
+  difference(&S, A, len_A, B, len_B);
+  ListTraverse_SL(S, PrintElem);
+  printf("\n\n");
+
+  return 0;
 }
 
-void PrintElem(LElemType_S e)
-{
-	printf("%d ", e);
-}
+void PrintElem(LElemType_S e) { printf("%d ", e); }

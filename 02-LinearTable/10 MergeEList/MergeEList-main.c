@@ -1,51 +1,47 @@
 /****************************************
  *						                *
- * ÎÄ¼ş¼Ğ: ¡ø02 ÏßĞÔ±í\10 MergeEList    *
+ * æ–‡ä»¶å¤¹: â–²02 çº¿æ€§è¡¨\10 MergeEList    *
  * 						                *
- * ÄÚ  Èİ: ¹é²¢À©Õ¹µÄµ¥Á´±íÏà¹Øº¯Êı²âÊÔ *
+ * å†…  å®¹: å½’å¹¶æ‰©å±•çš„å•é“¾è¡¨ç›¸å…³å‡½æ•°æµ‹è¯• *
  *                                      *
  ****************************************/
 
 #include <stdio.h>
-#include "MergeEList.c"					//**¡ø02 ÏßĞÔ±í**//
+#include "MergeEList.c"  //**â–²02 çº¿æ€§è¡¨**//
 
-void PrintElem(LElemType_E e);			//²âÊÔº¯Êı£¬´òÓ¡ÕûĞÍ
+void PrintElem(LElemType_E e);  //æµ‹è¯•å‡½æ•°ï¼Œæ‰“å°æ•´å‹
 
-int main(int argc, char **argv)
-{
-	FILE *fp;
-	ELinkList La, Lb, Lc;
-	int m, n;
-		
-	m = 6;
-	n = 7;
-	
-	printf("×÷ÎªÊ¾Àı£¬La³¤¶ÈÉè¶¨Îª %d £¬LbÉè¶¨Îª %d £¬´´½¨LaºÍLb...\n", m, n);	
-	fp = fopen("TestData_La.txt", "r");	//ÎÄ¼şÖ¸Õë£¬Ö¸ÏòÊı¾İÔ´	
-	CreateList_ascend(fp, &La, m);		//´´½¨LaÓëLb 
-	fclose(fp);
-	fp = fopen("TestData_Lb.txt", "r");	//ÎÄ¼şÖ¸Õë£¬Ö¸ÏòÊı¾İÔ´
-	CreateList_ascend(fp, &Lb, n);	
-	fclose(fp);
-		
-	printf("La= ");						//Êä³öLaÓëLb 
-	ListTraverse_E(La, PrintElem);
-	printf("\n");
-	printf("Lb= ");
-	ListTraverse_E(Lb, PrintElem);
-	printf("\n\n");
-	PressEnter;
-	
-	MergeEList_L(La, Lb, &Lc, Cmp);
-	printf("ºÏ²¢LaºÍLbÎª Lc = ");
-	ListTraverse_E(Lc, PrintElem);
-	printf("\n\n");
-	PressEnter;
-		
-	return 0;
+int main(int argc, char **argv) {
+  FILE *fp;
+  ELinkList La, Lb, Lc;
+  int m, n;
+
+  m = 6;
+  n = 7;
+
+  printf("ä½œä¸ºç¤ºä¾‹ï¼ŒLaé•¿åº¦è®¾å®šä¸º %d ï¼ŒLbè®¾å®šä¸º %d ï¼Œåˆ›å»ºLaå’ŒLb...\n", m, n);
+  fp = fopen("TestData_La.txt", "r");  //æ–‡ä»¶æŒ‡é’ˆï¼ŒæŒ‡å‘æ•°æ®æº
+  CreateList_ascend(fp, &La, m);       //åˆ›å»ºLaä¸Lb
+  fclose(fp);
+  fp = fopen("TestData_Lb.txt", "r");  //æ–‡ä»¶æŒ‡é’ˆï¼ŒæŒ‡å‘æ•°æ®æº
+  CreateList_ascend(fp, &Lb, n);
+  fclose(fp);
+
+  printf("La= ");  //è¾“å‡ºLaä¸Lb
+  ListTraverse_E(La, PrintElem);
+  printf("\n");
+  printf("Lb= ");
+  ListTraverse_E(Lb, PrintElem);
+  printf("\n\n");
+  PressEnter;
+
+  MergeEList_L(La, Lb, &Lc, Cmp);
+  printf("åˆå¹¶Laå’ŒLbä¸º Lc = ");
+  ListTraverse_E(Lc, PrintElem);
+  printf("\n\n");
+  PressEnter;
+
+  return 0;
 }
 
-void PrintElem(LElemType_E e)
-{
-	printf("%d ", e);
-}
+void PrintElem(LElemType_E e) { printf("%d ", e); }

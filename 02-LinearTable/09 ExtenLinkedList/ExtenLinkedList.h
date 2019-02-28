@@ -1,156 +1,157 @@
 /************************************
  *						            *
- * ÎÄ¼þ¼Ð: ¡ø02 ÏßÐÔ±í              *
+ * æ–‡ä»¶å¤¹: â–²02 çº¿æ€§è¡¨              *
  * 							        *
- * ÎÄ¼þÃû: ExtenLinkedList.h        *
+ * æ–‡ä»¶å: ExtenLinkedList.h        *
  * 							        *
- * ÄÚ  ÈÝ: À©Õ¹µÄµ¥Á´±íÏà¹Ø²Ù×÷ÁÐ±í *
+ * å†…  å®¹: æ‰©å±•çš„å•é“¾è¡¨ç›¸å…³æ“ä½œåˆ—è¡¨ *
  *                                  *
  ************************************/
 
 #ifndef EXTENLINKEDLIST_H
 #define EXTENLINKEDLIST_H
 
-#include <stdlib.h>						//Ìá¹©malloc¡¢realloc¡¢free¡¢exitÔ­ÐÍ
-#include "../../¡ø01 Ð÷ÂÛ/Status.h"		//**¡ø01 Ð÷ÂÛ**//
-#include "../../¡ø01 Ð÷ÂÛ/Scanf.c"		//**¡ø01 Ð÷ÂÛ**//
+#include <stdlib.h>  //æä¾›mallocã€reallocã€freeã€exitåŽŸåž‹
+#include "../../01-Introduction/Scanf.c"   //**â–²01 ç»ªè®º**//
+#include "../../01-Introduction/Status.h"  //**â–²01 ç»ªè®º**//
 
-/*	À©Õ¹µÄµ¥Á´±íÀàÐÍ¶¨Òå	*/
-#ifndef POLYNOMIAL_H					//ÔÚ¶àÏîÊ½²Ù×÷ÖÐ£¬´ËÀàÐÍÐèÖØÐÂ¶¨Òå 
-typedef int LElemType_E; 
+/*	æ‰©å±•çš„å•é“¾è¡¨ç±»åž‹å®šä¹‰	*/
+#ifndef POLYNOMIAL_H  //åœ¨å¤šé¡¹å¼æ“ä½œä¸­ï¼Œæ­¤ç±»åž‹éœ€é‡æ–°å®šä¹‰
+typedef int LElemType_E;
 #endif
-typedef struct ELNode					//½áµãÀàÐÍ 
+typedef struct ELNode  //ç»“ç‚¹ç±»åž‹
 {
-	LElemType_E data;
-	struct ELNode *next;
-}ELNode; 
-typedef ELNode* Link;			 		//Ö¸Ïò½á¹¹µÄÖ¸Õë 
-typedef ELNode* PositionPtr;
-typedef struct							//Á´±íÀàÐÍ 
+  LElemType_E data;
+  struct ELNode *next;
+} ELNode;
+typedef ELNode *Link;  //æŒ‡å‘ç»“æž„çš„æŒ‡é’ˆ
+typedef ELNode *PositionPtr;
+typedef struct  //é“¾è¡¨ç±»åž‹
 {
-	Link head, tail;					//·Ö±ðÖ¸ÏòÏßÐÔÁ´±íÖÐµÄÍ·½áµãºÍÎ²½áµã 
-	int len;							//Ö¸Ê¾ÏßÐÔÁ´±íÖÐÊý¾ÝÔªËØµÄ¸öÊý 
-}ELinkList;
+  Link head, tail;  //åˆ†åˆ«æŒ‡å‘çº¿æ€§é“¾è¡¨ä¸­çš„å¤´ç»“ç‚¹å’Œå°¾ç»“ç‚¹
+  int len;          //æŒ‡ç¤ºçº¿æ€§é“¾è¡¨ä¸­æ•°æ®å…ƒç´ çš„ä¸ªæ•°
+} ELinkList;
 
-/*	À©Õ¹µÄµ¥Á´±íº¯ÊýÁÐ±í */ 
-Status MakeNode_E(Link *p, LElemType_E e); 
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(01)·ÖÅäÓÉpÖ¸ÏòeµÄ½áµã¡£©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*	æ‰©å±•çš„å•é“¾è¡¨å‡½æ•°åˆ—è¡¨ */
+Status MakeNode_E(Link *p, LElemType_E e);
+/*â”â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(01)åˆ†é…ç”±pæŒ‡å‘eçš„ç»“ç‚¹ã€‚â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”â”*/
 
 void FreeNode_E(Link *p);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(02)ÊÍ·ÅpÖ¸ÏòµÄ½áµã¡£ ©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(02)é‡Šæ”¾pæŒ‡å‘çš„ç»“ç‚¹ã€‚ â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”*/
 
 Status InitList_E(ELinkList *L);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(03)³õÊ¼»¯Ò»¸ö¿ÕµÄÏßÐÔÁ´±í¡£©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(03)åˆå§‹åŒ–ä¸€ä¸ªç©ºçš„çº¿æ€§é“¾è¡¨ã€‚â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”*/
 
 void ClearList_E(ELinkList *L);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(04)ÖØÖÃÏßÐÔÁ´±íLÎª¿Õ¡£ ©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(04)é‡ç½®çº¿æ€§é“¾è¡¨Lä¸ºç©ºã€‚ â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”â”*/
 
 void DestroyList_E(ELinkList *L);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(05)Ïú»ÙÏßÐÔÁ´±íL¡£ ©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(05)é”€æ¯çº¿æ€§é“¾è¡¨Lã€‚ â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”*/
 
 void InsFirst_E(ELinkList *L, Link h, Link s);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(06)hÖ¸ÏòLÖÐµÄÒ»¸ö½áµã£¬½«hµ±×öÍ·½áµã£¬½«s²åÈëµ½¡°µÚÒ»¸ö½áµã¡±Ö®Ç°¡£©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(06)hæŒ‡å‘Lä¸­çš„ä¸€ä¸ªç»“ç‚¹ï¼Œå°†hå½“åšå¤´ç»“ç‚¹ï¼Œå°†sæ’å…¥åˆ°â€œç¬¬ä¸€ä¸ªç»“ç‚¹â€ä¹‹å‰ã€‚â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”*/
 
 Status DelFirst_E(ELinkList *L, Link h, Link *q);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(07)hÖ¸ÏòLÖÐµÄÒ»¸ö½áµã£¬½«hµ±×öÍ·½áµã£¬É¾³ý¡°µÚÒ»¸ö½áµã¡±£¬²¢ÓÃq½ÓÊÕ¡£©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(07)hæŒ‡å‘Lä¸­çš„ä¸€ä¸ªç»“ç‚¹ï¼Œå°†hå½“åšå¤´ç»“ç‚¹ï¼Œåˆ é™¤â€œç¬¬ä¸€ä¸ªç»“ç‚¹â€ï¼Œå¹¶ç”¨qæŽ¥æ”¶ã€‚â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”*/
 
 void Append_E(ELinkList *L, Link s);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(08)½«sËùÖ¸µÄÒ»´®½áµãÁ´½ÓÔÚLµÄ×îºóÒ»¸ö½áµãÖ®ºó£¬²¢¸Ä±äLµÄÎ²Ö¸Õë¡£ ©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(08)å°†sæ‰€æŒ‡çš„ä¸€ä¸²ç»“ç‚¹é“¾æŽ¥åœ¨Lçš„æœ€åŽä¸€ä¸ªç»“ç‚¹ä¹‹åŽï¼Œå¹¶æ”¹å˜Lçš„å°¾æŒ‡é’ˆã€‚ â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”*/
 
 Status Remove_E(ELinkList *L, Link *q);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(09)É¾³ýLµÄÎ²½áµã²¢ÓÃq½ÓÊÕ£¬¸Ä±äÎ²Ö¸Õë¡£©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(09)åˆ é™¤Lçš„å°¾ç»“ç‚¹å¹¶ç”¨qæŽ¥æ”¶ï¼Œæ”¹å˜å°¾æŒ‡é’ˆã€‚â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”*/
 
 void InsBefore_E(ELinkList *L, Link *p, Link s);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(10)½«sËùÖ¸½áµã²åÈëpËùÖ¸½áµãÖ®Ç°,²¢½«pÖ¸ÏòÐÂ²åÈëµÄ½áµã¡£©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(10)å°†sæ‰€æŒ‡ç»“ç‚¹æ’å…¥pæ‰€æŒ‡ç»“ç‚¹ä¹‹å‰,å¹¶å°†pæŒ‡å‘æ–°æ’å…¥çš„ç»“ç‚¹ã€‚â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”*/
 
 void InsAfter_E(ELinkList *L, Link *p, Link s);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(11)½«sËùÖ¸½áµã²åÈëpËùÖ¸½áµãÖ®ºó,²¢½«pÖ¸ÏòÐÂ²åÈëµÄ½áµã¡£©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(11)å°†sæ‰€æŒ‡ç»“ç‚¹æ’å…¥pæ‰€æŒ‡ç»“ç‚¹ä¹‹åŽ,å¹¶å°†pæŒ‡å‘æ–°æ’å…¥çš„ç»“ç‚¹ã€‚â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”*/
 
 void SetCurElem_E(Link p, LElemType_E e);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(12)ÓÃe¸üÐÂpÖ¸ÏòµÄ½áµãÖÐµÄÖµ¡£©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(12)ç”¨eæ›´æ–°pæŒ‡å‘çš„ç»“ç‚¹ä¸­çš„å€¼ã€‚â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”*/
 
 LElemType_E GetCurElem_E(Link p);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(13)·µ»Øp½áµãÖÐµÄÖµ¡£ ©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(13)è¿”å›žpç»“ç‚¹ä¸­çš„å€¼ã€‚ â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”*/
 
 Status ListEmpty_E(ELinkList L);
-/*©¥©¥©¥©¥©¥©·
-©§(14)ÅÐ¿Õ¡£©§
-©»©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”“
+â”ƒ(14)åˆ¤ç©ºã€‚â”ƒ
+â”—â”â”â”â”â”*/
 
 int ListLength_E(ELinkList L);
-/*©¥©¥©¥©¥©¥©·
-©§(15)Çó³¤¡£©§
-©»©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”“
+â”ƒ(15)æ±‚é•¿ã€‚â”ƒ
+â”—â”â”â”â”â”*/
 
 PositionPtr GetHead_E(ELinkList L);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(16)ÒÔÖ¸ÕëÐÎÊ½·µ»ØLÍ·½áµãµÄÎ»ÖÃ¡£ ©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(16)ä»¥æŒ‡é’ˆå½¢å¼è¿”å›žLå¤´ç»“ç‚¹çš„ä½ç½®ã€‚ â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”*/
 
 PositionPtr GetLast_E(ELinkList L);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(17)ÒÔÖ¸ÕëÐÎÊ½·µ»ØL×îºóÒ»¸ö½áµãµÄÎ»ÖÃ¡£ ©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(17)ä»¥æŒ‡é’ˆå½¢å¼è¿”å›žLæœ€åŽä¸€ä¸ªç»“ç‚¹çš„ä½ç½®ã€‚ â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”*/
 
 PositionPtr PriorPos_E(ELinkList L, Link p);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(18)·µ»ØpÖ¸ÏòµÄ½áµãµÄÇ°Çý¡£ ©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(18)è¿”å›žpæŒ‡å‘çš„ç»“ç‚¹çš„å‰é©±ã€‚ â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”*/
 
 PositionPtr NextPos_E(Link p);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(19)·µ»ØpÖ¸ÏòµÄ½áµãµÄºó¼Ì¡£ ©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(19)è¿”å›žpæŒ‡å‘çš„ç»“ç‚¹çš„åŽç»§ã€‚ â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”*/
 
 Status LocatePos_E(ELinkList L, int i, Link *p);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(20)½«*pÖ¸ÏòLÖÐµÚi¸ö½áµã,i=0Ê±ÎªÍ·½áµã¡£©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(20)å°†*pæŒ‡å‘Lä¸­ç¬¬iä¸ªç»“ç‚¹,i=0æ—¶ä¸ºå¤´ç»“ç‚¹ã€‚â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”*/
 
-PositionPtr LocateElem_E(ELinkList L, LElemType_E e, Status(Compare)(LElemType_E,LElemType_E));
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(21)·µ»ØLÖÐÖ¸ÏòµÚÒ»¸öÓëeÂú×ãCompare¹ØÏµµÄÔªËØÖ¸Õë¡£ ©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+PositionPtr LocateElem_E(ELinkList L, LElemType_E e,
+                         Status(Compare)(LElemType_E, LElemType_E));
+/*â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(21)è¿”å›žLä¸­æŒ‡å‘ç¬¬ä¸€ä¸ªä¸Žeæ»¡è¶³Compareå…³ç³»çš„å…ƒç´ æŒ‡é’ˆã€‚ â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”*/
 
 Status ListTraverse_E(ELinkList L, void(Visit)(LElemType_E));
-/*©¥©¥©¥©¥©¥©·
-©§(22)·ÃÎÊ¡£©§
-©»©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”“
+â”ƒ(22)è®¿é—®ã€‚â”ƒ
+â”—â”â”â”â”â”*/
 
 Status ListInsert_L_E(ELinkList *L, int i, LElemType_E e);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(23)Ëã·¨2.20£ºÔÚLµÚi¸öÎ»ÖÃÖ®Ç°²åÈëe¡£ ©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/
+/*â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(23)ç®—æ³•2.20ï¼šåœ¨Lç¬¬iä¸ªä½ç½®ä¹‹å‰æ’å…¥eã€‚ â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”*/
 
 Status ListDelete_L_E(ELinkList *L, int i, LElemType_E *e);
-/*©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©·
-©§(24)É¾³ýLµÚi¸öÎ»ÖÃµÄÖµ£¬²¢ÓÃe½ÓÊÕ¡£ ©§
-©»©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥©¥*/ 
+/*â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”“
+â”ƒ(24)åˆ é™¤Lç¬¬iä¸ªä½ç½®çš„å€¼ï¼Œå¹¶ç”¨eæŽ¥æ”¶ã€‚ â”ƒ
+â”—â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”â”*/
 
 #endif

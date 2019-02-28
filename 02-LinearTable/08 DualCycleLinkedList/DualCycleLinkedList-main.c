@@ -1,146 +1,142 @@
 /**********************************************
  *						                      *
- * ÎÄ¼ş¼Ğ: ¡ø02 ÏßĞÔ±í\08 DualCycleLinkedList *
+ * æ–‡ä»¶å¤¹: â–²02 çº¿æ€§è¡¨\08 DualCycleLinkedList *
  * 						                      *
- * ÄÚ  Èİ: Ë«Ñ­»·Á´±íÏà¹Øº¯Êı²âÊÔ             *
+ * å†…  å®¹: åŒå¾ªç¯é“¾è¡¨ç›¸å…³å‡½æ•°æµ‹è¯•             *
  *                                            *
  **********************************************/
 
 #include <stdio.h>
-#include "DualCycleLinkedList.c" 						//**¡ø02 ÏßĞÔ±í**//
+#include "DualCycleLinkedList.c"  //**â–²02 çº¿æ€§è¡¨**//
 
-Status CmpGreater(LElemType_DC e, LElemType_DC data);	//Èôdata>e£¬·µ»ØTRUE£¬·ñÔò·µ»ØFALSE 
-void PrintElem(LElemType_DC e);							//²âÊÔº¯Êı£¬´òÓ¡ÕûĞÍ
+Status CmpGreater(LElemType_DC e,
+                  LElemType_DC data);  //è‹¥data>eï¼Œè¿”å›TRUEï¼Œå¦åˆ™è¿”å›FALSE
+void PrintElem(LElemType_DC e);        //æµ‹è¯•å‡½æ•°ï¼Œæ‰“å°æ•´å‹
 
-int main(int argc, char **argv)
-{
-	DuLinkList L;
-	int i;
-	LElemType_DC e;
-	
-	printf("¨‹1\n¡øº¯Êı InitList_DuL ²âÊÔ...\n");		//1.º¯ÊıInitList_DuL²âÊÔ
-	{
-		printf("³õÊ¼»¯Ë«Ñ­»·Á´±í L ...\n");					 
-		InitList_DuL(&L);
-		printf("\n");
-	} 
-	PressEnter;
-	
-	printf("¨‹4\n¡øº¯Êı ListEmpty_DuL ²âÊÔ...\n");		//4.º¯ÊıListEmpty_DuL²âÊÔ
-	{
-		ListEmpty_DuL(L) ? printf(" L Îª¿Õ£¡£¡\n") : printf(" L ²»Îª¿Õ£¡\n");
-		printf("\n");
-	} 
-	PressEnter;
-	
-	printf("¨‹11\n¡øº¯Êı ListInsert_DuL ²âÊÔ...\n");	//11.º¯ÊıListInsert_DuL²âÊÔ
-	{
-		for(i=1; i<=6; i++)									
-		{
-			printf("ÔÚ L µÚ %d ¸öÎ»ÖÃ²åÈë \"%d\" ...\n", i, 2*i);
-			ListInsert_DuL(L, i, 2*i);
-		}
-		printf("\n");
-	} 
-	PressEnter;
-	
-	printf("¨‹13\n¡øº¯Êı ListTraverse_DuL ²âÊÔ...\n");	//13.º¯ÊıListTraverse_DuL²âÊÔ
-	{
-		printf(" L ÖĞµÄÔªËØÎª£ºL = ");							 
-		ListTraverse_DuL(L, PrintElem);
-		printf("\n\n");
-	} 
-	PressEnter;
-	
-	printf("¨‹5\n¡øº¯Êı ListLength_DuL ²âÊÔ...\n");		//5.º¯ÊıListLength_DuL²âÊÔ
-	{
-		printf(" L µÄ³¤¶ÈÎª %d \n", ListLength_DuL(L));
-		printf("\n");
-	} 
-	PressEnter;	
-	
-	printf("¨‹12\n¡øº¯Êı ListDelete_DuL ²âÊÔ...\n");	//12.º¯ÊıListDelete_DuL²âÊÔ
-	{
-		ListDelete_DuL(L, 6, &e);
-		printf("É¾³ı L ÖĞµÚ6¸öÔªËØ \"%d\" ...\n", e);
-		printf(" L ÖĞµÄÔªËØÎª£ºL = ");						 
-		ListTraverse_DuL(L, PrintElem);
-		printf("\n\n");
-	} 
-	PressEnter;
-	
-	printf("¨‹6\n¡øº¯Êı GetElem_DuL ²âÊÔ...\n");		//6.º¯ÊıGetElem_DuL²âÊÔ
-	{
-		GetElem_DuL(L, 4, &e);
-		printf(" L ÖĞµÚ 4 ¸öÎ»ÖÃµÄÔªËØÎª \"%d\" \n", e);
-		printf("\n");
-	} 
-	PressEnter;
-	
-	printf("¨‹7\n¡øº¯Êı LocateElem_DuL ²âÊÔ...\n");		//7.º¯ÊıLocateElem_DuL²âÊÔ
-	{
-		i = LocateElem_DuL(L, 7, CmpGreater); 
-		printf(" L ÖĞµÚÒ»¸öÔªËØÖµ´óÓÚ \"7\" µÄÔªËØµÄÎ»ÖÃÎª %d \n", i); 
-		printf("\n");
-	} 
-	PressEnter;
-	
-	printf("¨‹8\n¡øº¯Êı PriorElem_DuL ²âÊÔ...\n");		//8.º¯ÊıPriorElem_DuL²âÊÔ
-	{
-		PriorElem_DuL(L, 6, &e);
-		printf("ÔªËØ \"6\" µÄÇ°ÇıÎª \"%d\" \n", e);
-		printf("\n");
-	} 
-	PressEnter;
-	
-	printf("¨‹9\n¡øº¯Êı NextElem_DuL ²âÊÔ...\n");		//9.º¯ÊıNextElem_DuL²âÊÔ
-	{
-		NextElem_DuL(L, 6, &e);
-		printf("ÔªËØ \"6\" µÄºó¼ÌÎª \"%d\" \n", e);
-		printf("\n");
-	} 
-	PressEnter;
-	
-	printf("¨‹10\n¡øº¯Êı GetElem_P ²âÊÔ...\n");			//10.º¯ÊıGetElem_P²âÊÔ
-	{
-		DuLinkList p;
-		p = GetElemPtr_DuL(L, 3);
-		printf("Á´±íµÚ 3 ¸ö½áµãµÄÖ¸ÕëÎª 0x%x£¬Æä¶ÔÓ¦µÄÖµÎª \"%d\" \n", p, *p);
-		printf("\n");
-	} 
-	PressEnter;
-	
-	printf("¨‹3\n¡øº¯Êı ClearList_DuL ²âÊÔ...\n");		//3.º¯ÊıClearList_DuL²âÊÔ
-	{
-		printf("Çå¿Õ L Ç°£º");
-		ListEmpty_DuL(L) ? printf(" L Îª¿Õ£¡£¡\n") : printf(" L ²»Îª¿Õ£¡\n");
-		ClearList_DuL(L);
-		printf("Çå¿Õ L ºó£º");
-		ListEmpty_DuL(L) ? printf(" L Îª¿Õ£¡£¡\n") : printf(" L ²»Îª¿Õ£¡\n");
-		printf("\n");
-	} 
-	PressEnter;
-	
-	printf("¨‹2\n¡øº¯Êı DestroyList_DuL ²âÊÔ...\n");	//2.º¯ÊıDestroyList_DuL²âÊÔ
-	{
-		printf("Ïú»Ù L Ç°£º");
-		L ? printf(" L ´æÔÚ£¡\n") : printf(" L ²»´æÔÚ£¡£¡\n");
-		DestroyList_DuL(&L);
-		printf("Ïú»Ù L ºó£º");
-		L ? printf(" L ´æÔÚ£¡\n") : printf(" L ²»´æÔÚ£¡£¡\n");
-		printf("\n");
-	} 
-	PressEnter;
-	
-	return 0;
+int main(int argc, char **argv) {
+  DuLinkList L;
+  int i;
+  LElemType_DC e;
+
+  printf("â–¼1\nâ–²å‡½æ•° InitList_DuL æµ‹è¯•...\n");  // 1.å‡½æ•°InitList_DuLæµ‹è¯•
+  {
+    printf("åˆå§‹åŒ–åŒå¾ªç¯é“¾è¡¨ L ...\n");
+    InitList_DuL(&L);
+    printf("\n");
+  }
+  PressEnter;
+
+  printf("â–¼4\nâ–²å‡½æ•° ListEmpty_DuL æµ‹è¯•...\n");  // 4.å‡½æ•°ListEmpty_DuLæµ‹è¯•
+  {
+    ListEmpty_DuL(L) ? printf(" L ä¸ºç©ºï¼ï¼\n") : printf(" L ä¸ä¸ºç©ºï¼\n");
+    printf("\n");
+  }
+  PressEnter;
+
+  printf("â–¼11\nâ–²å‡½æ•° ListInsert_DuL æµ‹è¯•...\n");  // 11.å‡½æ•°ListInsert_DuLæµ‹è¯•
+  {
+    for (i = 1; i <= 6; i++) {
+      printf("åœ¨ L ç¬¬ %d ä¸ªä½ç½®æ’å…¥ \"%d\" ...\n", i, 2 * i);
+      ListInsert_DuL(L, i, 2 * i);
+    }
+    printf("\n");
+  }
+  PressEnter;
+
+  printf(
+      "â–¼13\nâ–²å‡½æ•° ListTraverse_DuL æµ‹è¯•...\n");  // 13.å‡½æ•°ListTraverse_DuLæµ‹è¯•
+  {
+    printf(" L ä¸­çš„å…ƒç´ ä¸ºï¼šL = ");
+    ListTraverse_DuL(L, PrintElem);
+    printf("\n\n");
+  }
+  PressEnter;
+
+  printf("â–¼5\nâ–²å‡½æ•° ListLength_DuL æµ‹è¯•...\n");  // 5.å‡½æ•°ListLength_DuLæµ‹è¯•
+  {
+    printf(" L çš„é•¿åº¦ä¸º %d \n", ListLength_DuL(L));
+    printf("\n");
+  }
+  PressEnter;
+
+  printf("â–¼12\nâ–²å‡½æ•° ListDelete_DuL æµ‹è¯•...\n");  // 12.å‡½æ•°ListDelete_DuLæµ‹è¯•
+  {
+    ListDelete_DuL(L, 6, &e);
+    printf("åˆ é™¤ L ä¸­ç¬¬6ä¸ªå…ƒç´  \"%d\" ...\n", e);
+    printf(" L ä¸­çš„å…ƒç´ ä¸ºï¼šL = ");
+    ListTraverse_DuL(L, PrintElem);
+    printf("\n\n");
+  }
+  PressEnter;
+
+  printf("â–¼6\nâ–²å‡½æ•° GetElem_DuL æµ‹è¯•...\n");  // 6.å‡½æ•°GetElem_DuLæµ‹è¯•
+  {
+    GetElem_DuL(L, 4, &e);
+    printf(" L ä¸­ç¬¬ 4 ä¸ªä½ç½®çš„å…ƒç´ ä¸º \"%d\" \n", e);
+    printf("\n");
+  }
+  PressEnter;
+
+  printf("â–¼7\nâ–²å‡½æ•° LocateElem_DuL æµ‹è¯•...\n");  // 7.å‡½æ•°LocateElem_DuLæµ‹è¯•
+  {
+    i = LocateElem_DuL(L, 7, CmpGreater);
+    printf(" L ä¸­ç¬¬ä¸€ä¸ªå…ƒç´ å€¼å¤§äº \"7\" çš„å…ƒç´ çš„ä½ç½®ä¸º %d \n", i);
+    printf("\n");
+  }
+  PressEnter;
+
+  printf("â–¼8\nâ–²å‡½æ•° PriorElem_DuL æµ‹è¯•...\n");  // 8.å‡½æ•°PriorElem_DuLæµ‹è¯•
+  {
+    PriorElem_DuL(L, 6, &e);
+    printf("å…ƒç´  \"6\" çš„å‰é©±ä¸º \"%d\" \n", e);
+    printf("\n");
+  }
+  PressEnter;
+
+  printf("â–¼9\nâ–²å‡½æ•° NextElem_DuL æµ‹è¯•...\n");  // 9.å‡½æ•°NextElem_DuLæµ‹è¯•
+  {
+    NextElem_DuL(L, 6, &e);
+    printf("å…ƒç´  \"6\" çš„åç»§ä¸º \"%d\" \n", e);
+    printf("\n");
+  }
+  PressEnter;
+
+  printf("â–¼10\nâ–²å‡½æ•° GetElem_P æµ‹è¯•...\n");  // 10.å‡½æ•°GetElem_Pæµ‹è¯•
+  {
+    DuLinkList p;
+    p = GetElemPtr_DuL(L, 3);
+    printf("é“¾è¡¨ç¬¬ 3 ä¸ªç»“ç‚¹çš„æŒ‡é’ˆä¸º 0x%xï¼Œå…¶å¯¹åº”çš„å€¼ä¸º \"%d\" \n", p, *p);
+    printf("\n");
+  }
+  PressEnter;
+
+  printf("â–¼3\nâ–²å‡½æ•° ClearList_DuL æµ‹è¯•...\n");  // 3.å‡½æ•°ClearList_DuLæµ‹è¯•
+  {
+    printf("æ¸…ç©º L å‰ï¼š");
+    ListEmpty_DuL(L) ? printf(" L ä¸ºç©ºï¼ï¼\n") : printf(" L ä¸ä¸ºç©ºï¼\n");
+    ClearList_DuL(L);
+    printf("æ¸…ç©º L åï¼š");
+    ListEmpty_DuL(L) ? printf(" L ä¸ºç©ºï¼ï¼\n") : printf(" L ä¸ä¸ºç©ºï¼\n");
+    printf("\n");
+  }
+  PressEnter;
+
+  printf("â–¼2\nâ–²å‡½æ•° DestroyList_DuL æµ‹è¯•...\n");  // 2.å‡½æ•°DestroyList_DuLæµ‹è¯•
+  {
+    printf("é”€æ¯ L å‰ï¼š");
+    L ? printf(" L å­˜åœ¨ï¼\n") : printf(" L ä¸å­˜åœ¨ï¼ï¼\n");
+    DestroyList_DuL(&L);
+    printf("é”€æ¯ L åï¼š");
+    L ? printf(" L å­˜åœ¨ï¼\n") : printf(" L ä¸å­˜åœ¨ï¼ï¼\n");
+    printf("\n");
+  }
+  PressEnter;
+
+  return 0;
 }
 
-Status CmpGreater(LElemType_DC e, LElemType_DC data)
-{
-	return data>e ? TRUE : FALSE;
+Status CmpGreater(LElemType_DC e, LElemType_DC data) {
+  return data > e ? TRUE : FALSE;
 }
 
-void PrintElem(LElemType_DC e)
-{
-	printf("%d ", e);
-}
+void PrintElem(LElemType_DC e) { printf("%d ", e); }

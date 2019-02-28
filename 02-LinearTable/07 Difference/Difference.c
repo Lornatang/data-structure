@@ -1,67 +1,64 @@
 /*************************************
  *					                 *
- * ÎÄ¼ş¼Ğ: ¡ø02 ÏßĞÔ±í\07 Difference *
+ * æ–‡ä»¶å¤¹: â–²02 çº¿æ€§è¡¨\07 Difference *
  * 					    			 *
- * ÎÄ¼şÃû: Difference.c 			 *
+ * æ–‡ä»¶å: Difference.c 			 *
  * 				        			 *
- * Ëã  ·¨: 2.17         			 * 
+ * ç®—  æ³•: 2.17         			 *
  *                      			 *
  *************************************/
 
 #ifndef DIFFERENCE_C
 #define DIFFERENCE_C
 
-#include "Difference.h"						//**¡ø02 ÏßĞÔ±í**//
+#include "Difference.h"  //**â–²02 çº¿æ€§è¡¨**//
 
-/*¨T¨T¨T¨T¨T¨[
-¨U Ëã·¨2.17 ¨U 
-¨^¨T¨T¨T¨T¨T*/
-void difference(SLinkList *S, LElemType_S A[], int len_A, LElemType_S B[], int len_B)
-{
-	int i, j;
-	int r, p, k;
-	LElemType_S b;
-	
-	InitSpace_SL();
-	*S = Malloc_SL();						//Í·½áµã 
-	r = *S;									//rÖ¸ÏòSµÄµ±Ç°×îºó½áµã£¨Î²Ö¸Õë£© 
-	SPACE[r].cur = 0;
-	
-	for(j=0; j<len_A; j++)					//½¨Á¢¼¯ºÏAµÄÁ´±í 
-	{
-		i = Malloc_SL();					//ÉêÇë½áµã 
-		SPACE[i].data = A[j];				//Â¼ÈëAµÄÔªËØÖµ	 
-		SPACE[r].cur = i;					//²åÈëµ½±íÎ² 
-		r = i;
-	}
-	SPACE[r].cur =0;						//Î²½áµãÖ¸ÕëÎª¿Õ
-	
-	for(j=0; j<len_B; j++)					//Â¼ÈëBµÄÔªËØÖµ
-	{
-		b = B[j];		
-		p = *S;								//pÖ¸Ïò¼¯ºÏAµÄÍ·½áµã
-		k = SPACE[*S].cur;					//kÖ¸Ïò¼¯ºÏAµÄµÚÒ»¸ö½áµã
-		while(k && SPACE[k].data!=b)
-		{									//ÔÚ¼¯ºÏAÖĞ²éÕÒb 
-			p = k;
-			k = SPACE[k].cur; 
-		}
-		
-		if(!k)								//AÖĞÕÒ²»µ½b£¬Ôò½«b²åÈëA
-		{									//ĞÂÔöÔªËØ½«²åÈër½áµãµÄÎ²²¿
-			i = Malloc_SL();
-			SPACE[i].data = b;
-			SPACE[i].cur = SPACE[r].cur;	 
-			SPACE[r].cur = i;				//rÊ¼ÖÕÖ¸Ïò×îºó´ÓAÖĞ²åÈëµÄÔªËØ	
-		} 
-		else								//AÖĞ´æÔÚb£¬Ôò½«b´ÓAÖĞÉ¾³ı 
-		{
-			SPACE[p].cur = SPACE[k].cur;
-			Free_SL(k);
-			if(k==r)
-				r = p;
-		}				
-	} 	
+/*â•â•â•â•â•â•—
+â•‘ ç®—æ³•2.17 â•‘
+â•šâ•â•â•â•â•*/
+void difference(SLinkList *S, LElemType_S A[], int len_A, LElemType_S B[],
+                int len_B) {
+  int i, j;
+  int r, p, k;
+  LElemType_S b;
+
+  InitSpace_SL();
+  *S = Malloc_SL();  //å¤´ç»“ç‚¹
+  r = *S;            // ræŒ‡å‘Sçš„å½“å‰æœ€åç»“ç‚¹ï¼ˆå°¾æŒ‡é’ˆï¼‰
+  SPACE[r].cur = 0;
+
+  for (j = 0; j < len_A; j++)  //å»ºç«‹é›†åˆAçš„é“¾è¡¨
+  {
+    i = Malloc_SL();       //ç”³è¯·ç»“ç‚¹
+    SPACE[i].data = A[j];  //å½•å…¥Açš„å…ƒç´ å€¼
+    SPACE[r].cur = i;      //æ’å…¥åˆ°è¡¨å°¾
+    r = i;
+  }
+  SPACE[r].cur = 0;  //å°¾ç»“ç‚¹æŒ‡é’ˆä¸ºç©º
+
+  for (j = 0; j < len_B; j++)  //å½•å…¥Bçš„å…ƒç´ å€¼
+  {
+    b = B[j];
+    p = *S;                            // pæŒ‡å‘é›†åˆAçš„å¤´ç»“ç‚¹
+    k = SPACE[*S].cur;                 // kæŒ‡å‘é›†åˆAçš„ç¬¬ä¸€ä¸ªç»“ç‚¹
+    while (k && SPACE[k].data != b) {  //åœ¨é›†åˆAä¸­æŸ¥æ‰¾b
+      p = k;
+      k = SPACE[k].cur;
+    }
+
+    if (!k)  // Aä¸­æ‰¾ä¸åˆ°bï¼Œåˆ™å°†bæ’å…¥A
+    {        //æ–°å¢å…ƒç´ å°†æ’å…¥rç»“ç‚¹çš„å°¾éƒ¨
+      i = Malloc_SL();
+      SPACE[i].data = b;
+      SPACE[i].cur = SPACE[r].cur;
+      SPACE[r].cur = i;  // rå§‹ç»ˆæŒ‡å‘æœ€åä»Aä¸­æ’å…¥çš„å…ƒç´ 
+    } else               // Aä¸­å­˜åœ¨bï¼Œåˆ™å°†bä»Aä¸­åˆ é™¤
+    {
+      SPACE[p].cur = SPACE[k].cur;
+      Free_SL(k);
+      if (k == r) r = p;
+    }
+  }
 }
 
 #endif

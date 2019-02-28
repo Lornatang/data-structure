@@ -1,337 +1,298 @@
 /*******************************************
  *                                         *
- * ÎÄ¼þ¼Ð: ¡ø02 ÏßÐÔ±í\04 SinglyLinkedList *
+ * æ–‡ä»¶å¤¹: â–²02 çº¿æ€§è¡¨\04 SinglyLinkedList *
  *                                         *
- * ÎÄ¼þÃû: SinglyLinkedList.c              *
+ * æ–‡ä»¶å: SinglyLinkedList.c              *
  *                                         *
- * Ëã  ·¨: 2.8¡¢2.9¡¢2.10¡¢2.11            * 
+ * ç®—  æ³•: 2.8ã€2.9ã€2.10ã€2.11            *
  *                                         *
  *******************************************/
 
 #ifndef SINGLYLINKEDLIST_C
 #define SINGLYLINKEDLIST_C
 
-#include "SinglyLinkedList.h" 			//**¡ø02 ÏßÐÔ±í**//
+#include "SinglyLinkedList.h"  //**â–²02 çº¿æ€§è¡¨**//
 
-Status InitList_L(LinkList *L)
-{
-	(*L) = (LinkList)malloc(sizeof(LNode));
-	if(!(*L))
-		exit(OVERFLOW);
-	(*L)->next = NULL;
-	
-	return OK;
+Status InitList_L(LinkList *L) {
+  (*L) = (LinkList)malloc(sizeof(LNode));
+  if (!(*L)) exit(OVERFLOW);
+  (*L)->next = NULL;
+
+  return OK;
 }
 
-Status ClearList_L(LinkList L)			//±£ÁôÍ·½áµã 
-{	
-	LinkList pre, p;
-	
-	if(!L)
-		return ERROR;
-	
-	pre = L->next;
+Status ClearList_L(LinkList L)  //ä¿ç•™å¤´ç»“ç‚¹
+{
+  LinkList pre, p;
 
-	while(pre)
-	{
-		p = pre->next;
-		free(pre);
-		pre = p;
-	}
+  if (!L) return ERROR;
 
-	L->next = NULL;
+  pre = L->next;
 
-	return OK; 
+  while (pre) {
+    p = pre->next;
+    free(pre);
+    pre = p;
+  }
+
+  L->next = NULL;
+
+  return OK;
 }
 
-void DestroyList_L(LinkList *L)			//Ïú»ÙËùÓÐ½áµã 
+void DestroyList_L(LinkList *L)  //é”€æ¯æ‰€æœ‰ç»“ç‚¹
 {
-	LinkList p = *L;	
+  LinkList p = *L;
 
-	while(p)
-	{
-		p = (*L)->next;
-		free(*L);
-		(*L) = p;
-	}
+  while (p) {
+    p = (*L)->next;
+    free(*L);
+    (*L) = p;
+  }
 }
 
-Status ListEmpty_L(LinkList L)
-{
-	if(L!=NULL && L->next==NULL)		//Á´±í´æÔÚÇÒÖ»ÓÐÍ·½áµã 
-		return TRUE;
-	else
-		return FALSE;
+Status ListEmpty_L(LinkList L) {
+  if (L != NULL && L->next == NULL)  //é“¾è¡¨å­˜åœ¨ä¸”åªæœ‰å¤´ç»“ç‚¹
+    return TRUE;
+  else
+    return FALSE;
 }
 
-int ListLength_L(LinkList L)
-{
-	LinkList p;
-	int i;
-	
-	if(L)
-	{
-		i = 0;
-		p = L->next;
-		while(p)
-		{
-			i++;
-			p = p->next;
-		}		
-	}
-	
-	return i;
+int ListLength_L(LinkList L) {
+  LinkList p;
+  int i;
+
+  if (L) {
+    i = 0;
+    p = L->next;
+    while (p) {
+      i++;
+      p = p->next;
+    }
+  }
+
+  return i;
 }
 
-/*¨T¨T¨T¨T¨[
-¨U Ëã·¨2.8¨U 
-¨^¨T¨T¨T¨T*/
-Status GetElem_L(LinkList L, int i, LElemType_L *e)
-{
-	int j;
-	LinkList p = L->next;
-	
-	j = 1;
-	p = L->next;
-	
-	while(p && j<i)						//p²»Îª¿ÕÇÒ»¹Î´µ½´ïi´¦
-	{
-		j++;
-		p = p->next;
-	}
+/*â•â•â•â•â•—
+â•‘ ç®—æ³•2.8â•‘
+â•šâ•â•â•â•*/
+Status GetElem_L(LinkList L, int i, LElemType_L *e) {
+  int j;
+  LinkList p = L->next;
 
-	if(!p || j>i)						//µÚi¸öÔªËØ²»´æÔÚ 
-		return ERROR;
+  j = 1;
+  p = L->next;
 
-	*e = p->data;
+  while (p && j < i)  // pä¸ä¸ºç©ºä¸”è¿˜æœªåˆ°è¾¾iå¤„
+  {
+    j++;
+    p = p->next;
+  }
 
-	return OK; 
+  if (!p || j > i)  //ç¬¬iä¸ªå…ƒç´ ä¸å­˜åœ¨
+    return ERROR;
+
+  *e = p->data;
+
+  return OK;
 }
 
-int LocateElem_L(LinkList L, LElemType_L e, Status(Compare)(LElemType_L, LElemType_L))
-{
-	int i;
-	LinkList p;
-	
-	i = -1;								//L²»´æÔÚÊ±·µ»Ø-1 
-	
-	if(L)
-	{
-		i = 0;
-		p = L->next;
-		
-		while(p)
-		{
-			i++;
-			
-			if(!Compare(e, p->data))
-			{
-				p = p->next;
-				if(p==NULL)		//Ê§ÅäÊ±ÒÑ¾­ÊÇ×îºóÒ»¸ö½áµã 
-					i++;
-			}
-			else
-				break;
-		}	
-	}
+int LocateElem_L(LinkList L, LElemType_L e,
+                 Status(Compare)(LElemType_L, LElemType_L)) {
+  int i;
+  LinkList p;
 
-	return i;	
+  i = -1;  // Lä¸å­˜åœ¨æ—¶è¿”å›ž-1
+
+  if (L) {
+    i = 0;
+    p = L->next;
+
+    while (p) {
+      i++;
+
+      if (!Compare(e, p->data)) {
+        p = p->next;
+        if (p == NULL)  //å¤±é…æ—¶å·²ç»æ˜¯æœ€åŽä¸€ä¸ªç»“ç‚¹
+          i++;
+      } else
+        break;
+    }
+  }
+
+  return i;
 }
 
-/* ÒøÐÐÅÅ¶ÓËã·¨ÖÐ£¬´Ë´¦Á½¸öº¯Êý²»ÄÜÖ±½ÓÊ¹ÓÃ£¬Ô­ÒòÊÇ½á¹¹²»ÄÜÖ±½Ó±È½Ï */
-#ifndef BANKQUEUING_C				
-Status PriorElem_L(LinkList L, LElemType_L cur_e, LElemType_L *pre_e)
-{
-	LinkList p, suc;
-	
-	if(L)
-	{
-		p = L->next;
-		
-		if(p->data!=cur_e)				//µÚÒ»¸ö½áµãÎÞÇ°Çý 
-		{
-			while(p->next)				//Èôp½áµãÓÐºó¼Ì 
-			{
-				suc = p->next;			//sucÖ¸ÏòpµÄºó¼Ì
-				if(suc->data==cur_e)
-				{
-					*pre_e = p->data;
-					return OK;
-				}
-				p = suc;
-			}			
-		}	
-	}
+/* é“¶è¡ŒæŽ’é˜Ÿç®—æ³•ä¸­ï¼Œæ­¤å¤„ä¸¤ä¸ªå‡½æ•°ä¸èƒ½ç›´æŽ¥ä½¿ç”¨ï¼ŒåŽŸå› æ˜¯ç»“æž„ä¸èƒ½ç›´æŽ¥æ¯”è¾ƒ */
+#ifndef BANKQUEUING_C
+Status PriorElem_L(LinkList L, LElemType_L cur_e, LElemType_L *pre_e) {
+  LinkList p, suc;
 
-	return ERROR;
+  if (L) {
+    p = L->next;
+
+    if (p->data != cur_e)  //ç¬¬ä¸€ä¸ªç»“ç‚¹æ— å‰é©±
+    {
+      while (p->next)  //è‹¥pç»“ç‚¹æœ‰åŽç»§
+      {
+        suc = p->next;  // sucæŒ‡å‘pçš„åŽç»§
+        if (suc->data == cur_e) {
+          *pre_e = p->data;
+          return OK;
+        }
+        p = suc;
+      }
+    }
+  }
+
+  return ERROR;
 }
 
-Status NextElem_L(LinkList L, LElemType_L cur_e, LElemType_L *next_e)
-{
-	LinkList p, suc;
-	
-	if(L)
-	{
-		p = L->next;
-		
-		while(p && p->next)
-		{
-			suc = p->next;
-			
-			if(suc && p->data==cur_e)
-			{
-				*next_e = suc->data;
-				return OK;
-			}
-			
-			if(suc)
-				p = suc;
-			else
-				break;
-		}	
-	}
+Status NextElem_L(LinkList L, LElemType_L cur_e, LElemType_L *next_e) {
+  LinkList p, suc;
 
-	return ERROR;
+  if (L) {
+    p = L->next;
+
+    while (p && p->next) {
+      suc = p->next;
+
+      if (suc && p->data == cur_e) {
+        *next_e = suc->data;
+        return OK;
+      }
+
+      if (suc)
+        p = suc;
+      else
+        break;
+    }
+  }
+
+  return ERROR;
 }
 #endif
 
-/*¨T¨T¨T¨T¨[
-¨U Ëã·¨2.9¨U 
-¨^¨T¨T¨T¨T*/
-Status ListInsert_L(LinkList L, int i, LElemType_L e)
-{
-	LinkList p, s;
-	int j;
-	
-	p = L;
-	j = 0; 
-	
-	while(p && j<i-1)					//Ñ°ÕÒµÚi-1¸ö½áµã 
-	{
-		p = p->next;
-		++j;
-	}
-	
-	if(!p || j>i-1)
-		return ERROR;
+/*â•â•â•â•â•—
+â•‘ ç®—æ³•2.9â•‘
+â•šâ•â•â•â•*/
+Status ListInsert_L(LinkList L, int i, LElemType_L e) {
+  LinkList p, s;
+  int j;
 
-	s = (LinkList)malloc(sizeof(LNode));
-	if(!s)
-		exit(OVERFLOW);
-	s->data = e;
-	s->next = p->next;
-	p->next = s;
+  p = L;
+  j = 0;
 
-	return OK;
+  while (p && j < i - 1)  //å¯»æ‰¾ç¬¬i-1ä¸ªç»“ç‚¹
+  {
+    p = p->next;
+    ++j;
+  }
+
+  if (!p || j > i - 1) return ERROR;
+
+  s = (LinkList)malloc(sizeof(LNode));
+  if (!s) exit(OVERFLOW);
+  s->data = e;
+  s->next = p->next;
+  p->next = s;
+
+  return OK;
 }
 
-/*¨T¨T¨T¨T¨T¨[
-¨U Ëã·¨2.10 ¨U 
-¨^¨T¨T¨T¨T¨T*/
-Status ListDelete_L(LinkList L, int i, LElemType_L *e)
-{
-	LinkList pre, p; 
-	int j;
+/*â•â•â•â•â•â•—
+â•‘ ç®—æ³•2.10 â•‘
+â•šâ•â•â•â•â•*/
+Status ListDelete_L(LinkList L, int i, LElemType_L *e) {
+  LinkList pre, p;
+  int j;
 
-	pre = L;
-	j = 1; 
+  pre = L;
+  j = 1;
 
-	while(pre->next && j<i)			//Ñ°ÕÒµÚi¸ö½áµã£¬²¢ÁîpreÖ¸ÏòÆäÇ°Çý 
-	{
-		pre = pre->next;
-		++j;
-	}
-	
-	if(!pre->next || j>i)			//É¾³ýÎ»ÖÃ²»ºÏÀí
-		return ERROR;
+  while (pre->next && j < i)  //å¯»æ‰¾ç¬¬iä¸ªç»“ç‚¹ï¼Œå¹¶ä»¤preæŒ‡å‘å…¶å‰é©±
+  {
+    pre = pre->next;
+    ++j;
+  }
 
-	p = pre->next;
-	pre->next = p->next;
-	*e = p->data;
-	free(p);
+  if (!pre->next || j > i)  //åˆ é™¤ä½ç½®ä¸åˆç†
+    return ERROR;
 
-	return OK; 
+  p = pre->next;
+  pre->next = p->next;
+  *e = p->data;
+  free(p);
+
+  return OK;
 }
 
-Status ListTraverse_L(LinkList L, void(Visit)(LElemType_L))
-{
-	LinkList p;
+Status ListTraverse_L(LinkList L, void(Visit)(LElemType_L)) {
+  LinkList p;
 
-	if(!L)
-		return ERROR;
-	else
-		p = L->next;	
+  if (!L)
+    return ERROR;
+  else
+    p = L->next;
 
-	while(p)
-	{
-		Visit(p->data);
-		p = p->next;
-	}
+  while (p) {
+    Visit(p->data);
+    p = p->next;
+  }
 
-	return OK;
+  return OK;
 }
 
-/*¨T¨T¨T¨T¨T¨[
-¨U Ëã·¨2.11 ¨U 
-¨^¨T¨T¨T¨T¨T*/
-Status CreateList_HL(FILE *fp, LinkList *L, int n)
-{
-	int i;
-	LinkList p;
-	LElemType_L tmp;
-		
-	*L = (LinkList)malloc(sizeof(LNode));
-	if(!(*L))
-		exit(OVERFLOW);
-	(*L)->next = NULL;							//½¨Á¢Í·½áµã 
-	
-	for(i=1; i<=n; ++i)
-	{
-		if(Scanf(fp, "%d", &tmp)==1)
-		{
-			p = (LinkList)malloc(sizeof(LNode));
-			if(!p)
-				exit(OVERFLOW);
-			p->data = tmp;						//Â¼ÈëÊý¾Ý 
-			p->next = (*L)->next;
-			(*L)->next = p;		
-		}
-		else
-			return ERROR;
-	}
-	
-	return OK;
-}  
+/*â•â•â•â•â•â•—
+â•‘ ç®—æ³•2.11 â•‘
+â•šâ•â•â•â•â•*/
+Status CreateList_HL(FILE *fp, LinkList *L, int n) {
+  int i;
+  LinkList p;
+  LElemType_L tmp;
 
-Status CreateList_TL(FILE *fp, LinkList *L, int n)
-{
-	int i;
-	LinkList p, q;
-	LElemType_L tmp;	
-			
-	*L = (LinkList)malloc(sizeof(LNode));
-	if(!(*L))
-		exit(OVERFLOW);
-	(*L)->next = NULL;
-		
-	for(i=1,q=*L; i<=n; ++i)
-	{
-		if(Scanf(fp, "%d", &tmp)==1)
-		{
-			p = (LinkList)malloc(sizeof(LNode));
-			if(!p)
-				exit(OVERFLOW);
-			p->data = tmp;						//Â¼ÈëÊý¾Ý 
-			q->next = p;
-			q = q->next;		
-		}
-		else
-			return ERROR;		
-	}
-	
-	q->next = NULL;
+  *L = (LinkList)malloc(sizeof(LNode));
+  if (!(*L)) exit(OVERFLOW);
+  (*L)->next = NULL;  //å»ºç«‹å¤´ç»“ç‚¹
 
-	return OK;
+  for (i = 1; i <= n; ++i) {
+    if (Scanf(fp, "%d", &tmp) == 1) {
+      p = (LinkList)malloc(sizeof(LNode));
+      if (!p) exit(OVERFLOW);
+      p->data = tmp;  //å½•å…¥æ•°æ®
+      p->next = (*L)->next;
+      (*L)->next = p;
+    } else
+      return ERROR;
+  }
+
+  return OK;
 }
 
-#endif 
+Status CreateList_TL(FILE *fp, LinkList *L, int n) {
+  int i;
+  LinkList p, q;
+  LElemType_L tmp;
+
+  *L = (LinkList)malloc(sizeof(LNode));
+  if (!(*L)) exit(OVERFLOW);
+  (*L)->next = NULL;
+
+  for (i = 1, q = *L; i <= n; ++i) {
+    if (Scanf(fp, "%d", &tmp) == 1) {
+      p = (LinkList)malloc(sizeof(LNode));
+      if (!p) exit(OVERFLOW);
+      p->data = tmp;  //å½•å…¥æ•°æ®
+      q->next = p;
+      q = q->next;
+    } else
+      return ERROR;
+  }
+
+  q->next = NULL;
+
+  return OK;
+}
+
+#endif

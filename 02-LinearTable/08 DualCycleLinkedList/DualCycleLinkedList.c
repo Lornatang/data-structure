@@ -1,258 +1,226 @@
 /**********************************************
  *							     			  *
- * ÎÄ¼ş¼Ğ: ¡ø02 ÏßĞÔ±í\08 DualCycleLinkedList *
+ * æ–‡ä»¶å¤¹: â–²02 çº¿æ€§è¡¨\08 DualCycleLinkedList *
  * 							     			  *
- * ÎÄ¼şÃû: DualCycleLinkedList.c 			  *
+ * æ–‡ä»¶å: DualCycleLinkedList.c 			  *
  * 				     		     			  *
- * Ëã  ·¨: 2.18¡¢2.19            			  * 
+ * ç®—  æ³•: 2.18ã€2.19            			  *
  *                               			  *
  **********************************************/
 
 #ifndef DUALCYCLELINKEDLIST_C
 #define DUALCYCLELINKEDLIST_C
 
-#include "DualCycleLinkedList.h" 		//**¡ø02 ÏßĞÔ±í**//
+#include "DualCycleLinkedList.h"  //**â–²02 çº¿æ€§è¡¨**//
 
-Status InitList_DuL(DuLinkList *L)
-{
-	*L = (DuLinkList)malloc(sizeof(DuLNode));
-	if(!(*L))
-		exit(OVERFLOW);
+Status InitList_DuL(DuLinkList *L) {
+  *L = (DuLinkList)malloc(sizeof(DuLNode));
+  if (!(*L)) exit(OVERFLOW);
 
-	(*L)->next = (*L)->prior = *L;
+  (*L)->next = (*L)->prior = *L;
 
-	return OK;
-} 
-
-Status ClearList_DuL(DuLinkList L)
-{
-	DuLinkList p, q;
-	
-	p = L->next;
-	
-	while(p!=L)
-	{
-		q = p->next;
-		free(p);
-		p = q;
-	}
-	
-	L->next = L->prior = L;
-
-	return OK;
+  return OK;
 }
 
-void DestroyList_DuL(DuLinkList *L)
-{
-	ClearList_DuL(*L);
-	
-	free(*L);
+Status ClearList_DuL(DuLinkList L) {
+  DuLinkList p, q;
 
-	*L = NULL;	
+  p = L->next;
+
+  while (p != L) {
+    q = p->next;
+    free(p);
+    p = q;
+  }
+
+  L->next = L->prior = L;
+
+  return OK;
 }
 
-Status ListEmpty_DuL(DuLinkList L)
-{
-	if(L && L->next==L && L->prior==L)
-		return TRUE;
-	else
-		return FALSE;	
-} 
+void DestroyList_DuL(DuLinkList *L) {
+  ClearList_DuL(*L);
 
-int ListLength_DuL(DuLinkList L)
-{
-	DuLinkList p;				
-	int count;
+  free(*L);
 
-	if(L)
-	{
-		count = 0;
-		p = L;					//pÖ¸ÏòÍ·½áµã
-		
-		while(p->next!=L)		//pÃ»µ½±íÍ·
-		{
-			count++;
-			p = p->next;
-		}
-	}
-
-	return count;
-} 
-
-Status GetElem_DuL(DuLinkList L, int i, LElemType_DC *e)
-{
-	DuLinkList p;
-	int count;
-	
-	if(L)
-	{
-		count = 1;
-		p = L->next;
-		
-		while(p!=L && count<i)
-		{
-			count++;
-			p = p->next;
-		}
-		
-		if(p!=L)
-		{
-			*e = p->data;
-			return OK;
-		}	
-	}
-
-	return ERROR;
-} 
-
-int LocateElem_DuL(DuLinkList L, LElemType_DC e, Status(Compare)(LElemType_DC, LElemType_DC))
-{
-	DuLinkList p;
-	int count;
-	
-	if(L)
-	{
-		count = 1;
-		p = L->next;
-		
-		while(p!=L && !Compare(e, p->data))
-		{
-			count++;
-			p = p->next;	
-		}
-				
-		if(p!=L)
-			return count;		
-	}
-	
-	return 0;
-} 
-
-Status PriorElem_DuL(DuLinkList L, LElemType_DC cur_e, LElemType_DC *pre_e)
-{
-	DuLinkList p;
-	
-	if(L)
-	{
-		p = L->next;
-		
-		while(p!=L && p->data!=cur_e)
-			p = p->next;
-		
-		if(p!=L && p->prior!=L)				//p²»ÎªÊ×½áµã
-		{
-			*pre_e = p->prior->data;
-			return OK;
-		}			
-	}
-
-	return ERROR;	
-} 
-
-Status NextElem_DuL(DuLinkList L, LElemType_DC cur_e, LElemType_DC *next_e)
-{
-	DuLinkList p;
-	
-	if(L)
-	{
-		p = L->next;
-		
-		while(p!=L && p->data!=cur_e)
-			p = p->next;
-		
-		if(p!=L && p->next!=L)
-		{
-			*next_e = p->next->data;
-			return OK;
-		}		
-	}
-
-	
-	return ERROR;
+  *L = NULL;
 }
 
-DuLinkList GetElemPtr_DuL(DuLinkList L, int i)
-{										
-	int count;
-	DuLinkList p;
-	
-	if(L && i>0)
-	{
-		count = 1;
-		p = L->next;
-		
-		while(p!=L && count<i)
-		{
-			count++;
-			p = p->next;
-		}
-	
-		if(p!=L)
-			return p;
-	}
-
-	return NULL;
+Status ListEmpty_DuL(DuLinkList L) {
+  if (L && L->next == L && L->prior == L)
+    return TRUE;
+  else
+    return FALSE;
 }
 
-/*¨T¨T¨T¨T¨T¨[
-¨U Ëã·¨2.18 ¨U 
-¨^¨T¨T¨T¨T¨T*/
-/* Óë¿Î±¾Ë«Á´±í²åÈëËã·¨ÂÔÓĞ²»Í¬£¬¸ùÔ´ÔÚÓÚGetElemP_DuL²»Í¬ */
-Status ListInsert_DuL(DuLinkList L, int i, LElemType_DC e)
-{
-	DuLinkList p, s;
-	
-	if(i<1 || i>ListLength_DuL(L)+1)	//ÏÈ¶Ôi×ö³öÏŞÖÆ 
-		return ERROR;
+int ListLength_DuL(DuLinkList L) {
+  DuLinkList p;
+  int count;
 
-	p = GetElemPtr_DuL(L, i);			//È·¶¨µÚi¸ö½áµãÖ¸Õë 
-	if(!p)								//´Ë´¦Èôp=NULL£¬ËµÃ÷i = ListLength_DuL(L)+1
-		p = L;							//ÁîpÖ¸ÏòÍ·Ö¸Õë	
-	
-	s = (DuLinkList)malloc(sizeof(DuLNode));
-	if(!s)
-		exit(OVERFLOW);
-	s->data = e;
-	
-	s->prior = p->prior;
-	p->prior->next = s;
-	s->next = p;
-	p->prior = s;
-	
-	return OK;		
-} 
+  if (L) {
+    count = 0;
+    p = L;  // pæŒ‡å‘å¤´ç»“ç‚¹
 
-/*¨T¨T¨T¨T¨T¨[
-¨U Ëã·¨2.19 ¨U 
-¨^¨T¨T¨T¨T¨T*/
-Status ListDelete_DuL(DuLinkList L, int i, LElemType_DC *e)
-{
-	DuLinkList p;
-	
-	if(!(p=GetElemPtr_DuL(L, i)))		//iÖµ²»ºÏ·¨
-		return ERROR;
-	
-	*e = p->data;
-	p->prior->next = p->next;
-	p->next->prior = p->prior;
+    while (p->next != L)  // pæ²¡åˆ°è¡¨å¤´
+    {
+      count++;
+      p = p->next;
+    }
+  }
 
-	free(p);
-	p = NULL;
-	
-	return OK;
-} 
+  return count;
+}
 
-void ListTraverse_DuL(DuLinkList L, void(Visit)(LElemType_DC))
-{
-	DuLinkList p;
+Status GetElem_DuL(DuLinkList L, int i, LElemType_DC *e) {
+  DuLinkList p;
+  int count;
 
-	p = L->next;					//pÖ¸ÏòÍ·½áµã£¬ÕıÏò·ÃÎÊÁ´±í
-	
-	while(p!=L)
-	{
-		Visit(p->data);
-		p = p->next;
-	}
-} 
+  if (L) {
+    count = 1;
+    p = L->next;
 
-#endif 
+    while (p != L && count < i) {
+      count++;
+      p = p->next;
+    }
+
+    if (p != L) {
+      *e = p->data;
+      return OK;
+    }
+  }
+
+  return ERROR;
+}
+
+int LocateElem_DuL(DuLinkList L, LElemType_DC e,
+                   Status(Compare)(LElemType_DC, LElemType_DC)) {
+  DuLinkList p;
+  int count;
+
+  if (L) {
+    count = 1;
+    p = L->next;
+
+    while (p != L && !Compare(e, p->data)) {
+      count++;
+      p = p->next;
+    }
+
+    if (p != L) return count;
+  }
+
+  return 0;
+}
+
+Status PriorElem_DuL(DuLinkList L, LElemType_DC cur_e, LElemType_DC *pre_e) {
+  DuLinkList p;
+
+  if (L) {
+    p = L->next;
+
+    while (p != L && p->data != cur_e) p = p->next;
+
+    if (p != L && p->prior != L)  // pä¸ä¸ºé¦–ç»“ç‚¹
+    {
+      *pre_e = p->prior->data;
+      return OK;
+    }
+  }
+
+  return ERROR;
+}
+
+Status NextElem_DuL(DuLinkList L, LElemType_DC cur_e, LElemType_DC *next_e) {
+  DuLinkList p;
+
+  if (L) {
+    p = L->next;
+
+    while (p != L && p->data != cur_e) p = p->next;
+
+    if (p != L && p->next != L) {
+      *next_e = p->next->data;
+      return OK;
+    }
+  }
+
+  return ERROR;
+}
+
+DuLinkList GetElemPtr_DuL(DuLinkList L, int i) {
+  int count;
+  DuLinkList p;
+
+  if (L && i > 0) {
+    count = 1;
+    p = L->next;
+
+    while (p != L && count < i) {
+      count++;
+      p = p->next;
+    }
+
+    if (p != L) return p;
+  }
+
+  return NULL;
+}
+
+/*â•â•â•â•â•â•—
+â•‘ ç®—æ³•2.18 â•‘
+â•šâ•â•â•â•â•*/
+/* ä¸è¯¾æœ¬åŒé“¾è¡¨æ’å…¥ç®—æ³•ç•¥æœ‰ä¸åŒï¼Œæ ¹æºåœ¨äºGetElemP_DuLä¸åŒ */
+Status ListInsert_DuL(DuLinkList L, int i, LElemType_DC e) {
+  DuLinkList p, s;
+
+  if (i < 1 || i > ListLength_DuL(L) + 1)  //å…ˆå¯¹iåšå‡ºé™åˆ¶
+    return ERROR;
+
+  p = GetElemPtr_DuL(L, i);  //ç¡®å®šç¬¬iä¸ªç»“ç‚¹æŒ‡é’ˆ
+  if (!p)                    //æ­¤å¤„è‹¥p=NULLï¼Œè¯´æ˜i = ListLength_DuL(L)+1
+    p = L;                   //ä»¤pæŒ‡å‘å¤´æŒ‡é’ˆ
+
+  s = (DuLinkList)malloc(sizeof(DuLNode));
+  if (!s) exit(OVERFLOW);
+  s->data = e;
+
+  s->prior = p->prior;
+  p->prior->next = s;
+  s->next = p;
+  p->prior = s;
+
+  return OK;
+}
+
+/*â•â•â•â•â•â•—
+â•‘ ç®—æ³•2.19 â•‘
+â•šâ•â•â•â•â•*/
+Status ListDelete_DuL(DuLinkList L, int i, LElemType_DC *e) {
+  DuLinkList p;
+
+  if (!(p = GetElemPtr_DuL(L, i)))  // iå€¼ä¸åˆæ³•
+    return ERROR;
+
+  *e = p->data;
+  p->prior->next = p->next;
+  p->next->prior = p->prior;
+
+  free(p);
+  p = NULL;
+
+  return OK;
+}
+
+void ListTraverse_DuL(DuLinkList L, void(Visit)(LElemType_DC)) {
+  DuLinkList p;
+
+  p = L->next;  // pæŒ‡å‘å¤´ç»“ç‚¹ï¼Œæ­£å‘è®¿é—®é“¾è¡¨
+
+  while (p != L) {
+    Visit(p->data);
+    p = p->next;
+  }
+}
+
+#endif

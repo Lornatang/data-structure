@@ -1,50 +1,46 @@
 /************************************
  *						            *
- * ÎÄ¼ş¼Ğ: ¡ø02 ÏßĞÔ±í\05 MergeList *
+ * æ–‡ä»¶å¤¹: â–²02 çº¿æ€§è¡¨\05 MergeList *
  * 						            *
- * ÄÚ  Èİ: µ¥Á´±í¹é²¢Ïà¹Øº¯Êı²âÊÔ   *
+ * å†…  å®¹: å•é“¾è¡¨å½’å¹¶ç›¸å…³å‡½æ•°æµ‹è¯•   *
  *                                  *
  ************************************/
 
 #include <stdio.h>
-#include "MergeList.c"					//**¡ø02 ÏßĞÔ±í**//
-	
-void PrintElem(LElemType_L e);			//²âÊÔº¯Êı£¬´òÓ¡ÕûĞÍ
-	
-int main(int argc, char **argv)
-{
-	FILE *fp;
-	LinkList La, Lb, Lc;
-	int m;									
+#include "MergeList.c"  //**â–²02 çº¿æ€§è¡¨**//
 
-	m = 5;
-	
-	printf("×÷ÎªÊ¾Àı£¬La³¤¶ÈÉè¶¨Îª %d £¬LbÉè¶¨Îª %d £¬´´½¨LaºÍLb...\n", m, m);
-	fp = fopen("TestData_HL.txt", "r");	//ÎÄ¼şÖ¸Õë£¬Ö¸ÏòÊı¾İÔ´	
-	CreateList_HL(fp, &La, m);
-	fclose(fp);
-	fp = fopen("TestData_TL.txt", "r");	//ÎÄ¼şÖ¸Õë£¬Ö¸ÏòÊı¾İÔ´
-	CreateList_TL(fp, &Lb, m);	
-	fclose(fp);
+void PrintElem(LElemType_L e);  //æµ‹è¯•å‡½æ•°ï¼Œæ‰“å°æ•´å‹
 
-	printf("La = ");
-	ListTraverse_L(La, PrintElem);
-	printf("\n");
-	printf("Lb = ");
-	ListTraverse_L(Lb, PrintElem);
-	printf("\n\n");
-	PressEnter;
-		
-	MergeList_L(La, &Lb, &Lc);
-	printf("ºÏ²¢LaºÍLbÎªLc = ");
-	ListTraverse_L(Lc, PrintElem);
-	printf("\n\n");
-	PressEnter;
+int main(int argc, char **argv) {
+  FILE *fp;
+  LinkList La, Lb, Lc;
+  int m;
 
-	return 0;
+  m = 5;
+
+  printf("ä½œä¸ºç¤ºä¾‹ï¼ŒLaé•¿åº¦è®¾å®šä¸º %d ï¼ŒLbè®¾å®šä¸º %d ï¼Œåˆ›å»ºLaå’ŒLb...\n", m, m);
+  fp = fopen("TestData_HL.txt", "r");  //æ–‡ä»¶æŒ‡é’ˆï¼ŒæŒ‡å‘æ•°æ®æº
+  CreateList_HL(fp, &La, m);
+  fclose(fp);
+  fp = fopen("TestData_TL.txt", "r");  //æ–‡ä»¶æŒ‡é’ˆï¼ŒæŒ‡å‘æ•°æ®æº
+  CreateList_TL(fp, &Lb, m);
+  fclose(fp);
+
+  printf("La = ");
+  ListTraverse_L(La, PrintElem);
+  printf("\n");
+  printf("Lb = ");
+  ListTraverse_L(Lb, PrintElem);
+  printf("\n\n");
+  PressEnter;
+
+  MergeList_L(La, &Lb, &Lc);
+  printf("åˆå¹¶Laå’ŒLbä¸ºLc = ");
+  ListTraverse_L(Lc, PrintElem);
+  printf("\n\n");
+  PressEnter;
+
+  return 0;
 }
 
-void PrintElem(LElemType_L e)
-{
-	printf("%d ", e);
-}
+void PrintElem(LElemType_L e) { printf("%d ", e); }

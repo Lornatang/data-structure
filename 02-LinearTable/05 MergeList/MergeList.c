@@ -1,49 +1,45 @@
 /************************************
  *					                *
- * ÎÄ¼ş¼Ğ: ¡ø02 ÏßĞÔ±í\05 MergeList *
+ * æ–‡ä»¶å¤¹: â–²02 çº¿æ€§è¡¨\05 MergeList *
  * 					                *
- * ÎÄ¼şÃû: MergeList.c              *
+ * æ–‡ä»¶å: MergeList.c              *
  * 				                    *
- * Ëã  ·¨: 2.12                     * 
+ * ç®—  æ³•: 2.12                     *
  *                                  *
  ************************************/
 
 #ifndef MERGELIST_C
 #define MERGELIST_C
 
-#include "MergeList.h"					//**¡ø02 ÏßĞÔ±í**//
+#include "MergeList.h"  //**â–²02 çº¿æ€§è¡¨**//
 
-/*¨T¨T¨T¨T¨T¨[
-¨U Ëã·¨2.12 ¨U 
-¨^¨T¨T¨T¨T¨T*/
-void MergeList_L(LinkList La, LinkList *Lb, LinkList *Lc)
-{										//Ö¸ÕëLb,LcÒª¸Ä±ä£¬¹ÊĞÎ²ÎÊÇÖ¸ÏòÖ¸ÕëµÄÖ¸Õë 
-	LinkList pa, pb, pc;
-	
-	pa = La->next;
-	pb = (*Lb)->next;
-	pc = *Lc = La;						//ÓÃLaµÄÍ·½áµã×÷ÎªLcµÄÍ·½áµã 						
+/*â•â•â•â•â•â•—
+â•‘ ç®—æ³•2.12 â•‘
+â•šâ•â•â•â•â•*/
+void MergeList_L(LinkList La, LinkList *Lb,
+                 LinkList *Lc) {  //æŒ‡é’ˆLb,Lcè¦æ”¹å˜ï¼Œæ•…å½¢å‚æ˜¯æŒ‡å‘æŒ‡é’ˆçš„æŒ‡é’ˆ
+  LinkList pa, pb, pc;
 
-	while(pa && pb)
-	{
-		if(pa->data <= pb->data)
-		{
-			pc->next = pa;
-			pc = pa;
-			pa = pa->next;
-		}
-		else
-		{
-			pc->next = pb;
-			pc = pb;
-			pb = pb->next;
-		}	
-	}
+  pa = La->next;
+  pb = (*Lb)->next;
+  pc = *Lc = La;  //ç”¨Laçš„å¤´ç»“ç‚¹ä½œä¸ºLcçš„å¤´ç»“ç‚¹
 
-	pc->next = pa ? pa : pb;			//²åÈëÊ£Óà¶Î 
-	
-	free(*Lb);							//ÊÍ·ÅLbµÄÍ·½áµã
-	*Lb = NULL; 
+  while (pa && pb) {
+    if (pa->data <= pb->data) {
+      pc->next = pa;
+      pc = pa;
+      pa = pa->next;
+    } else {
+      pc->next = pb;
+      pc = pb;
+      pb = pb->next;
+    }
+  }
+
+  pc->next = pa ? pa : pb;  //æ’å…¥å‰©ä½™æ®µ
+
+  free(*Lb);  //é‡Šæ”¾Lbçš„å¤´ç»“ç‚¹
+  *Lb = NULL;
 }
 
 #endif

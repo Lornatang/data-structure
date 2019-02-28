@@ -1,307 +1,275 @@
 /**********************************
  *							      *
- * ÎÄ¼ş¼Ğ: ¡ø02 ÏßĞÔ±í            *
+ * æ–‡ä»¶å¤¹: â–²02 çº¿æ€§è¡¨            *
  * 							      *
- * ÎÄ¼şÃû: StaticLinkedList.c     *
+ * æ–‡ä»¶å: StaticLinkedList.c     *
  * 				     		      *
- * Ëã  ·¨: 2.13¡¢2.14¡¢2.15¡¢2.16 * 
+ * ç®—  æ³•: 2.13ã€2.14ã€2.15ã€2.16 *
  *                                *
  **********************************/
 
 #ifndef STATICLINKEDLIST_C
 #define STATICLINKEDLIST_C
- 
-#include "StaticLinkedList.h" 			//**¡ø02 ÏßĞÔ±í**//
 
-/*¨T¨T¨T¨T¨T¨[
-¨U Ëã·¨2.14 ¨U 
-¨^¨T¨T¨T¨T¨T*/
-void InitSpace_SL()						//Ê×ÏÈ³õÊ¼»¯±¸ÓÃ¿Õ¼ä 
+#include "StaticLinkedList.h"  //**â–²02 çº¿æ€§è¡¨**//
+
+/*â•â•â•â•â•â•—
+â•‘ ç®—æ³•2.14 â•‘
+â•šâ•â•â•â•â•*/
+void InitSpace_SL()  //é¦–å…ˆåˆå§‹åŒ–å¤‡ç”¨ç©ºé—´
 {
-	int i;								//0ºÅµ¥Ôª×ö±¸ÓÃ¿Õ¼äµÄÆğÊ¼½áµã 
+  int i;  // 0å·å•å…ƒåšå¤‡ç”¨ç©ºé—´çš„èµ·å§‹ç»“ç‚¹
 
-	for(i=0; i<MAXSIZE-1; i++)			//¸÷¿Õ¼ä½áµãÊ×Î²Ïà½Ó 
-		SPACE[i].cur = i + 1;
+  for (i = 0; i < MAXSIZE - 1; i++)  //å„ç©ºé—´ç»“ç‚¹é¦–å°¾ç›¸æ¥
+    SPACE[i].cur = i + 1;
 
-	SPACE[MAXSIZE-1].cur = 0;	
+  SPACE[MAXSIZE - 1].cur = 0;
 }
 
-/*¨T¨T¨T¨T¨T¨[
-¨U Ëã·¨2.15 ¨U 
-¨^¨T¨T¨T¨T¨T*/
-int Malloc_SL()							//´Ó±¸ÓÃ¿Õ¼äÉêÇë½áµã¿Õ¼ä
+/*â•â•â•â•â•â•—
+â•‘ ç®—æ³•2.15 â•‘
+â•šâ•â•â•â•â•*/
+int Malloc_SL()  //ä»å¤‡ç”¨ç©ºé—´ç”³è¯·ç»“ç‚¹ç©ºé—´
 {
-	int i;
-	
-	i = SPACE[0].cur;					 
+  int i;
 
-	if(SPACE[0].cur)				 
-	{ 
-		SPACE[0].cur = SPACE[i].cur;	//½«ÉêÇëµ½µÄ¿Õ¼ä´Ó±¸ÓÃ¿Õ¼äÖĞÉ¾È¥ 
-		return i;						//·µ»ØĞÂÉêÇë½áµãÏÂ±ê
-	}
-	else
-		return 0;						//ÉêÇëÊ§°Ü·µ»Ø0 
+  i = SPACE[0].cur;
+
+  if (SPACE[0].cur) {
+    SPACE[0].cur = SPACE[i].cur;  //å°†ç”³è¯·åˆ°çš„ç©ºé—´ä»å¤‡ç”¨ç©ºé—´ä¸­åˆ å»
+    return i;                     //è¿”å›æ–°ç”³è¯·ç»“ç‚¹ä¸‹æ ‡
+  } else
+    return 0;  //ç”³è¯·å¤±è´¥è¿”å›0
 }
 
-/*¨T¨T¨T¨T¨T¨[
-¨U Ëã·¨2.16 ¨U 
-¨^¨T¨T¨T¨T¨T*/
-void Free_SL(int k) 					//»ØÊÕk½áµã¿Õ¼ä 
+/*â•â•â•â•â•â•—
+â•‘ ç®—æ³•2.16 â•‘
+â•šâ•â•â•â•â•*/
+void Free_SL(int k)  //å›æ”¶kç»“ç‚¹ç©ºé—´
 {
-	SPACE[k].cur = SPACE[0].cur;		
-	SPACE[0].cur = k;
+  SPACE[k].cur = SPACE[0].cur;
+  SPACE[0].cur = k;
 }
 
-Status InitList_SL(SLinkList *H)		//HÎªÍ·½áµãÖ¸Õë 
+Status InitList_SL(SLinkList *H)  // Hä¸ºå¤´ç»“ç‚¹æŒ‡é’ˆ
 {
-	*H = Malloc_SL();					//´´½¨Í·½áµã 	
-	if(!(*H))
-		exit(OVERFLOW);					//¡°ÄÚ´æ¡±ÒÑÂú 
+  *H = Malloc_SL();           //åˆ›å»ºå¤´ç»“ç‚¹
+  if (!(*H)) exit(OVERFLOW);  //â€œå†…å­˜â€å·²æ»¡
 
-	SPACE[*H].cur = 0; 					//Í·½áµãÓÎ±êÖÃÎª0 
+  SPACE[*H].cur = 0;  //å¤´ç»“ç‚¹æ¸¸æ ‡ç½®ä¸º0
 
-	return OK;
+  return OK;
 }
 
-Status ClearList_SL(SLinkList H)
-{
-	int p, q;
-	
-	if(!H)
-		return ERROR;
+Status ClearList_SL(SLinkList H) {
+  int p, q;
 
-	p = SPACE[H].cur;					//pÖ¸ÏòµÚÒ»¸ö½áµã 
-	
-	while(p)							//´ÓÁ´±íÊ×½áµã¿ªÊ¼É¾³ı 
-	{
-		SPACE[H].cur = SPACE[p].cur;
-		Free_SL(p);
-		p = SPACE[H].cur;
-	}
+  if (!H) return ERROR;
 
-	return OK;
+  p = SPACE[H].cur;  // pæŒ‡å‘ç¬¬ä¸€ä¸ªç»“ç‚¹
+
+  while (p)  //ä»é“¾è¡¨é¦–ç»“ç‚¹å¼€å§‹åˆ é™¤
+  {
+    SPACE[H].cur = SPACE[p].cur;
+    Free_SL(p);
+    p = SPACE[H].cur;
+  }
+
+  return OK;
 }
 
-void DestroyList_SL(SLinkList *H)
-{	
-	ClearList_SL(*H);					//Çå¿Õ¾²Ì¬Á´±í 
-	
-	Free_SL(*H);							//ÊÍ·ÅÍ·½áµã	
-	*H = 0; 
+void DestroyList_SL(SLinkList *H) {
+  ClearList_SL(*H);  //æ¸…ç©ºé™æ€é“¾è¡¨
+
+  Free_SL(*H);  //é‡Šæ”¾å¤´ç»“ç‚¹
+  *H = 0;
 }
 
-Status ListEmpty_SL(SLinkList H)
-{
-	if(H && !SPACE[H].cur)				//Ö»ÓĞÍ·½áµã 
-		return TRUE;
-	else
-		return FALSE;
-} 
-
-int ListLength_SL(SLinkList H)
-{
-	int count;							//¼ÆÊıÆ÷
-	int p;
-	
-	if(!H)
-		exit(OVERFLOW);
-
-	count = 0;
-	p = SPACE[H].cur;
-	
-	while(p)
-	{
-		count++;
-		p = SPACE[p].cur;
-	}
-
-	return count;
-} 
-
-Status GetElem_SL(SLinkList H, int i, LElemType_S *e)
-{
-	int count, p;
-	
-	if(!H || i<1 || i>MAXSIZE-2)
-		return ERROR;
-	
-	count = 0;
-	p = SPACE[H].cur;
-	
-	while(p)
-	{
-		count++;
-		
-		if(count==i)
-		{
-			*e = SPACE[p].data;		
-			return OK;
-		}
-
-		p = SPACE[p].cur;
-	}
-} 
-
-/*¨T¨T¨T¨T¨T¨[
-¨U Ëã·¨2.13 ¨U 
-¨^¨T¨T¨T¨T¨T*/
-int LocateElem_SL(SLinkList H, LElemType_S e)
-{
-	int k, count;
-	
-	count = 1;
-	if(H && SPACE[H].cur)
-	{
-		k = SPACE[H].cur;
-		
-		while(k && SPACE[k].data!=e)
-		{
-			count++;
-			k = SPACE[k].cur;	
-		}
-		
-		if(k)
-			return count;
-	}
-	
-	return 0;			
-} 
-
-Status PriorElem_SL(SLinkList H, LElemType_S cur_e, LElemType_S *pre_e)
-{
-	int p, q;
-
-	if(H)
-	{
-		p = SPACE[H].cur;
-		
-		if(p && SPACE[p].data!=cur_e)
-		{
-			q = SPACE[p].cur;
-			
-			while(q && SPACE[q].data!=cur_e)
-			{
-				p = q;
-				q= SPACE[q].cur;
-			}
-			
-			if(q)								//ÕÒµ½ÁËcur_e
-			{
-				*pre_e = SPACE[p].data;
-				return OK;			
-			}
-		}
-	}
-	
-	return ERROR;
-} 
-
-Status NextElem_SL(SLinkList H, LElemType_S cur_e, LElemType_S *next_e)
-{
-	int p;
-	
-	if(H)
-	{
-		p = SPACE[H].cur;
-		
-		while(p && SPACE[p].data!=cur_e)
-			p = SPACE[p].cur;
-		
-		if(p && SPACE[p].cur)					//ÕÒµ½ÁËcur_eÇÒ²»ÊÇ×îºóÒ»¸ö½áµã 
-		{
-			p = SPACE[p].cur;
-			*next_e = SPACE[p].data;
-			return OK;
-		}	
-	}
-	
-	return ERROR;
-} 
-
-Status ListInsert_SL(SLinkList H, int i, LElemType_S e)
-{
-	int count, k, p;
-	
-	if(!H)								//Á´±í²»´æÔÚ 
-		return ERROR;
-	
-	if(i>0)
-	{
-		count = 0;
-		k = H;							//kÖ¸ÏòÍ·½áµã 
-		
-		while(k && count<i-1)			//Ñ°ÕÒ²åÈëÎ»ÖÃµÄÇ°Ò»¸öÎ»ÖÃ 
-		{
-			count++;
-			k = SPACE[k].cur;
-		}
-		
-		if(k)							//ÕÒµ½ÁËµÚi-1¸öÔªËØµÄÎ»ÖÃ 
-		{
-			p = Malloc_SL();
-			if(!p)						//ÉêÇë¿Õ¼äÊ§°Ü 
-				return ERROR;
-
-			SPACE[p].data = e;			//²åÈëÔªËØe 
-			SPACE[p].cur = SPACE[k].cur;
-			SPACE[k].cur = p;
-			
-			return OK;			
-		}		
-	}
-
-	return ERROR;	
-} 
-
-Status ListDelete_SL(SLinkList H, int i, LElemType_S *e)
-{
-	int count, k, p;
-	
-	if(!H)								//Á´±í²»´æÔÚ 
-		return ERROR;
-	
-	if(i>0)
-	{
-		count = 0;
-		k = H;							//kÖ¸ÏòÍ·½áµã 
-		
-		while(k && count<i-1)			//Ñ°ÕÒ²åÈëÎ»ÖÃµÄÇ°Ò»¸öÎ»ÖÃ 
-		{
-			count++;
-			k = SPACE[k].cur;
-		}
-		
-		if(k && SPACE[k].cur)			//ÕÒµ½ÁËµÚi-1¸öÔªËØµÄÎ»ÖÃÇÒ²»ÊÇ×îºóÒ»¸öÔªËØ 
-		{
-			p = SPACE[k].cur;			//pÖ¸ÏòÒª±»É¾³ıµÄ½áµã 
-			*e = SPACE[p].data;
-			SPACE[k].cur = SPACE[p].cur;
-			Free_SL(p);			
-
-			return OK;			
-		}		
-	}
-
-	return ERROR; 
-} 
-
-Status ListTraverse_SL(SLinkList H, void(Visit)(LElemType_S))
-{
-	int p;
-	
-	if(!H)
-		return ERROR;					//¾²Ì¬Á´±í²»´æÔÚ»òÎª¿Õ
-		
-	p = SPACE[H].cur;
-	
-	while(p)
-	{
-		Visit(SPACE[p].data);
-		p = SPACE[p].cur;
-	}
-
-	return OK;
+Status ListEmpty_SL(SLinkList H) {
+  if (H && !SPACE[H].cur)  //åªæœ‰å¤´ç»“ç‚¹
+    return TRUE;
+  else
+    return FALSE;
 }
 
-#endif 
+int ListLength_SL(SLinkList H) {
+  int count;  //è®¡æ•°å™¨
+  int p;
+
+  if (!H) exit(OVERFLOW);
+
+  count = 0;
+  p = SPACE[H].cur;
+
+  while (p) {
+    count++;
+    p = SPACE[p].cur;
+  }
+
+  return count;
+}
+
+Status GetElem_SL(SLinkList H, int i, LElemType_S *e) {
+  int count, p;
+
+  if (!H || i < 1 || i > MAXSIZE - 2) return ERROR;
+
+  count = 0;
+  p = SPACE[H].cur;
+
+  while (p) {
+    count++;
+
+    if (count == i) {
+      *e = SPACE[p].data;
+      return OK;
+    }
+
+    p = SPACE[p].cur;
+  }
+}
+
+/*â•â•â•â•â•â•—
+â•‘ ç®—æ³•2.13 â•‘
+â•šâ•â•â•â•â•*/
+int LocateElem_SL(SLinkList H, LElemType_S e) {
+  int k, count;
+
+  count = 1;
+  if (H && SPACE[H].cur) {
+    k = SPACE[H].cur;
+
+    while (k && SPACE[k].data != e) {
+      count++;
+      k = SPACE[k].cur;
+    }
+
+    if (k) return count;
+  }
+
+  return 0;
+}
+
+Status PriorElem_SL(SLinkList H, LElemType_S cur_e, LElemType_S *pre_e) {
+  int p, q;
+
+  if (H) {
+    p = SPACE[H].cur;
+
+    if (p && SPACE[p].data != cur_e) {
+      q = SPACE[p].cur;
+
+      while (q && SPACE[q].data != cur_e) {
+        p = q;
+        q = SPACE[q].cur;
+      }
+
+      if (q)  //æ‰¾åˆ°äº†cur_e
+      {
+        *pre_e = SPACE[p].data;
+        return OK;
+      }
+    }
+  }
+
+  return ERROR;
+}
+
+Status NextElem_SL(SLinkList H, LElemType_S cur_e, LElemType_S *next_e) {
+  int p;
+
+  if (H) {
+    p = SPACE[H].cur;
+
+    while (p && SPACE[p].data != cur_e) p = SPACE[p].cur;
+
+    if (p && SPACE[p].cur)  //æ‰¾åˆ°äº†cur_eä¸”ä¸æ˜¯æœ€åä¸€ä¸ªç»“ç‚¹
+    {
+      p = SPACE[p].cur;
+      *next_e = SPACE[p].data;
+      return OK;
+    }
+  }
+
+  return ERROR;
+}
+
+Status ListInsert_SL(SLinkList H, int i, LElemType_S e) {
+  int count, k, p;
+
+  if (!H)  //é“¾è¡¨ä¸å­˜åœ¨
+    return ERROR;
+
+  if (i > 0) {
+    count = 0;
+    k = H;  // kæŒ‡å‘å¤´ç»“ç‚¹
+
+    while (k && count < i - 1)  //å¯»æ‰¾æ’å…¥ä½ç½®çš„å‰ä¸€ä¸ªä½ç½®
+    {
+      count++;
+      k = SPACE[k].cur;
+    }
+
+    if (k)  //æ‰¾åˆ°äº†ç¬¬i-1ä¸ªå…ƒç´ çš„ä½ç½®
+    {
+      p = Malloc_SL();
+      if (!p)  //ç”³è¯·ç©ºé—´å¤±è´¥
+        return ERROR;
+
+      SPACE[p].data = e;  //æ’å…¥å…ƒç´ e
+      SPACE[p].cur = SPACE[k].cur;
+      SPACE[k].cur = p;
+
+      return OK;
+    }
+  }
+
+  return ERROR;
+}
+
+Status ListDelete_SL(SLinkList H, int i, LElemType_S *e) {
+  int count, k, p;
+
+  if (!H)  //é“¾è¡¨ä¸å­˜åœ¨
+    return ERROR;
+
+  if (i > 0) {
+    count = 0;
+    k = H;  // kæŒ‡å‘å¤´ç»“ç‚¹
+
+    while (k && count < i - 1)  //å¯»æ‰¾æ’å…¥ä½ç½®çš„å‰ä¸€ä¸ªä½ç½®
+    {
+      count++;
+      k = SPACE[k].cur;
+    }
+
+    if (k && SPACE[k].cur)  //æ‰¾åˆ°äº†ç¬¬i-1ä¸ªå…ƒç´ çš„ä½ç½®ä¸”ä¸æ˜¯æœ€åä¸€ä¸ªå…ƒç´ 
+    {
+      p = SPACE[k].cur;  // pæŒ‡å‘è¦è¢«åˆ é™¤çš„ç»“ç‚¹
+      *e = SPACE[p].data;
+      SPACE[k].cur = SPACE[p].cur;
+      Free_SL(p);
+
+      return OK;
+    }
+  }
+
+  return ERROR;
+}
+
+Status ListTraverse_SL(SLinkList H, void(Visit)(LElemType_S)) {
+  int p;
+
+  if (!H) return ERROR;  //é™æ€é“¾è¡¨ä¸å­˜åœ¨æˆ–ä¸ºç©º
+
+  p = SPACE[H].cur;
+
+  while (p) {
+    Visit(SPACE[p].data);
+    p = SPACE[p].cur;
+  }
+
+  return OK;
+}
+
+#endif
