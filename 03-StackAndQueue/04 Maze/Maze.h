@@ -1,7 +1,4 @@
 /*********************************
- *							     *
- * 文件夹: ▲03 栈和队列\04 Maze *
- * 							     *
  * 文件名: Maze.h                *
  * 							     *
  * 内  容: 迷宫相关操作列表      *
@@ -12,9 +9,9 @@
 #define MAZE_H
 
 #include <stdio.h>
-#include <stdlib.h>                 //提供system、rand、srand原型
-#include <time.h>                   //提供time原型
-#include "../../▲01 绪论/Status.h"  //**▲01 绪论**//
+#include <stdlib.h>                        //提供system、rand、srand原型
+#include <time.h>                          //提供time原型
+#include "../../01-Introduction/Status.h"  //**▲01 绪论**//
 
 /* 宏定义 */
 #define N 15  //迷宫的大小为N×N

@@ -12,8 +12,8 @@
 #define LINKQUEUE_H
 
 #include <stdio.h>
-#include <stdlib.h>                 //提供malloc、realloc、free、exit原型
-#include "../../▲01 绪论/Status.h"  //**▲01 绪论**//
+#include <stdlib.h>  //提供malloc、realloc、free、exit原型
+#include "../../01-Introduction/Status.h"  //**▲01 绪论**//
 
 /* 链队类型定义 */
 /* 在模拟银行排队、二叉树三叉链表存储的算法中，QElemType_L需重新定义*/

@@ -12,8 +12,8 @@
 #define CYLSEQQUEUE_H
 
 #include <stdio.h>
-#include <stdlib.h>                 //提供malloc、realloc、free、exit原型
-#include "../../▲01 绪论/Status.h"  //**▲01 绪论**//
+#include <stdlib.h>  //提供malloc、realloc、free、exit原型
+#include "../../01-Introduction/Status.h"  //**▲01 绪论**//
 
 /* 宏定义 */
 #define MAXQSIZE 1000  //最大队列长度

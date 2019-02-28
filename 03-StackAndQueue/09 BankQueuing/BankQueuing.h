@@ -12,9 +12,9 @@
 #define BANKQUEUING_H
 
 #include <stdio.h>
-#include <stdlib.h>                 //提供malloc、realloc、free、exit原型
-#include <time.h>                   //提供time原型
-#include "../../▲01 绪论/Status.h"  //**▲01 绪论**//
+#include <stdlib.h>  //提供malloc、realloc、free、exit原型
+#include <time.h>    //提供time原型
+#include "../../01-Introduction/Status.h"  //**▲01 绪论**//
 
 /* 宏定义 */
 #define SleepTime 1      // SleepTime代表休眠时间
@@ -41,7 +41,7 @@ typedef struct LNode {
 } LNode;
 typedef LNode *LinkList;
 typedef LinkList EventList;  //事件链表类型，定义为有序链表
-#include "../../▲02 线性表/04 SinglyLinkedList/SinglyLinkedList.c"  //**▲02 线性表**//
+#include "../../02-LinearTable/04 SinglyLinkedList/SinglyLinkedList.c"  //**▲02 线性表**//
 typedef struct {
   int ArrivedTime;  //客户到达时间
   int Duration;     //办理事务所需的时间
